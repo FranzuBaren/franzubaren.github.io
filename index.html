@@ -3,165 +3,415 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FranzoBaren / Francesco Orsi's GitHub</title>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<title>Francesco Orsi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  body {
-    margin: 0;
-    font-family: 'EB Garamond', serif;
-    background-color: #fafafa;
-    color: #22232a;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  header {
-    width: 100%;
-    max-width: 900px;
-    padding: 2rem 1rem;
-    text-align: center;
-    border-bottom: 1.5px solid #ddd;
-  }
-  header img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid #5e5add;
-    object-fit: cover;
-    margin-bottom: 1rem;
-  }
-  header h1 {
-    margin: 0 0 0.25rem 0;
-    font-weight: 700;
-    font-size: 2rem;
-  }
-  header h2 {
-    margin: 0;
-    font-family: 'Roboto Mono', monospace;
-    color: #5e5add;
-    font-weight: 400;
-    font-size: 1.1rem;
-  }
-  nav {
-    width: 100%;
-    max-width: 900px;
-    padding: 1rem 0 0.5rem 0;
-    border-bottom: 1.5px solid #ddd;
-    text-align: center;
-  }
-  nav a {
-    text-decoration: none;
-    color: #22232a;
-    font-family: 'EB Garamond', serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin: 0 1rem;
-    padding-bottom: 0.3rem;
-    border-bottom: 3px solid transparent;
-    transition: border-bottom-color 0.2s;
-  }
-  nav a:hover {
-    border-bottom-color: #5e5add;
-    color: #5e5add;
-  }
-  main {
-    max-width: 900px;
-    margin: 3rem 1rem;
-    padding: 0 1rem;
-  }
-  section {
-    margin-bottom: 3rem;
-  }
-  h2 {
-    border-left: 6px solid #5e5add;
-    padding-left: 0.5em;
-    font-weight: 700;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-  }
-  p, li {
-    font-size: 1.05rem;
-    line-height: 1.5;
-  }
-  ul {
-    margin-left: 1.5em;
-    list-style: disc;
-  }
-  footer {
-    text-align: center;
-    padding: 1.5rem 1rem;
-    color: #555759;
-    font-family: 'EB Garamond', serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    margin-top: auto;
-    border-top: 1.5px solid #ddd;
-    width: 100%;
-    max-width: 900px;
+  :root {
+    --text-primary: #333;
+    --text-secondary: #666;
+    --text-light: #999;
+    --link-color: #0ea5e9;
+    --link-hover: #0284c7;
+    --border-light: #e5e7eb;
+    --bg-color: #ffffff;
+    --bg-light: #f8fafc;
   }
 
-  @media (max-width: 600px) {
-    header img {
-      width: 80px;
-      height: 80px;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  /* Header */
+  .header {
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-light);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    color: var(--text-primary);
+  }
+
+  /* Main Container */
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    min-height: calc(100vh - 80px);
+    display: flex;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 300px;
+    padding: 3rem 2rem;
+    border-right: 1px solid var(--border-light);
+    text-align: center;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 48px;
+    font-weight: 300;
+  }
+
+  .profile-name {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .profile-title {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+  }
+
+  .profile-org {
+    font-size: 16px;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .social-links a {
+    width: 40px;
+    height: 40px;
+    background-color: var(--link-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+  }
+
+  .social-links a:hover {
+    background-color: var(--link-hover);
+  }
+
+  /* Content */
+  .content {
+    flex: 1;
+    padding: 3rem 3rem 3rem 2rem;
+  }
+
+  .section-title {
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+  }
+
+  .bio-text {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .bio-text a {
+    color: var(--link-color);
+    text-decoration: none;
+  }
+
+  .bio-text a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+  }
+
+  /* Two Column Layout */
+  .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+
+  .column-title {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .interest-list {
+    list-style: none;
+  }
+
+  .interest-list li {
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    font-size: 16px;
+  }
+
+  .interest-list li::before {
+    content: "•";
+    color: var(--link-color);
+    font-weight: bold;
+    margin-right: 0.75rem;
+  }
+
+  .education-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+  }
+
+  .education-icon {
+    width: 24px;
+    height: 24px;
+    background-color: var(--text-light);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .education-content {
+    flex: 1;
+  }
+
+  .education-degree {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .education-school {
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 1024px) {
+    .main-container {
+      flex-direction: column;
     }
-    nav a {
-      margin: 0 0.7rem;
-      font-size: 1rem;
+
+    .sidebar {
+      width: 100%;
+      padding: 2rem;
+      border-right: none;
+      border-bottom: 1px solid var(--border-light);
     }
-    main {
-      margin: 2rem 0.5rem;
+
+    .content {
+      padding: 2rem;
+    }
+
+    .two-column {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      padding: 0 1rem;
+    }
+
+    .nav {
+      gap: 1rem;
+    }
+
+    .nav a {
+      font-size: 14px;
+    }
+
+    .logo {
+      font-size: 20px;
+    }
+
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      font-size: 36px;
+    }
+
+    .profile-name {
+      font-size: 24px;
+    }
+
+    .section-title {
+      font-size: 28px;
+    }
+
+    .content {
+      padding: 1.5rem;
+    }
+
+    .sidebar {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .social-links {
+      gap: 0.75rem;
+    }
+
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      font-size: 12px;
     }
   }
 </style>
 </head>
 <body>
-  <header>
-    <img src="https://via.placeholder.com/100" alt="Francesco Orsi Photo" />
-    <h1>Francesco Orsi</h1>
-    <h2>Data Science Manager</h2>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="logo">Francesco Orsi</a>
+      <nav class="nav">
+        <a href="#home" class="active">Home</a>
+        <a href="#posts">Posts</a>
+        <a href="#projects">Projects</a>
+        <a href="#talks">Talks</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#cv">CV</a>
+      </nav>
+    </div>
   </header>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#detailed-cv">Detailed CV</a>
-    <a href="#interest">Interests</a>
-    <a href="#projects">Selected Projects</a>
-    <a href="#social">Reach Out &amp; Socials</a>
-    <a href="#statistics">GitHub Statistics</a>
-  </nav>
-  <main>
-    <section id="about">
-      <h2>About</h2>
-      <p>I am a <b>data science professional</b> with a strong <b>quantitative background</b> rooted in theoretical physics and computational neuroscience. My career spans academic research and industry leadership, focusing on the development and deployment of robust AI systems that meet regulatory standards and business objectives.</p>
-      <p>With expertise in <b>mathematical modeling</b>, <b>statistical inference</b>, and <b>machine learning</b>, I specialize in building data-driven solutions that are both scientifically rigorous and commercially viable. My work emphasizes reproducible research methodologies, ethical AI practices, and the critical intersection of data science with regulatory compliance.</p>
-      <p>As a data science manager, I lead cross-functional teams in developing AI systems that undergo rigorous audit processes, ensuring they meet the highest standards of reliability, fairness, and regulatory adherence. My approach combines deep technical knowledge with strategic business acumen to deliver impactful, sustainable AI solutions.</p>
-      <p>For more, see my <a href="#detailed-cv"><u>Detailed CV</u></a>.</p>
-    </section>
-    <section id="interest">
-      <h2>Interests</h2>
-      <ul>
-        <li><b>Audit & Risk Management in AI:</b> Developing comprehensive frameworks for auditing AI systems, assessing model risks, and implementing governance structures that ensure ethical deployment.</li>
-        <li><b>Regulatory ML & Compliance:</b> Navigating AI regulation, including GDPR and sector standards, building ML systems that meet these requirements while maintaining performance.</li>
-        <li><b>Mathematical Foundations of ML:</b> Deep engagement with theoretical underpinnings of machine learning, focusing on model behavior, convergence, and algorithmic decision-making principles.</li>
-        <li><b>Reproducible Computational Research:</b> Championing open science through reproducible workflows, version-controlled code, and transparent reporting to enable independent verification.</li>
-      </ul>
-    </section>
-    <section id="projects">
-      <h2>Selected Projects</h2>
-      <p>Work in progress.</p>
-    </section>
-    <section id="social">
-      <h2>Reach Out &amp; Socials</h2>
-      <p>Contact and social media links here.</p>
-    </section>
-    <section id="statistics">
-      <h2>GitHub Statistics</h2>
-      <p>GitHub stats and activity graphs can be placed here.</p>
-    </section>
-  </main>
-  <footer>
-    &copy; 2025 Francesco Orsi | Data Science Manager
-  </footer>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="profile-image">FO</div>
+      <h1 class="profile-name">Francesco Orsi</h1>
+      <div class="profile-title">Data Science Manager</div>
+      <div class="profile-org">Regulatory AI Systems</div>
+      
+      <div class="social-links">
+        <a href="mailto:francesco@example.com" title="Email">@</a>
+        <a href="https://linkedin.com/in/francescoorsi" title="LinkedIn">in</a>
+        <a href="https://twitter.com/francescoorsi" title="Twitter">tw</a>
+        <a href="https://github.com/franzobaren" title="GitHub">gh</a>
+        <a href="#" title="Google Scholar">gs</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <h2 class="section-title">Biography</h2>
+      
+      <p class="bio-text">I began my career as a theoretical physicist, specializing in <a href="#projects">computational neuroscience</a>, while working on projects of various scale in many different domains such as finance, healthcare, and regulatory compliance. During this time, I <a href="#publications">actively participated</a> in the academic community, contributing to research publications and releasing open-source tools.</p>
+
+      <p class="bio-text">After several years of research experience, I decided to pivot my career and take an active part in the development of a field I am very passionate about – artificial intelligence governance and regulatory compliance. To fulfill this goal, I transitioned from academia to industry, starting with a data science role. I chose to pursue leadership opportunities that would complement my technical skills with strategic business understanding.</p>
+
+      <p class="bio-text">In my current role, I successfully lead <a href="#projects">AI audit frameworks</a>, developing comprehensive systems for regulated industries using advanced machine learning techniques and governance methodologies. I continued building expertise in regulatory compliance, filling in the gaps in practical implementation that I missed in academic settings.</p>
+
+      <p class="bio-text">Currently, I work as a data science manager leading teams that develop AI systems for regulated environments; contributing to <a href="#projects">compliance frameworks</a> and experimenting with novel approaches to ethical AI deployment.</p>
+
+      <p class="bio-text">In 2024, I established myself as a leader in AI governance and regulatory ML systems.</p>
+
+      <!-- Two Column Section -->
+      <div class="two-column">
+        <div>
+          <h3 class="column-title">Interests</h3>
+          <ul class="interest-list">
+            <li>Artificial Intelligence Governance</li>
+            <li>Regulatory Machine Learning</li>
+            <li>AI Audit & Risk Management</li>
+            <li>Mathematical Foundations of ML</li>
+            <li>Reproducible Research</li>
+            <li>Computational Neuroscience</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="column-title">Education</h3>
+          
+          <div class="education-item">
+            <div class="education-icon">🎓</div>
+            <div class="education-content">
+              <div class="education-degree">PhD in Theoretical Physics, 2018–2022</div>
+              <div class="education-school">European Research University</div>
+            </div>
+          </div>
+
+          <div class="education-item">
+            <div class="education-icon">🎓</div>
+            <div class="education-content">
+              <div class="education-degree">MSc in Computational Neuroscience, 2016–2018</div>
+              <div class="education-school">Technical University</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </body>
 </html>
