@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Francesco Orsi</title>
+<title>Francesco Orsi, PhD</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
 <style>
   :root {
@@ -58,10 +58,12 @@
 
   /* Tag-tier reference boxes (from CV pattern) */
   .ref-tiers { display:flex; flex-direction:column; gap:0.5rem; margin-top:1rem; }
-  .ref-tier { display:flex; gap:0.75rem; align-items:flex-start; flex-wrap:wrap; }
-  .ref-tier-label { font-family:var(--mono); font-size:8px; text-transform:uppercase; letter-spacing:1.5px; color:var(--ink-ghost); flex-shrink:0; width:58px; padding-top:0.35rem; text-align:right; }
-  .ref-tag { font-family:var(--mono); font-size:9px; letter-spacing:0.3px; padding:0.2rem 0.55rem; border:0.5px solid var(--rule); border-radius:2px; color:var(--ink-faint); text-decoration:none; transition:border-color 0.25s ease, color 0.25s ease, background 0.25s ease; display:inline-block; margin:0.1rem 0; }
-  .ref-tag:hover { border-color:var(--accent); color:var(--accent); background:rgba(139,37,0,0.03); }
+  .ref-tier { display:flex; gap:0.75rem; align-items:center; }
+  .ref-tier-label { font-family:var(--mono); font-size:8px; text-transform:uppercase; letter-spacing:1.5px; color:var(--ink-ghost); flex-shrink:0; width:58px; padding-top:0; text-align:right; line-height:1.2; }
+  .ref-tags { display:flex; gap:0.3rem; overflow-x:auto; flex:1; padding-bottom:2px; scrollbar-width:none; -ms-overflow-style:none; }
+  .ref-tags::-webkit-scrollbar { display:none; }
+  .ref-tag { font-family:var(--mono); font-size:9px; letter-spacing:0.3px; padding:0.2rem 0.55rem; border:0.5px solid var(--rule); border-radius:2px; color:var(--ink-faint); text-decoration:none; transition:border-color 0.25s ease, color 0.25s ease, background 0.25s ease; display:inline-block; white-space:nowrap; flex-shrink:0; max-width:340px; overflow:hidden; text-overflow:ellipsis; }
+  .ref-tag:hover { border-color:var(--accent); color:var(--accent); background:rgba(139,37,0,0.03); max-width:none; overflow:visible; position:relative; z-index:2; }
   .ref-tag::after { content:' ↗'; font-size:7px; opacity:0.3; }
   .ref-tag--highlight { border:0.5px solid rgba(139,37,0,0.25); color:var(--accent); background:rgba(139,37,0,0.035); font-weight:500; }
   .ref-tag--highlight:hover { border-color:var(--accent); color:#fff; background:var(--accent); }
@@ -158,7 +160,7 @@
     display: flex;
     align-items: center;
     gap: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeSlideUp 0.8s ease 0.1s forwards;
   }
@@ -294,7 +296,7 @@
   .section-rule {
     border: none;
     border-top: 0.5px solid var(--rule);
-    margin: 3rem 0 1.75rem;
+    margin: 1.5rem 0 1.25rem;
   }
 
   .section-heading {
@@ -775,17 +777,11 @@
         <img src="bear.png" alt="Francesco Orsi" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
       </div>
       <div class="author-text">
-        <h1 class="author-name">Francesco Orsi</h1>
+        <h1 class="author-name">Francesco Orsi, PhD</h1>
         <div class="author-affiliation">
           Data Science Manager
         </div>
       </div>
-    </div>
-
-    <div class="flourish">
-      <div class="flourish-line"></div>
-      <div class="flourish-diamond"></div>
-      <div class="flourish-line"></div>
     </div>
 
     <hr class="section-rule" />
@@ -931,11 +927,15 @@
                   <div class="deep-text">My approach treats the audit universe as a <em>set-cover problem</em>: each control mitigates a subset of risks, and the optimal audit plan is the minimum collection of controls that covers the full risk space. I model control effectiveness as a decaying exponential – controls erode over time through organizational drift, software updates, and personnel changes. When a control drops below a threshold θ, its risk set becomes uncovered, potentially triggering cascading exposures in downstream controls. This transforms audit planning from a static exercise into a dynamic optimization problem with deep connections to <a href="https://arxiv.org/abs/1709.05254" target="_blank">anomaly detection in financial records</a>, <a href="https://arxiv.org/abs/0904.1067" target="_blank">Bayesian operational risk modeling</a>, and percolation theory from statistical physics. I'm developing this framework in a <a href="https://kunskap.substack.com" target="_blank">Substack series on AI governance</a> and the open-source <em>auditcover</em> package.</div>
                 </div>
 
+                <div class="deep-section">
                   <div class="deep-heading">Why This Matters to Me</div>
+                  <div class="deep-text">I came to audit from fields where you can't afford to be wrong about your models. In pharma, the stakes are even higher: a flawed AI system in pharmacovigilance can miss safety signals that affect real patients. I find the intellectual challenge of designing assurance systems for adaptive AI deeply compelling. It's where the hardest problems in formal verification meet the messiest realities of enterprise software. The question isn't just "does this model work?" – it's "will this model <em>keep</em> working as the world shifts beneath it?"</div>
+                </div>
+
                 <div class="ref-tiers">
                   <div class="ref-tier">
                     <div class="ref-tier-label">🏗️ My Work</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag ref-tag--highlight" href="https://kunskap.substack.com" target="_blank">Audit 2.0 – Substack series</a>
                       <a class="ref-tag ref-tag--highlight" href="https://arxiv.org/abs/1709.05254" target="_blank">Schreyer et al. – Deep Autoencoders for Audit Anomalies (2017)</a>
                       <a class="ref-tag ref-tag--highlight" href="https://www.tandfonline.com/doi/full/10.1080/07366981.2024.2312025" target="_blank">ML Across the Internal Audit Lifecycle (2024)</a>
@@ -943,7 +943,7 @@
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🔬 Methods</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag" href="https://arxiv.org/abs/1908.00734" target="_blank">Adversarial Autoencoders – Audit Anomalies</a>
                       <a class="ref-tag" href="https://arxiv.org/abs/2112.13215" target="_blank">Continual Learning for Continuous Auditing</a>
                       <a class="ref-tag" href="https://arxiv.org/abs/2411.05815" target="_blank">GNNs for Financial Fraud – Review</a>
@@ -952,16 +952,12 @@
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🧭 Frontier</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank">EU AI Act – Regulatory Framework</a>
                       <a class="ref-tag" href="https://www.theiia.org/en/standards/" target="_blank">IIA Global Internal Audit Standards (2024)</a>
                       <a class="ref-tag" href="https://www.isaca.org/resources/frameworks" target="_blank">ISACA – COBIT &amp; IT Governance</a>
                     </div>
                   </div>
-                </div>
-
-                <div class="deep-section">
-                  <div class="deep-text">I came to audit from fields where you can't afford to be wrong about your models. In pharma, the stakes are even higher: a flawed AI system in pharmacovigilance can miss safety signals that affect real patients. I find the intellectual challenge of designing assurance systems for adaptive AI deeply compelling. It's where the hardest problems in formal verification meet the messiest realities of enterprise software. The question isn't just "does this model work?" – it's "will this model <em>keep</em> working as the world shifts beneath it?"</div>
                 </div>
 
               </div>
@@ -1184,7 +1180,7 @@
                 <div class="ref-tiers">
                   <div class="ref-tier">
                     <div class="ref-tier-label">🏗️ My Work</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 Your project – coming soon</a>
                       <a class="ref-tag ref-tag--highlight" href="https://arxiv.org/abs/0906.0612" target="_blank">Carlsson – Topology and Data (2009)</a>
                       <a class="ref-tag ref-tag--highlight" href="https://www.pnas.org/doi/10.1073/pnas.2528654122" target="_blank">PNAS – Neuromorphic vs GPU Energy (2025)</a>
@@ -1192,7 +1188,7 @@
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🔬 Methods</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag" href="https://arxiv.org/abs/0810.3015" target="_blank">Ollivier – Ricci Curvature on Metric Spaces</a>
                       <a class="ref-tag" href="https://arxiv.org/abs/1303.3255" target="_blank">Curry – Sheaves, Cosheaves, Applications</a>
                       <a class="ref-tag" href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">Amari – Information Geometry (Springer)</a>
@@ -1201,7 +1197,7 @@
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🧭 Frontier</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag" href="https://arxiv.org/abs/1901.09948" target="_blank">Neftci – Surrogate Gradients for SNNs</a>
                       <a class="ref-tag" href="https://doi.org/10.1038/s41467-020-17236-y" target="_blank">Bellec – e-prop Learning (Nature Comms)</a>
                     </div>
@@ -1266,7 +1262,7 @@
                 <div class="ref-tiers">
                   <div class="ref-tier">
                     <div class="ref-tier-label">🏗️ My Work</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 ClinOps AI – clinical trial safety intelligence (CDISC/PHUSE)</a>
                       <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 NVIDIA Clara – federated learning simulation for multi-hospital diagnostics</a>
                       <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 Boltz-2 Drug Repurposing – variant → structure → screen pipeline</a>
@@ -1274,7 +1270,7 @@
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🔬 Methods</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag" href="https://open.fda.gov/data/faers/" target="_blank">FDA FAERS – Adverse Event Reporting</a>
                       <a class="ref-tag" href="https://advance.phuse.global/display/WEL/PHUSE+Open+Data+Repository" target="_blank">PHUSE CDISC Pilot Study</a>
                       <a class="ref-tag" href="https://www.cdisc.org/standards" target="_blank">CDISC Data Standards</a>
@@ -1283,7 +1279,7 @@
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🧭 Frontier</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag" href="https://github.com/jwohlwend/boltz" target="_blank">Boltz-2 – MIT structural biology</a>
                       <a class="ref-tag" href="https://www.nature.com/articles/s41586-024-07487-w" target="_blank">AlphaFold 3 – Nature (2024)</a>
                       <a class="ref-tag" href="https://ai.google.dev/gemma/docs/medgemma" target="_blank">MedGemma – Google medical AI</a>
@@ -1379,20 +1375,20 @@
                 <div class="ref-tiers">
                   <div class="ref-tier">
                     <div class="ref-tier-label">🏗️ My Work</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag ref-tag--highlight" href="https://deeptechnation.ch/" target="_blank">Deep Tech Nation – Swiss Report 2025</a>
                     </div>
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🔬 Methods</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank">EU AI Act – Regulatory Framework</a>
                       <a class="ref-tag" href="https://www.who.int/publications/i/item/9789240029200" target="_blank">WHO – Ethics &amp; Governance of AI for Health</a>
                     </div>
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🧭 Frontier</div>
-                    <div>
+                    <div class="ref-tags">
                       <a class="ref-tag" href="https://www.ey.com/en_ch/newsroom/2025/05/swiss-biotech-report-2025-highlights-sectors-continuing-resilience-through-commitment-to-international-alliances" target="_blank">Swiss Biotech Report 2025 (EY)</a>
                       <a class="ref-tag" href="https://datascience.ch/" target="_blank">SDSC – Swiss Data Science Center</a>
                       <a class="ref-tag" href="https://www.appliedmldays.org/" target="_blank">AMLD – Lausanne</a>
@@ -1416,7 +1412,7 @@
   <footer class="footer">
     <hr class="footer-rule" />
     <div class="footer-inner">
-      <span class="footer-text">© 2026 Francesco Orsi</span>
+      <span class="footer-text">© 2026 Francesco Orsi, PhD</span>
       <span class="footer-text">Built with care</span>
     </div>
   </footer>
