@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Francesco Orsi — CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<style>
+  :root{--ink:#1a1a1a;--ink-light:#444;--ink-faint:#888;--ink-ghost:#bbb;--paper:#faf8f4;--accent:#8b2500;--accent-light:#c4522a;--rule:#d4cfc6;--serif:'Cormorant Garamond','Georgia',serif;--body:'Newsreader','Georgia',serif;--mono:'IBM Plex Mono','Courier New',monospace}
+  *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+  body>*{position:relative;z-index:1}::selection{background:rgba(139,37,0,.15);color:var(--ink)}
+  a{color:var(--accent);text-decoration:none;transition:color .25s ease}a:hover{color:var(--accent-light)}
+
+  .header{max-width:740px;margin:0 auto;padding:2rem 2rem 0}
+  .header-rule{border:none;border-top:2px solid var(--ink);margin-bottom:.6rem}
+  .header-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:.6rem;border-bottom:.5px solid var(--rule)}
+  .back-link{font-family:var(--mono);font-size:12px;color:var(--ink-faint);display:flex;align-items:center;gap:.4rem;transition:color .25s ease}
+  .back-link:hover{color:var(--accent)}.header-title{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-ghost)}
+
+  .page{max-width:740px;margin:0 auto;padding:3rem 2rem 4rem}
+  .section-rule{border:none;border-top:.5px solid var(--rule);margin-bottom:1.25rem}
+  .section-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(--ink-ghost);font-weight:500;margin-bottom:1.5rem}
+  .section-group{margin-bottom:2.5rem;opacity:0;animation:fadeSlideUp .8s ease forwards}
+  .section-group:nth-of-type(1){animation-delay:.15s}.section-group:nth-of-type(2){animation-delay:.3s}.section-group:nth-of-type(3){animation-delay:.45s}
+
+  .cards{display:flex;flex-direction:column;gap:0}
+  .card{border:.5px solid var(--rule);border-bottom:none;overflow:hidden;position:relative;transition:box-shadow .4s ease}
+  .card:last-child{border-bottom:.5px solid var(--rule)}.card.is-open{box-shadow:0 6px 30px rgba(0,0,0,.05);z-index:2}
+  .card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;transition:opacity .4s ease;opacity:.3}.card.is-open::before{opacity:1}
+  .card--roche::before{background:linear-gradient(180deg,#8b2500,#c4522a)}.card--sbb::before{background:linear-gradient(180deg,#b71c1c,#e53935)}
+  .card--bio::before{background:linear-gradient(180deg,#1a3a4a,#2d6a7e)}.card--bern::before{background:linear-gradient(180deg,#2c4a2e,#4a7a3a)}
+  .card--janelia::before{background:linear-gradient(180deg,#4a148c,#7b1fa2)}.card--phd::before{background:linear-gradient(180deg,#bf360c,#e65100)}
+  .card--msc::before{background:linear-gradient(180deg,#1a3a4a,#2d6a7e)}.card--bsc::before{background:linear-gradient(180deg,#1a3a4a,#2d6a7e)}
+
+  .card-header{display:grid;grid-template-columns:1fr 28px;align-items:center;gap:1rem;padding:1.2rem 1.75rem 1.2rem 2rem;cursor:pointer;user-select:none;transition:background .3s ease}
+  .card-header:hover{background:rgba(0,0,0,.012)}.card-period{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.3px;font-weight:500;margin-top:.2rem}
+  .card-header-text{min-width:0}.card-title{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--ink);line-height:1.2;transition:color .3s ease}
+  .card-header:hover .card-title{color:var(--accent)}.card-role{font-family:var(--mono);font-size:11px;color:var(--ink-ghost);letter-spacing:.3px;margin-top:.15rem}
+  .card-toggle{width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative}
+  .card-toggle::before,.card-toggle::after{content:'';position:absolute;background:var(--ink-ghost);transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s ease}
+  .card-toggle::before{width:12px;height:1.5px}.card-toggle::after{width:1.5px;height:12px}
+  .card.is-open .card-toggle::after{transform:rotate(90deg);opacity:0}.card-header:hover .card-toggle::before,.card-header:hover .card-toggle::after{background:var(--accent)}
+
+  .card-body{max-height:0;overflow:hidden;opacity:0;transition:max-height .6s cubic-bezier(.4,0,.2,1),opacity .4s ease}
+  .card.is-open .card-body{max-height:1100px;opacity:1}.card-body-inner{padding:0 1.75rem 1.75rem 2rem}
+  .card-topics{font-family:var(--body);font-size:14.5px;font-style:italic;color:var(--ink-light);line-height:1.7;margin-bottom:1.25rem}
+
+  .tag-tier{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.65rem;padding-left:0}.tag-tier:last-child{margin-bottom:0}
+  .tier-label{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-ghost);flex-shrink:0;width:52px;padding-top:.35rem;text-align:right}
+  .tier-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+  .tag-tier+.tag-tier{position:relative}.tag-tier+.tag-tier::before{content:'';position:absolute;left:49px;top:-.35rem;width:.5px;height:.35rem;background:var(--rule)}
+
+  .tag-t1{font-family:var(--mono);font-size:10.5px;letter-spacing:.3px;padding:.3rem .75rem;border:1px solid var(--ink-faint);border-radius:2px;color:var(--ink-light);text-decoration:none;font-weight:500;transition:border-color .25s ease,color .25s ease,background .25s ease}
+  .tag-t1:hover{border-color:var(--accent);color:var(--accent);background:rgba(139,37,0,.03)}
+  .tag-t2{font-family:var(--mono);font-size:10px;letter-spacing:.4px;padding:.25rem .65rem;border:.5px solid var(--rule);border-radius:2px;color:var(--ink-faint);text-decoration:none;transition:border-color .25s ease,color .25s ease,background .25s ease}
+  .tag-t2:hover{border-color:var(--accent);color:var(--accent);background:rgba(139,37,0,.03)}
+  .tag-t2::after{content:' ↗';font-size:7px;opacity:.3}
+  .tag-t3{font-family:var(--mono);font-size:9.5px;letter-spacing:.3px;padding:.2rem .6rem;border:.5px dashed var(--rule);border-radius:2px;color:var(--ink-ghost);text-decoration:none;transition:border-color .25s ease,color .25s ease,background .25s ease}
+  .tag-t3:hover{border-color:var(--accent);color:var(--accent);background:rgba(139,37,0,.02)}
+  .tag-t3::after{content:' ↗';font-size:7px;opacity:.3}
+  .tag-t4{font-family:var(--mono);font-size:9.5px;letter-spacing:.3px;padding:.2rem .6rem;border:.5px solid rgba(139,37,0,.25);border-radius:2px;color:var(--accent);background:rgba(139,37,0,.035);text-decoration:none;font-weight:500;transition:border-color .25s ease,color .25s ease,background .25s ease}
+  .tag-t4:hover{border-color:var(--accent);color:#fff;background:var(--accent)}.tag-t4::after{content:' ↗';font-size:7px;opacity:.6}
+
+  .footer{max-width:740px;margin:0 auto;padding:0 2rem}
+  .footer-rule{border:none;border-top:2px solid var(--ink);margin-bottom:1rem}
+  .footer-inner{display:flex;justify-content:space-between;padding-bottom:2rem}
+  .footer-text{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);letter-spacing:.5px}
+  @keyframes fadeSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:768px){.card-header{grid-template-columns:1fr 28px}.tier-label{width:40px;font-size:7px}}
+</style>
+</head>
+<body>
+
+<header class="header"><hr class="header-rule"/><div class="header-top"><a href="index.html" class="back-link">← Home</a><div class="header-title">Curriculum Vitae</div></div></header>
+
+<div style="display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.5rem 0 0.5rem;">
+  <img src="bear.png" alt="Francesco Orsi" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" />
+  <div style="font-family:var(--serif);font-size:24px;font-weight:500;color:var(--ink);line-height:1.2;">Francesco Orsi</div>
+</div>
+
+<main class="page">
+
+<!-- ====== EXPERIENCE ====== -->
+<div class="section-group">
+<hr class="section-rule"/><div class="section-label">Experience</div>
+<div class="cards">
+
+<!-- ROCHE -->
+<div class="card card--roche"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">F. Hoffmann-La Roche AG</div><div class="card-role">Data Science Manager — Audit &amp; Risk Data Analytics</div><div class="card-period">2021 – now</div></div><div class="card-toggle"></div></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="card-topics">AI audit frameworks for regulated pharma, GenAI adoption and LLM integration, advanced analytics governance, cross-functional team leadership.</div>
+<div class="tag-tiers">
+  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
+    <a class="tag-t1" href="https://www.who.int/publications/i/item/9789240029200" target="_blank">WHO — Ethics &amp; Governance of AI for Health</a>
+    <a class="tag-t1" href="https://www.theiia.org/en/standards/" target="_blank">IIA — Global Internal Audit Standards</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
+    <a class="tag-t2" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank">EU AI Act — Official Text</a>
+    <a class="tag-t2" href="https://www.isaca.org/resources/frameworks" target="_blank">ISACA — COBIT &amp; AI Frameworks</a>
+    <a class="tag-t2" href="https://www.ema.europa.eu/en/human-regulatory-overview/research-and-development/compliance-research-and-development/good-manufacturing-practice" target="_blank">EMA — GxP Manufacturing</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
+    <a class="tag-t2" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9197564/" target="_blank">Quantitative Models for SC Risk — PMC Review</a>
+    <a class="tag-t2" href="https://arxiv.org/abs/2405.06624" target="_blank">Guaranteed Safe AI — Dalrymple et al.</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
+    <a class="tag-t3" href="https://arxiv.org/abs/1709.05254" target="_blank">Deep Autoencoders for Audit — Schreyer et al.</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/1908.00734" target="_blank">Adversarial Autoencoders — Audit Anomalies</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/2112.13215" target="_blank">Continual Learning for Continuous Auditing</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/2411.05815" target="_blank">GNNs for Financial Fraud — Review</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/0904.1067" target="_blank">Bayesian Operational Risk — Shevchenko &amp; Wüthrich</a>
+  </div></div>
+</div>
+</div></div></div>
+
+<!-- SBB -->
+<div class="card card--sbb"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">Schweizerische Bundesbahnen (SBB)</div><div class="card-role">Product Owner / Senior Data Scientist</div><div class="card-period">2018 – 2021</div></div><div class="card-toggle"></div></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="card-topics">Corporate safety and quality analytical platform, ML for rail operations, innovation board for AI/ML incubation.</div>
+<div class="tag-tiers">
+  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
+    <a class="tag-t1" href="https://datascienceassn.org/content/data-science" target="_blank">Data Science</a>
+    <a class="tag-t1" href="https://arxiv.org/abs/1901.10170" target="_blank">Predictive Maintenance — Survey</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
+    <a class="tag-t2" href="https://arxiv.org/abs/1901.10170" target="_blank">ML for Predictive Maintenance — Survey</a>
+    <a class="tag-t2" href="https://arxiv.org/abs/1906.11248" target="_blank">Visual Analytics — State of the Art</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
+    <a class="tag-t3" href="https://arxiv.org/abs/2006.00116" target="_blank">Hypothesis Testing — Modern Review</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/2106.11346" target="_blank">Modern Data Pipelines — Survey</a>
+  </div></div>
+</div>
+</div></div></div>
+
+<!-- BIOZENTRUM -->
+<div class="card card--bio"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">Biozentrum / Swiss Institute for Bioinformatics</div><div class="card-role">Bioinformatics / ML Specialist</div><div class="card-period">2018</div></div><div class="card-toggle"></div></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="card-topics">Statistical benchmarking of protein structure prediction, supervised ML methods for the CAMEO platform.</div>
+<div class="tag-tiers">
+  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
+    <a class="tag-t1" href="https://www.sib.swiss/" target="_blank">Swiss Institute of Bioinformatics</a>
+    <a class="tag-t1" href="https://predictioncenter.org/" target="_blank">CASP — Protein Structure Prediction</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
+    <a class="tag-t2" href="https://arxiv.org/abs/2203.15076" target="_blank">AlphaFold &amp; Beyond — Jumper et al.</a>
+    <a class="tag-t2" href="https://www.cameo3d.org/about/" target="_blank">CAMEO Methodology</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Output</div><div class="tier-tags">
+    <a class="tag-t4" href="https://www.cameo3d.org/" target="_blank">CAMEO Platform — cameo3d.org</a>
+  </div></div>
+</div>
+</div></div></div>
+
+</div></div>
+
+<!-- ====== POST-DOCS ====== -->
+<div class="section-group">
+<hr class="section-rule"/><div class="section-label">Post-Doctoral Research</div>
+<div class="cards">
+
+<!-- BERN -->
+<div class="card card--bern"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">University of Bern</div><div class="card-role">Computational Neuroscience</div><div class="card-period">2014 – 2017</div></div><div class="card-toggle"></div></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="card-topics">Reinforcement learning with biological recurrent neural networks under sparse feedback, roving experiments in collaboration with EPFL.</div>
+<div class="tag-tiers">
+  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
+    <a class="tag-t1" href="https://www.nature.com/subjects/computational-neuroscience" target="_blank">Computational Neuroscience (Nature)</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
+    <a class="tag-t2" href="http://incompleteideas.net/book/the-book-2nd.html" target="_blank">Sutton &amp; Barto — RL: An Introduction</a>
+    <a class="tag-t2" href="https://arxiv.org/abs/2007.03750" target="_blank">Deep RL &amp; Neuroscience — Botvinick et al.</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
+    <a class="tag-t3" href="https://www.cell.com/neuron/fulltext/S0896-6273(13)01127-6" target="_blank">Dendritic Prediction of Somatic Spiking — Urbanczik &amp; Senn (2014)</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/1810.11393" target="_blank">Dendritic Microcircuits ≈ Backprop — Sacramento, Senn et al.</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/1803.09922" target="_blank">Biological RNNs — Sussillo (Review)</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/1810.11927" target="_blank">Three-Factor Learning Rules — Gerstner et al.</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Papers</div><div class="tier-tags">
+    <a class="tag-t4" href="https://www.biorxiv.org/content/10.1101/2024.09.30.615819v1" target="_blank">Prediction Errors &amp; Context Learning — Tsai, Senn et al. (2024)</a>
+    <a class="tag-t4" href="https://jov.arvojournals.org/article.aspx?articleid=2122233" target="_blank">Roving &amp; Bisection — Parkosadze et al., JOV 2008</a>
+    <a class="tag-t4" href="https://pubmed.ncbi.nlm.nih.gov/19258021/" target="_blank">Perceptual Learning &amp; Roving — Tartaglia et al. 2009</a>
+    <a class="tag-t4" href="https://www.epfl.ch/labs/lpsy/" target="_blank">EPFL Psychophysics Lab (Herzog)</a>
+    <a class="tag-t4" href="https://physiologie.unibe.ch/~senn/" target="_blank">Senn Group — Computational Neuroscience, Bern</a>
+  </div></div>
+</div>
+</div></div></div>
+
+<!-- JANELIA -->
+<div class="card card--janelia"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">Janelia Research Campus (HHMI)</div><div class="card-role">Computational Neuroscience</div><div class="card-period">2012 – 2014</div></div><div class="card-toggle"></div></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="card-topics">Online learning, regret minimization, Moon–Weissman optimal adversarial strategies, universal estimation for stochastic time series.</div>
+<div class="tag-tiers">
+  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
+    <a class="tag-t1" href="https://www.nature.com/subjects/computational-neuroscience" target="_blank">Computational Neuroscience (Nature)</a>
+    <a class="tag-t1" href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" target="_blank">Information Theory (Shannon 1948)</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
+    <a class="tag-t2" href="https://www.cs.huji.ac.il/~shais/papers/OLsurvey.pdf" target="_blank">Online Convex Optimization — Shalev-Shwartz (Survey)</a>
+    <a class="tag-t2" href="https://arxiv.org/abs/1912.13213" target="_blank">Modern Online Learning — Orabona (Monograph)</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
+    <a class="tag-t3" href="https://arxiv.org/abs/1204.0870" target="_blank">Relax and Localize — Rakhlin, Shamir &amp; Sridharan</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/1006.1138" target="_blank">Sequential Complexities — Rakhlin, Sridharan &amp; Tewari</a>
+    <a class="tag-t3" href="https://www.mit.edu/~rakhlin/courses/stat928/stat928_notes.pdf" target="_blank">Statistical Learning &amp; Sequential Prediction — Rakhlin (Lectures)</a>
+    <a class="tag-t3" href="https://en.wikipedia.org/wiki/Bregman_divergence" target="_blank">Bregman Divergence &amp; Mirror Descent</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Papers</div><div class="tier-tags">
+    <a class="tag-t4" href="https://arxiv.org/abs/1908.01867" target="_blank">Online Unsupervised Learning — Pehlevan, Hu &amp; Chklovskii</a>
+    <a class="tag-t4" href="https://arxiv.org/abs/1210.1530" target="_blank">Spiking Nets for Sparse Representations — Hu &amp; Chklovskii</a>
+    <a class="tag-t4" href="https://arxiv.org/abs/1210.1544" target="_blank">RESCUME: Sparse Circuit Reconstruction — Hu &amp; Chklovskii</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Detail</div><div class="tier-tags">
+    <a class="tag-t4" href="https://www.janelia.org/" target="_blank">Janelia Research Campus</a>
+  </div></div>
+</div>
+</div></div></div>
+
+</div></div>
+
+<!-- ====== EDUCATION ====== -->
+<div class="section-group">
+<hr class="section-rule"/><div class="section-label">Education</div>
+<div class="cards">
+
+<!-- PHD -->
+<div class="card card--phd"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">PhD in Theoretical Physics</div><div class="card-role">CEA-Saclay / Université Paris VII-Diderot</div><div class="card-period">2008 – 2012</div></div><div class="card-toggle"></div></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="card-topics">Geometrical structure of flux compactifications in string theory, exceptional generalized geometry, N=1 and N=2 vacua in type II compactifications.</div>
+<div class="tag-tiers">
+  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
+    <a class="tag-t1" href="https://arxiv.org/abs/hep-th/0209261" target="_blank">String Theory — Kiritsis (Lectures)</a>
+    <a class="tag-t1" href="https://arxiv.org/abs/1006.1536" target="_blank">Differential &amp; Generalized Geometry</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
+    <a class="tag-t2" href="https://arxiv.org/abs/hep-th/0509003" target="_blank">Flux Compactifications — Graña (Review)</a>
+    <a class="tag-t2" href="https://arxiv.org/abs/0804.1362" target="_blank">Exceptional Generalized Geometry — Pacheco &amp; Waldram</a>
+    <a class="tag-t2" href="https://arxiv.org/abs/hep-th/9702155" target="_blank">String Theory on Calabi-Yau — Greene (TASI Lectures)</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
+    <a class="tag-t3" href="https://arxiv.org/abs/math/0401221" target="_blank">Generalized Complex Geometry — Gualtieri (Thesis)</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/1008.0973" target="_blank">Lectures on Generalized Geometry — Hitchin</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/1006.1536" target="_blank">GCG for Physicists — Koerber (Lectures)</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/hep-th/0006034" target="_blank">E₇₍₇₎ U-duality — Koepsell, Nicolai, Samtleben</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Papers</div><div class="tier-tags">
+    <a class="tag-t4" href="https://arxiv.org/abs/1105.4855" target="_blank">N=1 Vacua in EGG — arXiv:1105.4855</a>
+    <a class="tag-t4" href="https://link.springer.com/article/10.1007/JHEP08(2011)109" target="_blank">Graña &amp; Orsi — JHEP 08 (2011) 109</a>
+    <a class="tag-t4" href="https://arxiv.org/abs/1207.3004" target="_blank">N=2 Vacua in GCG — arXiv:1207.3004</a>
+    <a class="tag-t4" href="https://link.springer.com/article/10.1007/JHEP11(2012)052" target="_blank">Graña &amp; Orsi — JHEP 11 (2012) 052</a>
+    <a class="tag-t4" href="https://independent.academia.edu/FOrsi" target="_blank">All Publications — Academia.edu</a>
+    <a class="tag-t4" href="https://www.ipht.fr/en/" target="_blank">IPhT — Institut de Physique Théorique, CEA-Saclay</a>
+  </div></div>
+</div>
+</div></div></div>
+
+<!-- MSC -->
+<div class="card card--msc"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">MSc in Theoretical Physics</div><div class="card-role">University of Bologna</div><div class="card-period">2006 – 2008</div></div><div class="card-toggle"></div></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="card-topics">Aspects of supersymmetric theories in low dimensions.</div>
+<div class="tag-tiers">
+  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
+    <a class="tag-t1" href="https://www.unibo.it/en/study/phd-professional-masters-specialisation-schools-and-other-programmes/course-unit-catalogue?codiceMateria=26339&annoAccademico=2024&codiceCorso=8025&single=True&search=True" target="_blank">Theoretical Physics (Bologna)</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
+    <a class="tag-t2" href="https://arxiv.org/abs/hep-ph/9709356" target="_blank">Supersymmetry — Martin (Primer)</a>
+    <a class="tag-t2" href="https://arxiv.org/abs/hep-th/9912205" target="_blank">QFT — Srednicki (Textbook)</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Detail</div><div class="tier-tags">
+    <a class="tag-t4" href="https://www.unibo.it/en" target="_blank">University of Bologna</a>
+  </div></div>
+</div>
+</div></div></div>
+
+<!-- BSC -->
+<div class="card card--bsc"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">BSc in Physics</div><div class="card-role">University of Bologna</div><div class="card-period">2003 – 2006</div></div><div class="card-toggle"></div></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="card-topics">Path integrals and functional integration.</div>
+<div class="tag-tiers">
+  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
+    <a class="tag-t1" href="https://www.unibo.it/en/study/phd-professional-masters-specialisation-schools-and-other-programmes/course-unit-catalogue/course-unit/2024/434428" target="_blank">Physics (Bologna)</a>
+  </div></div>
+  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
+    <a class="tag-t3" href="https://arxiv.org/abs/quant-ph/0004090" target="_blank">Path Integrals — Grosche (Review)</a>
+    <a class="tag-t3" href="https://arxiv.org/abs/0810.1261" target="_blank">Functional Integrals — Cartier &amp; DeWitt-Morette</a>
+  </div></div>
+</div>
+</div></div></div>
+
+</div></div>
+
+</main>
+
+<footer class="footer"><hr class="footer-rule"/><div class="footer-inner"><span class="footer-text">© 2025 Francesco Orsi</span><span class="footer-text"><a href="index.html" style="color:var(--ink-ghost);">← Home</a></span></div></footer>
+
+<script>
+function toggle(h){const c=h.closest('.card'),o=c.classList.contains('is-open');document.querySelectorAll('.card.is-open').forEach(x=>x.classList.remove('is-open'));if(!o)c.classList.add('is-open')}
+</script>
+</body>
+</html>
