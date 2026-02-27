@@ -56,6 +56,17 @@
   }
   a:hover { color: var(--accent-light); }
 
+  /* Tag-tier reference boxes (from CV pattern) */
+  .ref-tiers { display:flex; flex-direction:column; gap:0.5rem; margin-top:1rem; }
+  .ref-tier { display:flex; gap:0.75rem; align-items:flex-start; flex-wrap:wrap; }
+  .ref-tier-label { font-family:var(--mono); font-size:8px; text-transform:uppercase; letter-spacing:1.5px; color:var(--ink-ghost); flex-shrink:0; width:58px; padding-top:0.35rem; text-align:right; }
+  .ref-tag { font-family:var(--mono); font-size:9px; letter-spacing:0.3px; padding:0.2rem 0.55rem; border:0.5px solid var(--rule); border-radius:2px; color:var(--ink-faint); text-decoration:none; transition:border-color 0.25s ease, color 0.25s ease, background 0.25s ease; display:inline-block; margin:0.1rem 0; }
+  .ref-tag:hover { border-color:var(--accent); color:var(--accent); background:rgba(139,37,0,0.03); }
+  .ref-tag::after { content:' ↗'; font-size:7px; opacity:0.3; }
+  .ref-tag--highlight { border:0.5px solid rgba(139,37,0,0.25); color:var(--accent); background:rgba(139,37,0,0.035); font-weight:500; }
+  .ref-tag--highlight:hover { border-color:var(--accent); color:#fff; background:var(--accent); }
+  .ref-tag--highlight::after { content:' ↗'; font-size:7px; opacity:0.6; }
+
   /* ============================================
      HEADER
      ============================================ */
@@ -297,7 +308,7 @@
   }
 
   /* ============================================
-     SCORECARDS — Expandable Accordion
+     SCORECARDS – Expandable Accordion
      ============================================ */
   .scorecards-label {
     font-family: var(--mono);
@@ -449,7 +460,7 @@
   }
 
   .scorecard.is-open .scorecard-body {
-    max-height: 600px;
+    max-height: 5000px;
     opacity: 1;
   }
 
@@ -460,6 +471,9 @@
     gap: 2rem;
     align-items: start;
   }
+  .scorecard-deep-wrap {
+    grid-column: 1 / -1;
+  }
 
   .scorecard-content { min-width: 0; }
 
@@ -468,7 +482,7 @@
     font-size: 15px;
     line-height: 1.8;
     color: var(--ink-light);
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.6rem;
   }
 
   /* Tags */
@@ -520,6 +534,49 @@
   .scorecard--assurance .highlight-dot { background: #c4522a; }
   .scorecard--math .highlight-dot { background: #2d6a7e; }
   .scorecard--bridge .highlight-dot { background: #4a7a3a; }
+
+  /* Deep-dive sections */
+  .deep-dive { margin-top: 0.4rem; padding-top: 0.5rem; }
+  .deep-section { margin-bottom: 1.5rem; }
+  .deep-section:last-child { margin-bottom: 0; }
+  .deep-heading {
+    font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--ink);
+    margin-bottom: 0.6rem; line-height: 1.3;
+    letter-spacing: 0.2px;
+    padding-bottom: 0.35rem;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .deep-text {
+    font-family: var(--body); font-size: 14px; line-height: 1.75; color: var(--ink-light);
+    margin-bottom: 0.75rem;
+  }
+  .deep-text a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid rgba(139,37,0,0.3); transition: border-color 0.25s; }
+  .deep-text a:hover { border-color: var(--accent); }
+  .ref-list { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+  .ref-list li {
+    font-family: var(--mono); font-size: 10px; line-height: 1.6; color: var(--ink-faint);
+    padding: 0.3rem 0; padding-left: 1rem; position: relative;
+  }
+  .ref-list li::before { content: '↗'; position: absolute; left: 0; color: var(--accent-light); }
+  .ref-list li a { color: var(--ink-faint); text-decoration: none; transition: color 0.25s; }
+  .ref-list li a:hover { color: var(--accent); }
+  .deep-img {
+    width: 100%; border-radius: 3px; margin: 1rem 0;
+    border: 0.5px solid var(--rule); box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .challenge-box {
+    background: rgba(139,37,0,0.03); border-left: 2px solid var(--accent);
+    padding: 0.85rem 1rem; margin: 0.75rem 0; border-radius: 0 2px 2px 0;
+  }
+  .scorecard--math .challenge-box { background: rgba(26,58,74,0.03); border-left-color: #2d6a7e; }
+  .scorecard--bridge .challenge-box { background: rgba(44,74,46,0.03); border-left-color: #4a7a3a; }
+  .challenge-label {
+    font-family: var(--mono); font-size: 9px; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--accent); margin-bottom: 0.3rem; font-weight: 500;
+  }
+  .scorecard--math .challenge-label { color: #2d6a7e; }
+  .scorecard--bridge .challenge-label { color: #2c4a2e; }
+  .challenge-text { font-family: var(--body); font-size: 14px; line-height: 1.7; color: var(--ink-light); font-style: italic; }
 
   /* Stats panel */
   .scorecard-stats {
@@ -687,7 +744,7 @@
     <hr class="header-rule" />
     <div class="header-top">
       <div class="connect-links">
-        <a href="mailto:francesco.orsi84@gmail.com" title="Email" data-tooltip="email">
+        <a href="/cdn-cgi/l/email-protection#452337242b262036262a6b2a37362c7d71052228242c296b262a28" title="Email" data-tooltip="email">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
         </a>
         <a href="https://www.linkedin.com/in/francesco-o-ab73437b/" target="_blank" title="LinkedIn" data-tooltip="linkedin">
@@ -720,7 +777,7 @@
       <div class="author-text">
         <h1 class="author-name">Francesco Orsi</h1>
         <div class="author-affiliation">
-          Data Science Manager<span class="sep">·</span>F. Hoffmann-La Roche
+          Data Science Manager
         </div>
       </div>
     </div>
@@ -731,24 +788,53 @@
       <div class="flourish-line"></div>
     </div>
 
-    <div class="bio">
-      <p>I began my career as a theoretical physicist, specializing in <a href="#projects">computational neuroscience</a>, while working on projects of various scale across finance, healthcare, and regulatory compliance. During this time, I <a href="https://kunskap.substack.com">actively contributed</a> to the research community through publications and open-source tools.</p>
-    </div>
+    <hr class="section-rule" />
+    <div class="scorecards-label">About</div>
 
-    <div class="bio">
-      <p>After several years of research, I pivoted to a field I am deeply passionate about — artificial intelligence governance and regulatory compliance. I transitioned from academia to industry, starting with data science roles at Swiss Federal Railways and later at Roche, pursuing leadership opportunities that complement technical depth with strategic business understanding.</p>
-    </div>
+    <div class="scorecards">
+      <div class="scorecard scorecard--assurance">
+        <div class="scorecard-header" onclick="toggleCard(this)">
+          <div class="scorecard-number">↬</div>
+          <div class="scorecard-header-text">
+            <div class="scorecard-title">Who I Am</div>
+            <div class="scorecard-subtitle">Physicist → Neuroscientist → Data Science Leader</div>
+          </div>
+          <div class="scorecard-toggle"></div>
+        </div>
+        <div class="scorecard-body">
+          <div class="scorecard-body-inner">
+            <div class="scorecard-content">
+              <div style="padding:0.7rem 1rem;border:0.5px solid var(--rule);border-left:3px solid var(--accent);border-radius:3px;background:rgba(139,37,0,0.02);font-family:var(--body);font-size:14px;color:var(--ink-light);line-height:1.65;margin-bottom:0;">
+                <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:600;margin-bottom:0.35rem;">In Short</div>
+                PhD in Physics, six years in computational neuroscience across Italy, France, the US, and Switzerland. Now leading data analytics for assurance in pharma. Writing <a href="https://www.linkedin.com/newsletters/the-data-drip-%25F0%259F%2592%2589-7430116709400895488/" target="_blank"><em>The Data Drip</em> 💉</a> on LinkedIn and about tech, AI, and hard sciences on <a href="https://kunskap.substack.com" target="_blank">Substack</a>.
+              </div>
+            </div>
 
-    <div class="bio">
-      <p>Today, I lead a team of data scientists developing <a href="#projects">AI audit frameworks</a> for regulated pharmaceutical environments, building comprehensive systems that use advanced machine learning, topological data analysis, and governance methodologies to move beyond deterministic checklists toward probabilistic, resilience-based assurance.</p>
-    </div>
+            <div class="scorecard-deep-wrap">
+              <div class="deep-dive">
 
-    <div class="pull-quote">
-      <p>My long-term vision is to bridge healthcare and technology — connecting life sciences, government, and big tech to drive responsible innovation at scale in Europe and beyond.</p>
-    </div>
+                <div class="deep-section">
+                  <div class="deep-text">I began my career as a theoretical physicist, specializing in computational neuroscience, working across four countries – Italy, France, the United States, and Switzerland – on projects of various scale across finance, healthcare, and regulatory compliance. During this time, I actively contributed to the research community through publications and open-source tools.</div>
+                </div>
 
-    <div class="bio">
-      <p>I write regularly on <a href="https://kunskap.substack.com">Substack</a> about applying advanced mathematical concepts — from differential geometry to Bayesian governance — to real-world audit challenges. I hold a PhD in Physics from CEA-Saclay / Université Paris VII-Diderot and over six years of research experience in computational neuroscience and machine learning.</p>
+                <div class="deep-section">
+                  <div class="deep-text">After several years of research, I pivoted to a field I am deeply passionate about – artificial intelligence governance and regulatory compliance. I transitioned from academia to industry, starting with data science roles at Swiss Federal Railways and later in pharma, pursuing leadership opportunities that complement technical depth with strategic business understanding.</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-text">Today, I lead a data analytics team in a regulated pharmaceutical environment, using data science and machine learning to generate actionable insights for assurance – identifying emerging risks, strengthening controls, improving business processes, and helping the organization make better decisions. We bring a quantitative, evidence-based lens to audit work that has traditionally relied on sampling and professional judgment alone.</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-text">This profile – sitting at the crossroads of pharmaceutical operations, data science, and academic research – gives me an unusual vantage point. I see daily how life sciences, government, and technology could reinforce each other, yet how rarely they actually do. Switzerland, where I'm based, concentrates all the ingredients within 200 km: global pharma headquarters, world-class AI labs, a progressive regulator, and deep-tech capital. I believe the next wave of responsible health innovation will come from people and institutions who can operate across these boundaries – and I'm working to be part of that <a href="#vision-section">bridge</a>.</div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
 
     <hr class="section-rule" />
@@ -770,37 +856,117 @@
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
-              <div class="scorecard-description">
-                Building next-generation assurance systems for regulated industries — moving from deterministic checklists to probabilistic, resilience-based frameworks. Developing the AI Assurance Framework for pharma and pioneering audit-as-set-cover methodologies with cascade-blocking models.
-              </div>
-              <div class="scorecard-tags">
-                <span class="scorecard-tag">AI Act</span>
-                <span class="scorecard-tag">GxP Compliance</span>
-                <span class="scorecard-tag">ISACA</span>
-                <span class="scorecard-tag">Bayesian Governance</span>
-                <span class="scorecard-tag">Control Decay</span>
-                <span class="scorecard-tag">Enterprise Risk</span>
-              </div>
-              <div class="scorecard-highlights">
-                <span class="highlight-item"><span class="highlight-dot"></span>GARA 2026 candidate project</span>
-                <span class="highlight-item"><span class="highlight-dot"></span>auditcover package</span>
-                <span class="highlight-item"><span class="highlight-dot"></span>Substack series</span>
+              <div style="padding:0.7rem 1rem;border:0.5px solid var(--rule);border-left:3px solid var(--accent);border-radius:3px;background:rgba(139,37,0,0.02);font-family:var(--body);font-size:14px;color:var(--ink-light);line-height:1.65;margin-bottom:0;">
+                <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:600;margin-bottom:0.35rem;">In Short</div>
+                Building next-generation assurance systems for regulated industries – moving from deterministic checklists to probabilistic, resilience-based frameworks. Developing the AI Assurance Framework for pharma and pioneering audit-as-set-cover methodologies with cascade-blocking models.
               </div>
             </div>
-            <div class="scorecard-stats">
-              <div class="stat-block">
-                <div class="stat-value">5</div>
-                <div class="stat-label">Team members</div>
-              </div>
-              <div class="stat-block">
-                <div class="stat-value">6+</div>
-                <div class="stat-label">Years in audit</div>
-              </div>
-              <div class="stat-block">
-                <div class="stat-value">3</div>
-                <div class="stat-label">Conferences</div>
+
+            <!-- DEEP DIVE -->
+            <div class="scorecard-deep-wrap">
+              <div class="deep-dive">
+
+                <div class="challenge-box">
+                  <div class="challenge-label">The Challenge</div>
+                  <div class="challenge-text">Traditional audit relies on static checklists and binary pass/fail judgments. But in pharma – where a single AI model might influence drug safety decisions for millions of patients – we need assurance that is continuous, probabilistic, and structurally aware. How do you audit something that learns?</div>
+                </div>
+
+                <!-- Inline SVG: Audit-as-Set-Cover conceptual diagram -->
+                <svg viewBox="0 0 620 220" style="width:100%;max-width:600px;margin:1.25rem auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <marker id="arr1" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0 0, 6 2, 0 4" fill="#c4522a" opacity="0.5"/></marker>
+                  </defs>
+
+                  <text x="310" y="16" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#8b2500" letter-spacing="1.5">AUDIT AS SET COVER – THE FRAMEWORK</text>
+
+                  <!-- Risk universe (background) -->
+                  <rect x="30" y="30" width="260" height="170" rx="4" fill="#faf5ef" stroke="#d4cfc6" stroke-width="0.5"/>
+                  <text x="160" y="48" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#888" letter-spacing="1">RISK UNIVERSE 𝒰</text>
+
+                  <!-- Risk items -->
+                  <g font-family="'IBM Plex Mono',monospace" font-size="6" fill="#888">
+                    <rect x="50" y="60" width="48" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="74" y="74" text-anchor="middle">R₁ data</text>
+                    <rect x="110" y="60" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="138" y="74" text-anchor="middle">R₂ model</text>
+                    <rect x="178" y="60" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="206" y="74" text-anchor="middle">R₃ deploy</text>
+                    <rect x="50" y="92" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="78" y="106" text-anchor="middle">R₄ access</text>
+                    <rect x="118" y="92" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="146" y="106" text-anchor="middle">R₅ drift</text>
+                    <rect x="186" y="92" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="214" y="106" text-anchor="middle">R₆ audit</text>
+                    <rect x="80" y="124" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="108" y="138" text-anchor="middle">R₇ bias</text>
+                    <rect x="148" y="124" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="176" y="138" text-anchor="middle">R₈ PV</text>
+                  </g>
+
+                  <!-- Control coverage ellipses -->
+                  <ellipse cx="105" cy="90" rx="68" ry="48" fill="none" stroke="#8b2500" stroke-width="1" stroke-dasharray="4,3" opacity="0.35"/>
+                  <text x="52" y="170" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#8b2500" opacity="0.7">C₁ validation</text>
+
+                  <ellipse cx="195" cy="95" rx="60" ry="45" fill="none" stroke="#c4522a" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+                  <text x="215" y="170" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#c4522a" opacity="0.6">C₂ monitoring</text>
+
+                  <ellipse cx="150" cy="130" rx="50" ry="28" fill="none" stroke="#d48a6a" stroke-width="1" stroke-dasharray="4,3" opacity="0.25"/>
+                  <text x="130" y="187" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#d48a6a" opacity="0.6">C₃ fairness</text>
+
+                  <!-- Arrow to optimization -->
+                  <line x1="300" y1="110" x2="335" y2="110" stroke="#c4522a" stroke-width="0.8" opacity="0.4" marker-end="url(#arr1)"/>
+
+                  <!-- Right panel: Optimization problem -->
+                  <rect x="345" y="30" width="250" height="170" rx="4" fill="rgba(139,37,0,0.02)" stroke="#c4522a" stroke-width="0.4"/>
+                  <text x="470" y="48" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#8b2500" letter-spacing="1">OPTIMIZATION</text>
+
+                  <g font-family="'Newsreader',serif" font-size="10" fill="#4a3a2e">
+                    <text x="370" y="78" font-style="italic">Objective:</text>
+                    <text x="370" y="95" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#8b2500">min |𝒮| s.t. ∪𝒮 ⊇ 𝒰</text>
+                    <text x="370" y="120" font-style="italic">Dynamic extension:</text>
+                    <text x="370" y="137" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8b2500">η(t) = η₀ · exp(−λt)</text>
+                    <text x="370" y="155" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#888">control effectiveness decays</text>
+                    <text x="370" y="175" font-style="italic">Probabilistic coverage:</text>
+                    <text x="370" y="192" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8b2500">P(∪𝒮(t) ⊇ 𝒰) ≥ 1 − δ</text>
+                  </g>
+
+                  <!-- Bottom caption -->
+                  <text x="310" y="215" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">Each control covers a risk subset – the optimal audit plan is the minimum cover that holds over time</text>
+                </svg>
+
+                <div class="deep-section">
+                  <div class="deep-heading">From Checklists to Topology</div>
+                  <div class="deep-text">My approach treats the audit universe as a <em>set-cover problem</em>: each control mitigates a subset of risks, and the optimal audit plan is the minimum collection of controls that covers the full risk space. I model control effectiveness as a decaying exponential – controls erode over time through organizational drift, software updates, and personnel changes. When a control drops below a threshold θ, its risk set becomes uncovered, potentially triggering cascading exposures in downstream controls. This transforms audit planning from a static exercise into a dynamic optimization problem with deep connections to <a href="https://arxiv.org/abs/1709.05254" target="_blank">anomaly detection in financial records</a>, <a href="https://arxiv.org/abs/0904.1067" target="_blank">Bayesian operational risk modeling</a>, and percolation theory from statistical physics. I'm developing this framework in a <a href="https://kunskap.substack.com" target="_blank">Substack series on AI governance</a> and the open-source <em>auditcover</em> package.</div>
+                </div>
+
+                  <div class="deep-heading">Why This Matters to Me</div>
+                <div class="ref-tiers">
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🏗️ My Work</div>
+                    <div>
+                      <a class="ref-tag ref-tag--highlight" href="https://kunskap.substack.com" target="_blank">Audit 2.0 – Substack series</a>
+                      <a class="ref-tag ref-tag--highlight" href="https://arxiv.org/abs/1709.05254" target="_blank">Schreyer et al. – Deep Autoencoders for Audit Anomalies (2017)</a>
+                      <a class="ref-tag ref-tag--highlight" href="https://www.tandfonline.com/doi/full/10.1080/07366981.2024.2312025" target="_blank">ML Across the Internal Audit Lifecycle (2024)</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🔬 Methods</div>
+                    <div>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1908.00734" target="_blank">Adversarial Autoencoders – Audit Anomalies</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/2112.13215" target="_blank">Continual Learning for Continuous Auditing</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/2411.05815" target="_blank">GNNs for Financial Fraud – Review</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/0904.1067" target="_blank">Bayesian Operational Risk – Shevchenko &amp; Wüthrich</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🧭 Frontier</div>
+                    <div>
+                      <a class="ref-tag" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank">EU AI Act – Regulatory Framework</a>
+                      <a class="ref-tag" href="https://www.theiia.org/en/standards/" target="_blank">IIA Global Internal Audit Standards (2024)</a>
+                      <a class="ref-tag" href="https://www.isaca.org/resources/frameworks" target="_blank">ISACA – COBIT &amp; IT Governance</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-text">I came to audit from fields where you can't afford to be wrong about your models. In pharma, the stakes are even higher: a flawed AI system in pharmacovigilance can miss safety signals that affect real patients. I find the intellectual challenge of designing assurance systems for adaptive AI deeply compelling. It's where the hardest problems in formal verification meet the messiest realities of enterprise software. The question isn't just "does this model work?" – it's "will this model <em>keep</em> working as the world shifts beneath it?"</div>
+                </div>
+
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -818,37 +984,233 @@
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
-              <div class="scorecard-description">
-                Applying deep mathematical structures — differential geometry, algebraic topology, persistent homology, and Ricci curvature — to real-world machine learning and data quality problems. Treating data integration as manifold gluing where curvature singularities encode risk.
-              </div>
-              <div class="scorecard-tags">
-                <span class="scorecard-tag">TDA</span>
-                <span class="scorecard-tag">Persistent Homology</span>
-                <span class="scorecard-tag">Ricci Curvature</span>
-                <span class="scorecard-tag">Differential Geometry</span>
-                <span class="scorecard-tag">Information Entropy</span>
-                <span class="scorecard-tag">Sheaf Theory</span>
-              </div>
-              <div class="scorecard-highlights">
-                <span class="highlight-item"><span class="highlight-dot"></span>PhD in Theoretical Physics</span>
-                <span class="highlight-item"><span class="highlight-dot"></span>Stanford CS233</span>
-                <span class="highlight-item"><span class="highlight-dot"></span>RNA topology benchmarks</span>
+              <div style="padding:0.7rem 1rem;border:0.5px solid var(--rule);border-left:3px solid #2c4a54;border-radius:3px;background:rgba(44,74,84,0.02);font-family:var(--body);font-size:14px;color:var(--ink-light);line-height:1.65;margin-bottom:0;">
+                <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#2c4a54;font-weight:600;margin-bottom:0.35rem;">In Short</div>
+                Applying deep mathematical structures – differential geometry, algebraic topology, persistent homology, and Ricci curvature – to real-world machine learning and data quality problems. Treating data integration as manifold gluing where curvature singularities encode risk.
               </div>
             </div>
-            <div class="scorecard-stats">
-              <div class="stat-block">
-                <div class="stat-value">PhD</div>
-                <div class="stat-label">CEA-Saclay / Paris VII</div>
-              </div>
-              <div class="stat-block">
-                <div class="stat-value">6+</div>
-                <div class="stat-label">Research years</div>
-              </div>
-              <div class="stat-block">
-                <div class="stat-value">4</div>
-                <div class="stat-label">Languages</div>
+
+            <!-- DEEP DIVE -->
+            <div class="scorecard-deep-wrap">
+              <div class="deep-dive">
+
+                <div class="challenge-box">
+                  <div class="challenge-label">The Challenge</div>
+                  <div class="challenge-text">Current AI runs on brute-force matrix multiplication: GPT-4's training consumed ~50 GWh – enough to power a small city for a year. Meanwhile, the human brain performs 10¹⁵ synaptic operations per second on 20 watts. This 10⁶× efficiency gap isn't just an engineering problem – it's a sign that our computational paradigm is fundamentally misaligned with the structure of intelligence. What would AI look like if we built it on geometry, sparsity, and biological principles instead of dense linear algebra?</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">Why Current Models Are Suboptimal</div>
+                  <div class="deep-text">Transformers treat every token equally, attending to every other token in a quadratic explosion of computation. Biological neural networks do the opposite: they are massively sparse, event-driven, and compute only when needed. Spiking neural networks (SNNs) – the third generation of neural networks – encode information in the <em>timing</em> of discrete spikes rather than in continuous-valued activations. On neuromorphic hardware like Intel Loihi 2, SNNs achieve 50–300× energy reduction over GPU baselines for inference tasks. This isn't incremental improvement – it's a paradigm shift. The question is whether we can combine this biological efficiency with the representational power of geometric deep learning.</div>
+                </div>
+
+                <!-- Inline SVG: The Paradigm Gap – current AI vs brain-inspired architecture -->
+                <svg viewBox="0 0 620 380" style="width:100%;max-width:600px;margin:1.25rem auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="mg2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2d6a7e" stop-opacity="0.08"/><stop offset="100%" stop-color="#2d6a7e" stop-opacity="0"/></radialGradient>
+                    <radialGradient id="mg3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c4522a" stop-opacity="0.06"/><stop offset="100%" stop-color="#c4522a" stop-opacity="0"/></radialGradient>
+                    <radialGradient id="mg4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4a7a3a" stop-opacity="0.06"/><stop offset="100%" stop-color="#4a7a3a" stop-opacity="0"/></radialGradient>
+                    <marker id="arr2" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0 0, 6 2, 0 4" fill="#c4522a" opacity="0.4"/></marker>
+                    <filter id="glow1"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    <filter id="glow2"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                  </defs>
+
+                  <!-- ====== LEFT: Current AI – dense, wasteful ====== -->
+                  <rect x="15" y="8" width="185" height="195" rx="4" fill="rgba(196,82,42,0.015)" stroke="#c4522a" stroke-width="0.3" opacity="0.6"/>
+                  <text x="107" y="24" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#8b2500" letter-spacing="1.5" font-weight="500">CURRENT PARADIGM</text>
+                  <text x="107" y="36" text-anchor="middle" font-family="'Newsreader',serif" font-size="8.5" fill="#888" font-style="italic">dense · synchronous · O(n²)</text>
+
+                  <!-- Dense attention matrix -->
+                  <circle cx="107" cy="105" r="58" fill="url(#mg3)"/>
+                  <g transform="translate(65,63)">
+                    <!-- 8x8 grid representing dense attention weights -->
+                    <g fill="#c4522a">
+                      <rect x="0" y="0" width="9" height="9" rx="0.5" opacity="0.7"/><rect x="11" y="0" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="22" y="0" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="33" y="0" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="44" y="0" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="55" y="0" width="9" height="9" rx="0.5" opacity="0.25"/><rect x="66" y="0" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="77" y="0" width="9" height="9" rx="0.5" opacity="0.4"/>
+                      <rect x="0" y="11" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="11" y="11" width="9" height="9" rx="0.5" opacity="0.75"/><rect x="22" y="11" width="9" height="9" rx="0.5" opacity="0.3"/><rect x="33" y="11" width="9" height="9" rx="0.5" opacity="0.65"/><rect x="44" y="11" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="55" y="11" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="66" y="11" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="77" y="11" width="9" height="9" rx="0.5" opacity="0.6"/>
+                      <rect x="0" y="22" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="11" y="22" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="22" y="22" width="9" height="9" rx="0.5" opacity="0.8"/><rect x="33" y="22" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="44" y="22" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="55" y="22" width="9" height="9" rx="0.5" opacity="0.3"/><rect x="66" y="22" width="9" height="9" rx="0.5" opacity="0.65"/><rect x="77" y="22" width="9" height="9" rx="0.5" opacity="0.5"/>
+                      <rect x="0" y="33" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="11" y="33" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="22" y="33" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="33" y="33" width="9" height="9" rx="0.5" opacity="0.7"/><rect x="44" y="33" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="55" y="33" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="66" y="33" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="77" y="33" width="9" height="9" rx="0.5" opacity="0.45"/>
+                      <rect x="0" y="44" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="11" y="44" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="22" y="44" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="33" y="44" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="44" y="44" width="9" height="9" rx="0.5" opacity="0.75"/><rect x="55" y="44" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="66" y="44" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="77" y="44" width="9" height="9" rx="0.5" opacity="0.65"/>
+                      <rect x="0" y="55" width="9" height="9" rx="0.5" opacity="0.3"/><rect x="11" y="55" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="22" y="55" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="33" y="55" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="44" y="55" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="55" y="55" width="9" height="9" rx="0.5" opacity="0.7"/><rect x="66" y="55" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="77" y="55" width="9" height="9" rx="0.5" opacity="0.5"/>
+                      <rect x="0" y="66" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="11" y="66" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="22" y="66" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="33" y="66" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="44" y="66" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="55" y="66" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="66" y="66" width="9" height="9" rx="0.5" opacity="0.7"/><rect x="77" y="66" width="9" height="9" rx="0.5" opacity="0.55"/>
+                      <rect x="0" y="77" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="11" y="77" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="22" y="77" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="33" y="77" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="44" y="77" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="55" y="77" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="66" y="77" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="77" y="77" width="9" height="9" rx="0.5" opacity="0.65"/>
+                    </g>
+                  </g>
+                  <text x="107" y="160" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#8b2500" opacity="0.6">every token attends to every token</text>
+                  <text x="107" y="175" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#c4522a" font-weight="600">300–700 W</text>
+                  <text x="107" y="188" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#888">GPU inference (H100)</text>
+                  <text x="107" y="198" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6" fill="#888">62.9 mJ / inference</text>
+
+                  <!-- ====== CENTER: The arrow / paradigm shift ====== -->
+                  <line x1="208" y1="100" x2="224" y2="100" stroke="#c4522a" stroke-width="1" opacity="0.3" marker-end="url(#arr2)"/>
+                  <text x="216" y="115" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="5" fill="#c4522a" opacity="0.4">10⁶×</text>
+
+                  <!-- ====== CENTER-RIGHT: Brain-inspired – sparse, event-driven ====== -->
+                  <rect x="230" y="8" width="185" height="195" rx="4" fill="rgba(74,122,58,0.015)" stroke="#4a7a3a" stroke-width="0.3" opacity="0.6"/>
+                  <text x="322" y="24" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#2c4a2e" letter-spacing="1.5" font-weight="500">BRAIN-INSPIRED</text>
+                  <text x="322" y="36" text-anchor="middle" font-family="'Newsreader',serif" font-size="8.5" fill="#888" font-style="italic">sparse · event-driven · spiking</text>
+
+                  <!-- Spiking neural network visualization -->
+                  <circle cx="322" cy="105" r="58" fill="url(#mg4)"/>
+                  <g transform="translate(272,58)">
+                    <!-- Neurons (circles) with sparse spike connections -->
+                    <circle cx="15" cy="15" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.6"/>
+                    <circle cx="50" cy="8" r="4" fill="#4a7a3a" opacity="0.7" filter="url(#glow2)"/>
+                    <circle cx="85" cy="18" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.4"/>
+                    <circle cx="30" cy="40" r="4" fill="#4a7a3a" opacity="0.6" filter="url(#glow2)"/>
+                    <circle cx="65" cy="35" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.5"/>
+                    <circle cx="95" cy="42" r="4" fill="#4a7a3a" opacity="0.5" filter="url(#glow2)"/>
+                    <circle cx="10" cy="65" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.3"/>
+                    <circle cx="45" cy="60" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.6"/>
+                    <circle cx="75" cy="68" r="4" fill="#4a7a3a" opacity="0.65" filter="url(#glow2)"/>
+                    <circle cx="20" cy="88" r="4" fill="#4a7a3a" opacity="0.4" filter="url(#glow2)"/>
+                    <circle cx="55" cy="85" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.5"/>
+                    <circle cx="88" cy="90" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.3"/>
+                    <!-- Sparse spikes (only active connections) -->
+                    <line x1="50" y1="12" x2="30" y2="36" stroke="#4a7a3a" stroke-width="0.8" opacity="0.5"/>
+                    <line x1="50" y1="12" x2="65" y2="31" stroke="#4a7a3a" stroke-width="0.6" opacity="0.3"/>
+                    <line x1="30" y1="44" x2="45" y2="56" stroke="#4a7a3a" stroke-width="0.7" opacity="0.4"/>
+                    <line x1="95" y1="46" x2="75" y2="64" stroke="#4a7a3a" stroke-width="0.8" opacity="0.5"/>
+                    <line x1="75" y1="72" x2="55" y2="81" stroke="#4a7a3a" stroke-width="0.6" opacity="0.3"/>
+                    <line x1="75" y1="72" x2="88" y2="86" stroke="#4a7a3a" stroke-width="0.5" opacity="0.25"/>
+                    <line x1="20" y1="92" x2="10" y2="69" stroke="#4a7a3a" stroke-width="0.6" opacity="0.35"/>
+                    <!-- Spike timing marks -->
+                    <rect x="48" y="5" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.8"/>
+                    <rect x="28" y="37" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.7"/>
+                    <rect x="93" y="39" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.6"/>
+                    <rect x="73" y="65" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.7"/>
+                    <rect x="18" y="85" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.5"/>
+                  </g>
+                  <text x="322" y="160" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#2c4a2e" opacity="0.6">fire only when needed · ~5% active</text>
+                  <text x="322" y="175" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a7a3a" font-weight="600">0.25–1.2 W</text>
+                  <text x="322" y="188" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#888">Loihi 2 / SNN inference</text>
+                  <text x="322" y="198" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6" fill="#888">1.2 mJ / inference</text>
+
+                  <!-- ====== RIGHT: Geometric deep learning – the bridge ====== -->
+                  <rect x="422" y="8" width="185" height="195" rx="4" fill="rgba(45,106,126,0.015)" stroke="#2d6a7e" stroke-width="0.3" opacity="0.6"/>
+                  <text x="514" y="24" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#1a3a4a" letter-spacing="1.5" font-weight="500">GEOMETRIC DL</text>
+                  <text x="514" y="36" text-anchor="middle" font-family="'Newsreader',serif" font-size="8.5" fill="#888" font-style="italic">shape-aware · topological · efficient</text>
+
+                  <!-- TDA / manifold visualization -->
+                  <circle cx="514" cy="105" r="58" fill="url(#mg2)"/>
+                  <g transform="translate(514,105)">
+                    <!-- Outer manifold loop -->
+                    <path d="M -38,-5 C -35,-25 -18,-35 0,-38 S 30,-30 38,-10 S 35,22 18,35 S -15,38 -32,25 S -42,10 -38,-5 Z" fill="none" stroke="#2d6a7e" stroke-width="1" opacity="0.4"/>
+                    <!-- Points on manifold -->
+                    <circle cx="-35" cy="-8" r="2.2" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="-22" cy="-28" r="2.2" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="0" cy="-36" r="2.2" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="25" cy="-25" r="2.2" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="36" cy="-5" r="2.2" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="30" cy="18" r="2.2" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="12" cy="33" r="2.2" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="-12" cy="35" r="2.2" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="-30" cy="20" r="2.2" fill="#2d6a7e" opacity="0.7"/>
+                    <!-- Persistent hole – the key feature -->
+                    <circle cx="0" cy="0" r="14" fill="none" stroke="#c4522a" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.6"/>
+                    <text x="0" y="3" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#c4522a" font-weight="500" opacity="0.7">H₁</text>
+                    <!-- Simplicial edges -->
+                    <line x1="-35" y1="-8" x2="-22" y2="-28" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
+                    <line x1="-22" y1="-28" x2="0" y2="-36" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
+                    <line x1="0" y1="-36" x2="25" y2="-25" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
+                    <line x1="25" y1="-25" x2="36" y2="-5" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
+                    <line x1="36" y1="-5" x2="30" y2="18" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
+                    <line x1="30" y1="18" x2="12" y2="33" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
+                    <line x1="12" y1="33" x2="-12" y2="35" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
+                    <line x1="-12" y1="35" x2="-30" y2="20" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
+                    <line x1="-30" y1="20" x2="-35" y2="-8" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
+                    <!-- Filled triangle (2-simplex) -->
+                    <polygon points="0,-36 25,-25 36,-5" fill="#2d6a7e" fill-opacity="0.04" stroke="#2d6a7e" stroke-width="0.3" opacity="0.4"/>
+                    <polygon points="12,33 -12,35 -30,20" fill="#2d6a7e" fill-opacity="0.04" stroke="#2d6a7e" stroke-width="0.3" opacity="0.4"/>
+                  </g>
+                  <text x="514" y="160" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#1a3a4a" opacity="0.6">detect shape · ignore noise</text>
+                  <text x="514" y="175" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#2d6a7e" font-weight="600">~20 W</text>
+                  <text x="514" y="188" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#888">the human brain target</text>
+                  <text x="514" y="198" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6" fill="#888">10⁻² mJ / synaptic event</text>
+
+                  <!-- ====== BOTTOM: The convergence pipeline ====== -->
+                  <line x1="15" y1="218" x2="605" y2="218" stroke="#d4cfc6" stroke-width="0.4"/>
+
+                  <rect x="15" y="228" width="590" height="145" rx="4" fill="rgba(26,58,74,0.012)" stroke="#2d6a7e" stroke-width="0.2"/>
+                  <text x="310" y="245" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#1a3a4a" letter-spacing="1.5" font-weight="500">THE CONVERGENCE – WHERE THESE IDEAS MEET</text>
+
+                  <!-- Pipeline: data → topology → sparsity → efficiency -->
+                  <g font-family="'IBM Plex Mono',monospace" font-size="8" fill="#1a3a4a">
+                    <!-- Step 1 -->
+                    <rect x="40" y="262" width="90" height="36" rx="3" fill="#faf8f4" stroke="#c4522a" stroke-width="0.5"/>
+                    <text x="85" y="278" text-anchor="middle" font-size="7.5" fill="#8b2500" font-weight="500">RAW DATA</text>
+                    <text x="85" y="290" text-anchor="middle" font-size="6" fill="#888">patient cohorts</text>
+                    <!-- Arrow -->
+                    <text x="145" y="283" text-anchor="middle" font-size="10" fill="#c4522a" opacity="0.3">→</text>
+                    <!-- Step 2 -->
+                    <rect x="160" y="262" width="100" height="36" rx="3" fill="#faf8f4" stroke="#2d6a7e" stroke-width="0.5"/>
+                    <text x="210" y="278" text-anchor="middle" font-size="7.5" fill="#1a3a4a" font-weight="500">TDA FILTER</text>
+                    <text x="210" y="290" text-anchor="middle" font-size="6" fill="#888">VR(X,ε) → Dgm(X)</text>
+                    <!-- Arrow -->
+                    <text x="275" y="283" text-anchor="middle" font-size="10" fill="#c4522a" opacity="0.3">→</text>
+                    <!-- Step 3 -->
+                    <rect x="290" y="262" width="110" height="36" rx="3" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.5"/>
+                    <text x="345" y="278" text-anchor="middle" font-size="7.5" fill="#2c4a2e" font-weight="500">SPARSE SPIKES</text>
+                    <text x="345" y="290" text-anchor="middle" font-size="6" fill="#888">attend to H₁ features</text>
+                    <!-- Arrow -->
+                    <text x="415" y="283" text-anchor="middle" font-size="10" fill="#c4522a" opacity="0.3">→</text>
+                    <!-- Step 4 -->
+                    <rect x="430" y="262" width="150" height="36" rx="3" fill="#faf8f4" stroke="#8b2500" stroke-width="0.7"/>
+                    <text x="505" y="278" text-anchor="middle" font-size="7.5" fill="#8b2500" font-weight="500">EFFICIENT + AWARE</text>
+                    <text x="505" y="290" text-anchor="middle" font-size="6" fill="#888">signals, not noise</text>
+                  </g>
+
+                  <!-- Bottom formulas -->
+                  <text x="310" y="322" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#1a3a4a">X → VR(X, ε) → { Hₖ(ε) }ₖ₌₀,₁,… → Dgmₖ(X) → sparse SNN input</text>
+                  <text x="310" y="340" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">Topologically-guided spiking architectures: attend only to geometrically significant features</text>
+                  <text x="310" y="358" text-anchor="middle" font-family="'Newsreader',serif" font-size="8.5" fill="#888" font-style="italic">Stability Theorem (Cohen-Steiner, Edelsbrunner, Harer 2007) guarantees robustness under noise</text>
+                  <text x="310" y="373" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#2d6a7e" opacity="0.5">Applications: FAERS safety signals · patient subpopulation detection · control drift measurement</text>
+                </svg>
+
+                <div class="deep-section">
+                  <div class="deep-heading">Brain-Inspired Architectures Meet Geometric Learning</div>
+                  <div class="deep-text">The convergence I'm most excited about is between <em>neuromorphic computing</em> and <em>geometric deep learning</em>. SNNs naturally encode temporal structure through spike timing – but they lack the topological awareness that persistent homology provides. Conversely, TDA extracts shape from static point clouds but doesn't exploit the event-driven sparsity that makes biological computation efficient. Combining them – topologically-guided spiking architectures that attend only to geometrically significant features – could yield models that are both representationally powerful and energetically viable. <a href="https://arxiv.org/abs/0906.0612" target="_blank">Carlsson's foundational work on TDA</a> provides the mathematical scaffolding; <a href="https://arxiv.org/abs/1901.09948" target="_blank">surrogate gradient methods</a> for training SNNs provide the algorithmic bridge.</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">Geometric Data Science – Applied</div>
+                  <div class="deep-text">Concretely, I apply persistent homology to FDA adverse event data for topological safety signal detection – persistent 1-cycles in the co-occurrence graph of adverse events identify drug-reaction clusters invisible to frequency-based methods. I use <a href="https://arxiv.org/abs/0810.3015" target="_blank">Ollivier-Ricci curvature</a> on control networks to find structurally fragile audit pathways (negative curvature = bottleneck). And I frame data integration across clinical systems as a <a href="https://arxiv.org/abs/1303.3255" target="_blank">sheaf-theoretic consistency</a> problem where local-to-global obstructions reveal systemic data quality failures that no row-level validation can catch. The broader vision: <a href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">information geometry</a> (Fisher-Rao manifolds of probability distributions) as a natural language for measuring control drift, model divergence, and data quality degradation over time.</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">Why This Matters to Me</div>
+                  <div class="deep-text">I spent years studying the mathematical structures that describe how physical systems organize themselves – from neural networks in the brain to quantum field theories. The same tools that detect topological phase transitions in physics can detect structural anomalies in data pipelines. This isn't an analogy – it's the same mathematics. I'm drawn to this work because I believe the next leap in AI won't come from scaling compute alone, but from building models that understand the <em>geometry</em> of the problems they're solving. That's where my physics training becomes a genuine edge.</div>
+                </div>
+
+                <div class="ref-tiers">
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🏗️ My Work</div>
+                    <div>
+                      <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 Your project – coming soon</a>
+                      <a class="ref-tag ref-tag--highlight" href="https://arxiv.org/abs/0906.0612" target="_blank">Carlsson – Topology and Data (2009)</a>
+                      <a class="ref-tag ref-tag--highlight" href="https://www.pnas.org/doi/10.1073/pnas.2528654122" target="_blank">PNAS – Neuromorphic vs GPU Energy (2025)</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🔬 Methods</div>
+                    <div>
+                      <a class="ref-tag" href="https://arxiv.org/abs/0810.3015" target="_blank">Ollivier – Ricci Curvature on Metric Spaces</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1303.3255" target="_blank">Curry – Sheaves, Cosheaves, Applications</a>
+                      <a class="ref-tag" href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">Amari – Information Geometry (Springer)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1710.04019" target="_blank">Moor et al. – Topological Autoencoders</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🧭 Frontier</div>
+                    <div>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1901.09948" target="_blank">Neftci – Surrogate Gradients for SNNs</a>
+                      <a class="ref-tag" href="https://doi.org/10.1038/s41467-020-17236-y" target="_blank">Bellec – e-prop Learning (Nature Comms)</a>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -858,45 +1220,166 @@
         <div class="scorecard-header" onclick="toggleCard(this)">
           <div class="scorecard-number">03</div>
           <div class="scorecard-header-text">
-            <div class="scorecard-title">Healthcare &amp; Tech: Bridging Two Worlds</div>
-            <div class="scorecard-subtitle">Switzerland · Europe · Global Innovation</div>
+            <div class="scorecard-title">AI for Pharma &amp; Diagnostics</div>
+            <div class="scorecard-subtitle">Drug Discovery · Clinical Operations · Patient Outcomes</div>
           </div>
           <div class="scorecard-toggle"></div>
         </div>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
-              <div class="scorecard-description">
-                Connecting life sciences and big tech to drive responsible innovation — building cross-sector partnerships between pharma, government, and technology companies. Vision: creating a healthcare innovation sandbox model starting in Switzerland, scaling across Europe and beyond.
-              </div>
-              <div class="scorecard-tags">
-                <span class="scorecard-tag">Roche</span>
-                <span class="scorecard-tag">Swiss Ecosystem</span>
-                <span class="scorecard-tag">ETH Nexus</span>
-                <span class="scorecard-tag">SDSC</span>
-                <span class="scorecard-tag">BioTechX</span>
-                <span class="scorecard-tag">Digital Health</span>
-              </div>
-              <div class="scorecard-highlights">
-                <span class="highlight-item"><span class="highlight-dot"></span>BioTechX roundtable host</span>
-                <span class="highlight-item"><span class="highlight-dot"></span>Novartis AICS network</span>
-                <span class="highlight-item"><span class="highlight-dot"></span>AMLD Lausanne speaker</span>
+              <div style="padding:0.7rem 1rem;border:0.5px solid var(--rule);border-left:3px solid #2c4a2e;border-radius:3px;background:rgba(44,74,46,0.02);font-family:var(--body);font-size:14px;color:var(--ink-light);line-height:1.65;margin-bottom:0;">
+                <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#2c4a2e;font-weight:600;margin-bottom:0.35rem;">In Short</div>
+                Applying machine learning and advanced analytics to accelerate drug discovery, improve clinical trial design, strengthen pharmacovigilance, and bring diagnostic precision closer to the patient. Moving pharma from retrospective reporting to predictive, real-time intelligence.
               </div>
             </div>
-            <div class="scorecard-stats">
-              <div class="stat-block">
-                <div class="stat-value">CH</div>
-                <div class="stat-label">Base of operations</div>
-              </div>
-              <div class="stat-block">
-                <div class="stat-value">2</div>
-                <div class="stat-label">Sectors bridged</div>
-              </div>
-              <div class="stat-block">
-                <div class="stat-value">∞</div>
-                <div class="stat-label">Ambition</div>
+
+            <!-- DEEP DIVE -->
+            <div class="scorecard-deep-wrap">
+              <div class="deep-dive">
+
+                <div class="challenge-box">
+                  <div class="challenge-label">The Challenge</div>
+                  <div class="challenge-text">Bringing a new drug to market takes 10–15 years and costs over $2 billion on average. Clinical trials fail at a 90% rate, often due to poor patient stratification, late-detected safety signals, or flawed endpoint selection. Meanwhile, pharma sits on vast, underexploited datasets – electronic health records, adverse event reports, genomic profiles, imaging archives – that could transform every stage of the pipeline, from target identification to post-market surveillance. The bottleneck isn't data availability; it's the analytical capability to extract actionable insight at scale under strict regulatory constraints.</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">Where ML Is Changing the Game</div>
+                  <div class="deep-text">The highest-impact applications of AI in pharma compound quietly across the entire value chain. <em>In drug discovery</em>, foundation models like <a href="https://github.com/jwohlwend/boltz" target="_blank">Boltz-2</a> and <a href="https://www.nature.com/articles/s41586-024-07487-w" target="_blank">AlphaFold 3</a> predict protein structure and binding affinity from sequence alone, enabling virtual screening of thousands of candidates before a single molecule is synthesized. <em>In clinical operations</em>, NLP models parse millions of adverse event narratives from the <a href="https://open.fda.gov/data/faers/" target="_blank">FDA FAERS database</a> to detect safety signals months earlier than traditional disproportionality analysis. <em>In diagnostics</em>, Google's <a href="https://ai.google.dev/gemma/docs/medgemma" target="_blank">MedGemma</a> achieves radiologist-level chest X-ray report generation, while pathology foundation models are transforming tissue analysis at scale. <em>In federated learning</em>, <a href="https://developer.nvidia.com/clara" target="_blank">NVIDIA Clara</a> enables multi-hospital model training without patient data ever leaving institutional boundaries – critical for privacy-preserving AI in regulated environments. <em>In clinical trial design</em>, agentic AI systems built on <a href="https://spec.modelcontextprotocol.io/" target="_blank">MCP</a> + FHIR are beginning to automate care gap detection, documentation auditing, and real-time patient stratification on synthetic and real EHR data.</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">From Structure to Treatment: Drug Repurposing</div>
+                  <div class="deep-text">The convergence of structural biology and pharmacogenomics opens a powerful axis: take a patient's genetic variant, predict the mutant protein structure, and screen existing FDA-approved drugs for repurposing opportunities. Boltz-2 predicts both structure and binding affinity (r ≈ 0.66 on the FEP+ benchmark – approaching physics-based simulation accuracy at 1,000× the speed), making virtual repurposing screens feasible at scale. Combined with topological data analysis to map drug-reaction clusters in adverse event data, this creates a feedback loop: population-level safety signals inform individual-level treatment hypotheses, and vice versa.</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">My Projects</div>
+                  <div class="deep-text">I'm building hands-on projects at this intersection – each one a complete, reproducible pipeline designed for real-world clinical data under regulatory constraints:</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">Why This Matters to Me</div>
+                  <div class="deep-text">I work inside a pharmaceutical company. I see the data every day – the adverse event reports that pile up, the clinical trial datasets that get analyzed once and archived, the diagnostic pipelines that could be ten times faster. The gap between what's technically possible and what's actually deployed in regulated healthcare is enormous, and it's not closing fast enough. I build these projects because I want to prove – with working code, real data, and honest evaluation – that the tools exist today to do this better. Not in five years. Now.</div>
+                </div>
+
+                <div class="ref-tiers">
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🏗️ My Work</div>
+                    <div>
+                      <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 ClinOps AI – clinical trial safety intelligence (CDISC/PHUSE)</a>
+                      <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 NVIDIA Clara – federated learning simulation for multi-hospital diagnostics</a>
+                      <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 Boltz-2 Drug Repurposing – variant → structure → screen pipeline</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🔬 Methods</div>
+                    <div>
+                      <a class="ref-tag" href="https://open.fda.gov/data/faers/" target="_blank">FDA FAERS – Adverse Event Reporting</a>
+                      <a class="ref-tag" href="https://advance.phuse.global/display/WEL/PHUSE+Open+Data+Repository" target="_blank">PHUSE CDISC Pilot Study</a>
+                      <a class="ref-tag" href="https://www.cdisc.org/standards" target="_blank">CDISC Data Standards</a>
+                      <a class="ref-tag" href="https://physionet.org/content/mimiciv/" target="_blank">MIMIC-IV – Clinical EHR Dataset</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🧭 Frontier</div>
+                    <div>
+                      <a class="ref-tag" href="https://github.com/jwohlwend/boltz" target="_blank">Boltz-2 – MIT structural biology</a>
+                      <a class="ref-tag" href="https://www.nature.com/articles/s41586-024-07487-w" target="_blank">AlphaFold 3 – Nature (2024)</a>
+                      <a class="ref-tag" href="https://ai.google.dev/gemma/docs/medgemma" target="_blank">MedGemma – Google medical AI</a>
+                      <a class="ref-tag" href="https://developer.nvidia.com/clara" target="_blank">NVIDIA Clara – federated healthcare AI</a>
+                      <a class="ref-tag" href="https://spec.modelcontextprotocol.io/" target="_blank">MCP – Model Context Protocol</a>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================
+         VISION (separate section)
+         ============================================ -->
+    <hr class="section-rule" />
+    <div class="scorecards-label">Vision</div>
+
+    <div class="scorecards">
+      <!-- SCORECARD: Vision – Bridging Health & Tech -->
+      <div class="scorecard scorecard--assurance" id="vision-section">
+        <div class="scorecard-header" onclick="toggleCard(this)">
+          <div class="scorecard-number">✦</div>
+          <div class="scorecard-header-text">
+            <div class="scorecard-title">Bridging Healthcare &amp; Technology</div>
+            <div class="scorecard-subtitle">Switzerland · Europe · Innovation Ecosystem</div>
+          </div>
+          <div class="scorecard-toggle"></div>
+        </div>
+        <div class="scorecard-body">
+          <div class="scorecard-body-inner">
+            <div class="scorecard-content">
+              <div style="padding:0.7rem 1rem;border:0.5px solid var(--rule);border-left:3px solid var(--accent);border-radius:3px;background:rgba(139,37,0,0.02);font-family:var(--body);font-size:14px;color:var(--ink-light);line-height:1.65;margin-bottom:0;">
+                <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:600;margin-bottom:0.35rem;">The Thesis</div>
+                The next wave of healthcare innovation won't come from pharma or tech alone – it will come from people and institutions that operate across both. Switzerland concentrates all the ingredients within 200 km: global pharma HQs, world-class AI labs, a progressive regulator, and deep-tech capital. I'm working to connect these worlds through cross-sector partnerships and a healthcare AI sandbox model, starting here and scaling across Europe.
+              </div>
+            </div>
+
+            <!-- DEEP DIVE -->
+            <div class="scorecard-deep-wrap">
+              <div class="deep-dive">
+
+                <div class="challenge-box">
+                  <div class="challenge-label">The Challenge</div>
+                  <div class="challenge-text">Pharma and tech speak different languages. Pharma optimizes for safety and regulatory certainty over decades; tech optimizes for speed and iteration over weeks. Europe has world-class science and the strongest regulatory framework (EU AI Act, MDR, IVDR) – but risks becoming a rule-writer rather than an innovator. Who builds the bridge?</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">Switzerland: 200 km of Concentrated Innovation</div>
+                  <div class="deep-text">Switzerland hosts a uniquely concentrated innovation corridor. The biotech sector generated CHF 7.2 billion in revenue in 2024 and raised a record CHF 2.5 billion in capital. Over 40% of current Swiss drug-discovery projects apply machine learning. What makes this ecosystem exceptional isn't just scale – it's proximity. Basel pharma headquarters, Zürich AI labs, Bern computational neuroscience, Lausanne deep-tech research, and Geneva digital health are all within three hours of each other. No other region packs this density of complementary expertise into such a small geographic footprint.</div>
+                </div>
+
+                <!-- Interactive Swiss Ecosystem Map – D3.js + TopoJSON -->
+                <div style="width:100%;margin:1.25rem auto;border-radius:6px;overflow:hidden;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+                  <iframe src="swiss-ecosystem.html" style="width:100%;height:850px;border:none;display:block;" loading="lazy"></iframe>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">The Sandbox Vision</div>
+                  <div class="deep-text">Switzerland's unique position makes it the natural place to prototype a <em>healthcare AI sandbox</em>: a pre-competitive space where pharma, tech companies, regulators, and academics can test AI systems on real clinical data under controlled governance, before deployment. The ingredients already exist – Basel's DayOne Accelerator connects startups with pharma, the SDSC (ETH/EPFL joint initiative) provides data infrastructure, Swissmedic in Bern offers regulatory proximity, and the Wyss Centers in Zürich and Geneva bridge translational gaps. The fintech sandbox model (Singapore, UK) has already proven that regulated innovation spaces accelerate adoption without compromising safety. Healthcare is next.</div>
+                </div>
+
+                <div class="ref-tiers">
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🏗️ My Work</div>
+                    <div>
+                      <a class="ref-tag ref-tag--highlight" href="https://deeptechnation.ch/" target="_blank">Deep Tech Nation – Swiss Report 2025</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🔬 Methods</div>
+                    <div>
+                      <a class="ref-tag" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank">EU AI Act – Regulatory Framework</a>
+                      <a class="ref-tag" href="https://www.who.int/publications/i/item/9789240029200" target="_blank">WHO – Ethics &amp; Governance of AI for Health</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🧭 Frontier</div>
+                    <div>
+                      <a class="ref-tag" href="https://www.ey.com/en_ch/newsroom/2025/05/swiss-biotech-report-2025-highlights-sectors-continuing-resilience-through-commitment-to-international-alliances" target="_blank">Swiss Biotech Report 2025 (EY)</a>
+                      <a class="ref-tag" href="https://datascience.ch/" target="_blank">SDSC – Swiss Data Science Center</a>
+                      <a class="ref-tag" href="https://www.appliedmldays.org/" target="_blank">AMLD – Lausanne</a>
+                      <a class="ref-tag" href="https://www.dayone.swiss/accelerator/" target="_blank">DayOne Accelerator – Basel</a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -909,7 +1392,7 @@
   <footer class="footer">
     <hr class="footer-rule" />
     <div class="footer-inner">
-      <span class="footer-text">© 2025 Francesco Orsi</span>
+      <span class="footer-text">© 2026 Francesco Orsi</span>
       <span class="footer-text">Built with care</span>
     </div>
   </footer>
@@ -918,7 +1401,9 @@
     function toggleCard(header) {
       const card = header.closest('.scorecard');
       const wasOpen = card.classList.contains('is-open');
-
-      // Close all cards
-      document.querySelectorAll('.scorecard.is-open').forEach(c => {
-        c.classList.remove('is-op
+      document.querySelectorAll('.scorecard.is-open').forEach(c => c.classList.remove('is-open'));
+      if (!wasOpen) card.classList.add('is-open');
+    }
+  </script>
+</body>
+</html>
