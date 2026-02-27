@@ -4,414 +4,921 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Francesco Orsi</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --text-primary: #333;
-    --text-secondary: #666;
-    --text-light: #999;
-    --link-color: #0ea5e9;
-    --link-hover: #0284c7;
-    --border-light: #e5e7eb;
-    --bg-color: #ffffff;
-    --bg-light: #f8fafc;
+    --ink: #1a1a1a;
+    --ink-light: #444;
+    --ink-faint: #888;
+    --ink-ghost: #bbb;
+    --paper: #faf8f4;
+    --paper-warm: #f5f1ea;
+    --accent: #8b2500;
+    --accent-light: #c4522a;
+    --rule: #d4cfc6;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --body: 'Newsreader', 'Georgia', serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-primary);
+    font-family: var(--body);
+    background: var(--paper);
+    color: var(--ink);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Header */
-  .header {
-    background-color: var(--bg-color);
-    border-bottom: 1px solid var(--border-light);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  /* Paper texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
   }
 
-  .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
+  body > * { position: relative; z-index: 1; }
+
+  ::selection {
+    background: rgba(139, 37, 0, 0.15);
+    color: var(--ink);
   }
 
-  .logo {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-primary);
+  a {
+    color: var(--accent);
     text-decoration: none;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    transition: color 0.25s ease;
+  }
+  a:hover { color: var(--accent-light); }
+
+  /* ============================================
+     HEADER
+     ============================================ */
+  .header {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 2rem 2rem 0;
   }
 
-  .nav {
+  .header-rule {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .header-top {
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 0.6rem;
+    border-bottom: 0.5px solid var(--rule);
+  }
+
+  .connect-links {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .connect-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    position: relative;
+  }
+
+  .connect-links a:hover {
+    color: var(--accent);
+    background: rgba(139, 37, 0, 0.06);
+    transform: translateY(-2px);
+  }
+
+  /* Tooltip */
+  .connect-links a::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: var(--ink-light);
+    background: var(--paper);
+    border: 0.5px solid var(--rule);
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .connect-links a:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .connect-links a svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ============================================
+     MANUSCRIPT
+     ============================================ */
+  .manuscript {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+  }
+
+  .author-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease 0.1s forwards;
+  }
+
+  .avatar-frame {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #2c3025 0%, #4a5940 50%, #3a4a35 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-frame::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .avatar-initials {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 2px;
+  }
+
+  .author-text { flex: 1; }
+
+  .author-name {
+    font-family: var(--serif);
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+  }
+
+  .author-affiliation {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    margin-top: 0.3rem;
+  }
+
+  .author-affiliation .sep {
+    color: var(--ink-ghost);
+    margin: 0 0.5rem;
+  }
+
+  /* Flourish */
+  .flourish {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0;
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease 0.25s forwards;
+  }
+
+  .flourish-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--rule);
+  }
+
+  .flourish-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  /* Bio */
+  .bio {
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease forwards;
+  }
+  .bio:nth-of-type(1) { animation-delay: 0.35s; }
+  .bio:nth-of-type(2) { animation-delay: 0.45s; }
+  .bio:nth-of-type(3) { animation-delay: 0.55s; }
+  .bio:nth-of-type(4) { animation-delay: 0.75s; }
+
+  .bio p {
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--ink-light);
+    margin-bottom: 1.25rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .bio p a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(139, 37, 0, 0.25);
+    transition: text-decoration-color 0.3s ease;
+  }
+  .bio p a:hover { text-decoration-color: var(--accent); }
+
+  /* Pull-quote */
+  .pull-quote {
+    border-left: 2px solid var(--accent);
+    padding: 0.75rem 0 0.75rem 1.5rem;
+    margin: 2rem 0;
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease 0.65s forwards;
+  }
+
+  .pull-quote p {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+  }
+
+  /* Section */
+  .section-rule {
+    border: none;
+    border-top: 0.5px solid var(--rule);
+    margin: 3rem 0 1.75rem;
+  }
+
+  .section-heading {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--ink-ghost);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+
+  /* ============================================
+     SCORECARDS — Expandable Accordion
+     ============================================ */
+  .scorecards-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--ink-ghost);
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+
+  .scorecards {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease 0.85s forwards;
+  }
+
+  .scorecard {
+    border: 0.5px solid var(--rule);
+    border-bottom: none;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.4s ease;
+  }
+
+  .scorecard:last-child { border-bottom: 0.5px solid var(--rule); }
+
+  .scorecard.is-open {
+    box-shadow: 0 6px 30px rgba(0,0,0,0.05);
+    z-index: 2;
+  }
+
+  /* Colored accent stripe */
+  .scorecard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    transition: opacity 0.4s ease;
+    opacity: 0.35;
+  }
+
+  .scorecard.is-open::before { opacity: 1; }
+
+  .scorecard--assurance::before { background: linear-gradient(180deg, #8b2500, #c4522a); }
+  .scorecard--math::before { background: linear-gradient(180deg, #1a3a4a, #2d6a7e); }
+  .scorecard--bridge::before { background: linear-gradient(180deg, #2c4a2e, #4a7a3a); }
+
+  /* HEADER (always visible, clickable) */
+  .scorecard-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.35rem 2rem 1.35rem 2.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+    position: relative;
+  }
+
+  .scorecard-header:hover {
+    background: rgba(0,0,0,0.012);
+  }
+
+  .scorecard-number {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--ink-ghost);
+    flex-shrink: 0;
+    width: 28px;
+  }
+
+  .scorecard-header-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scorecard-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+    transition: color 0.3s ease;
+  }
+
+  .scorecard-header:hover .scorecard-title {
+    color: var(--accent);
+  }
+
+  .scorecard-subtitle {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-ghost);
+    letter-spacing: 0.5px;
+    margin-top: 0.2rem;
+  }
+
+  /* Toggle icon */
+  .scorecard-toggle {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .scorecard-toggle::before,
+  .scorecard-toggle::after {
+    content: '';
+    position: absolute;
+    background: var(--ink-ghost);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  }
+
+  .scorecard-toggle::before {
+    width: 14px;
+    height: 1.5px;
+  }
+
+  .scorecard-toggle::after {
+    width: 1.5px;
+    height: 14px;
+  }
+
+  .scorecard.is-open .scorecard-toggle::after {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+
+  .scorecard-header:hover .scorecard-toggle::before,
+  .scorecard-header:hover .scorecard-toggle::after {
+    background: var(--accent);
+  }
+
+  /* BODY (expandable) */
+  .scorecard-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    opacity: 0;
+  }
+
+  .scorecard.is-open .scorecard-body {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  .scorecard-body-inner {
+    padding: 0 2rem 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .scorecard-content { min-width: 0; }
+
+  .scorecard-description {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-light);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Tags */
+  .scorecard-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .scorecard-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    padding: 0.3rem 0.7rem;
+    border: 0.5px solid var(--rule);
+    border-radius: 2px;
+    color: var(--ink-faint);
+    transition: border-color 0.25s ease;
+  }
+
+  .scorecard.is-open .scorecard-tag { border-color: rgba(0,0,0,0.15); }
+
+  /* Highlights */
+  .scorecard-highlights {
+    display: flex;
+    gap: 1.75rem;
+    flex-wrap: wrap;
+    padding-top: 0.75rem;
+    border-top: 0.5px solid rgba(0,0,0,0.04);
+  }
+
+  .highlight-item {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .highlight-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .scorecard--assurance .highlight-dot { background: #c4522a; }
+  .scorecard--math .highlight-dot { background: #2d6a7e; }
+  .scorecard--bridge .highlight-dot { background: #4a7a3a; }
+
+  /* Stats panel */
+  .scorecard-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-left: 2rem;
+    border-left: 0.5px solid var(--rule);
+    min-width: 140px;
+  }
+
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--ink-ghost);
+    margin-top: 0.2rem;
+  }
+
+  .scorecard--assurance .stat-value { color: #8b2500; }
+  .scorecard--math .stat-value { color: #1a3a4a; }
+  .scorecard--bridge .stat-value { color: #2c4a2e; }
+
+  /* ============================================
+     EDUCATION (below scorecards)
+     ============================================ */
+  .education-section {
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease 1s forwards;
+  }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
 
-  .nav a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
+  .edu-entry { }
 
-  .nav a:hover,
-  .nav a.active {
-    color: var(--text-primary);
-  }
-
-  /* Main Container */
-  .main-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: var(--bg-color);
-    min-height: calc(100vh - 80px);
-    display: flex;
-  }
-
-  /* Sidebar */
-  .sidebar {
-    width: 300px;
-    padding: 3rem 2rem;
-    border-right: 1px solid var(--border-light);
-    text-align: center;
-  }
-
-  .profile-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 48px;
-    font-weight: 300;
-  }
-
-  .profile-name {
-    font-size: 28px;
+  .edu-degree {
+    font-family: var(--body);
     font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
   }
 
-  .profile-title {
-    font-size: 16px;
-    color: var(--text-secondary);
-    margin-bottom: 0.25rem;
-  }
-
-  .profile-org {
-    font-size: 16px;
-    color: var(--text-light);
-    margin-bottom: 2rem;
-  }
-
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .social-links a {
-    width: 40px;
-    height: 40px;
-    background-color: var(--link-color);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-  }
-
-  .social-links a:hover {
-    background-color: var(--link-hover);
-  }
-
-  /* Content */
-  .content {
-    flex: 1;
-    padding: 3rem 3rem 3rem 2rem;
-  }
-
-  .section-title {
-    font-size: 36px;
-    font-weight: 300;
-    margin-bottom: 2rem;
-    color: var(--text-primary);
-  }
-
-  .bio-text {
-    font-size: 16px;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-  }
-
-  .bio-text a {
-    color: var(--link-color);
-    text-decoration: none;
-  }
-
-  .bio-text a:hover {
-    color: var(--link-hover);
-    text-decoration: underline;
-  }
-
-  /* Two Column Layout */
-  .two-column {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-top: 3rem;
-  }
-
-  .column-title {
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-  }
-
-  .interest-list {
-    list-style: none;
-  }
-
-  .interest-list li {
-    margin-bottom: 0.75rem;
-    color: var(--text-primary);
-    font-size: 16px;
-  }
-
-  .interest-list li::before {
-    content: "•";
-    color: var(--link-color);
-    font-weight: bold;
-    margin-right: 0.75rem;
-  }
-
-  .education-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-    gap: 1rem;
-  }
-
-  .education-icon {
-    width: 24px;
-    height: 24px;
-    background-color: var(--text-light);
-    flex-shrink: 0;
-    margin-top: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+  .edu-institution {
+    font-family: var(--mono);
     font-size: 12px;
-    font-weight: bold;
+    color: var(--ink-faint);
+    letter-spacing: 0.3px;
   }
 
-  .education-content {
-    flex: 1;
+  .edu-year {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-ghost);
+    letter-spacing: 0.3px;
   }
 
-  .education-degree {
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
 
-  .education-school {
-    color: var(--text-secondary);
-    font-size: 14px;
+  .footer-rule {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin-bottom: 1rem;
   }
 
-  /* Mobile Responsiveness */
-  @media (max-width: 1024px) {
-    .main-container {
-      flex-direction: column;
-    }
-
-    .sidebar {
-      width: 100%;
-      padding: 2rem;
-      border-right: none;
-      border-bottom: 1px solid var(--border-light);
-    }
-
-    .content {
-      padding: 2rem;
-    }
-
-    .two-column {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2rem;
   }
 
+  .footer-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-ghost);
+    letter-spacing: 0.5px;
+  }
+
+  /* ============================================
+     ANIMATIONS
+     ============================================ */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
   @media (max-width: 768px) {
-    .header-container {
-      padding: 0 1rem;
+    .header-top {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .connect-links { gap: 1.25rem; }
+    nav { gap: 1.25rem; }
+
+    .author-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .author-name { font-size: 38px; }
+
+    .scorecard-body-inner {
+      grid-template-columns: 1fr;
     }
 
-    .nav {
+    .scorecard-stats {
+      border-left: none;
+      padding-left: 0;
+      border-top: 0.5px solid var(--rule);
+      padding-top: 1.25rem;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .scorecard-highlights {
+      flex-wrap: wrap;
       gap: 1rem;
     }
 
-    .nav a {
-      font-size: 14px;
+    .edu-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
 
-    .logo {
-      font-size: 20px;
-    }
-
-    .profile-image {
-      width: 120px;
-      height: 120px;
-      font-size: 36px;
-    }
-
-    .profile-name {
-      font-size: 24px;
-    }
-
-    .section-title {
-      font-size: 28px;
-    }
-
-    .content {
-      padding: 1.5rem;
-    }
-
-    .sidebar {
-      padding: 1.5rem;
-    }
+    .pull-quote p { font-size: 18px; }
   }
 
   @media (max-width: 480px) {
-    .nav {
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .social-links {
-      gap: 0.75rem;
-    }
-
-    .social-links a {
-      width: 36px;
-      height: 36px;
-      font-size: 12px;
-    }
+    .connect-links { flex-wrap: wrap; gap: 1rem; }
+    nav { flex-wrap: wrap; gap: 1rem; }
+    .author-name { font-size: 32px; }
+    .avatar-frame { width: 80px; height: 80px; }
+    .avatar-initials { font-size: 26px; }
   }
 </style>
 </head>
 <body>
+
   <!-- Header -->
   <header class="header">
-    <div class="header-container">
-      <a href="#" class="logo">Francesco Orsi</a>
-      <nav class="nav">
-        <a href="#home" class="active">Home</a>
-        <a href="#posts">Posts</a>
-        <a href="#projects">Projects</a>
-        <a href="#talks">Talks</a>
-        <a href="#teaching">Teaching</a>
-        <a href="#cv">CV</a>
-      </nav>
+    <hr class="header-rule" />
+    <div class="header-top">
+      <div class="connect-links">
+        <a href="/cdn-cgi/l/email-protection#3a5c485b54595f4959551455484953020e7a5d575b535614595557" title="Email" data-tooltip="email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/francesco-o-ab73437b/" target="_blank" title="LinkedIn" data-tooltip="linkedin">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </a>
+        <a href="https://kunskap.substack.com" target="_blank" title="Substack" data-tooltip="substack">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M22 6.98H2V4.82h20zM2 10.52h20v-2.2H2zM2 13.04v8.96l10-5.55 10 5.55v-8.96H2z"/></svg>
+        </a>
+        <a href="https://github.com/FranzuBaren/f" target="_blank" title="GitHub" data-tooltip="github">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="projects.html" title="Projects" data-tooltip="projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </a>
+        <a href="cv.html" title="CV" data-tooltip="cv">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </a>
+      </div>
+
     </div>
   </header>
 
-  <!-- Main Container -->
-  <div class="main-container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="profile-image">FO</div>
-      <h1 class="profile-name">Francesco Orsi</h1>
-      <div class="profile-title">Data Science Manager</div>
-      <div class="profile-org">Regulatory AI Systems</div>
-      
-      <div class="social-links">
-        <a href="mailto:francesco@example.com" title="Email">@</a>
-        <a href="https://linkedin.com/in/francescoorsi" title="LinkedIn">in</a>
-        <a href="https://twitter.com/francescoorsi" title="Twitter">tw</a>
-        <a href="https://github.com/franzobaren" title="GitHub">gh</a>
-        <a href="#" title="Google Scholar">gs</a>
+  <!-- Manuscript -->
+  <main class="manuscript">
+
+    <div class="author-header">
+      <div class="avatar-frame">
+        <span class="avatar-initials">FO</span>
       </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="content">
-      <h2 class="section-title">Biography</h2>
-      
-      <p class="bio-text">I began my career as a theoretical physicist, specializing in <a href="#projects">computational neuroscience</a>, while working on projects of various scale in many different domains such as finance, healthcare, and regulatory compliance. During this time, I <a href="#publications">actively participated</a> in the academic community, contributing to research publications and releasing open-source tools.</p>
-
-      <p class="bio-text">After several years of research experience, I decided to pivot my career and take an active part in the development of a field I am very passionate about – artificial intelligence governance and regulatory compliance. To fulfill this goal, I transitioned from academia to industry, starting with a data science role. I chose to pursue leadership opportunities that would complement my technical skills with strategic business understanding.</p>
-
-      <p class="bio-text">In my current role, I successfully lead <a href="#projects">AI audit frameworks</a>, developing comprehensive systems for regulated industries using advanced machine learning techniques and governance methodologies. I continued building expertise in regulatory compliance, filling in the gaps in practical implementation that I missed in academic settings.</p>
-
-      <p class="bio-text">Currently, I work as a data science manager leading teams that develop AI systems for regulated environments; contributing to <a href="#projects">compliance frameworks</a> and experimenting with novel approaches to ethical AI deployment.</p>
-
-      <p class="bio-text">In 2024, I established myself as a leader in AI governance and regulatory ML systems.</p>
-
-      <!-- Two Column Section -->
-      <div class="two-column">
-        <div>
-          <h3 class="column-title">Interests</h3>
-          <ul class="interest-list">
-            <li>Artificial Intelligence Governance</li>
-            <li>Regulatory Machine Learning</li>
-            <li>AI Audit & Risk Management</li>
-            <li>Mathematical Foundations of ML</li>
-            <li>Reproducible Research</li>
-            <li>Computational Neuroscience</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="column-title">Education</h3>
-          
-          <div class="education-item">
-            <div class="education-icon">🎓</div>
-            <div class="education-content">
-              <div class="education-degree">PhD in Theoretical Physics, 2018–2022</div>
-              <div class="education-school">European Research University</div>
-            </div>
-          </div>
-
-          <div class="education-item">
-            <div class="education-icon">🎓</div>
-            <div class="education-content">
-              <div class="education-degree">MSc in Computational Neuroscience, 2016–2018</div>
-              <div class="education-school">Technical University</div>
-            </div>
-          </div>
+      <div class="author-text">
+        <h1 class="author-name">Francesco Orsi</h1>
+        <div class="author-affiliation">
+          Data Science Manager<span class="sep">·</span>Audit &amp; Risk Data Analytics<span class="sep">·</span>F. Hoffmann-La Roche
         </div>
       </div>
-    </main>
-  </div>
-</body>
-</html>
+    </div>
+
+    <div class="flourish">
+      <div class="flourish-line"></div>
+      <div class="flourish-diamond"></div>
+      <div class="flourish-line"></div>
+    </div>
+
+    <div class="bio">
+      <p>I began my career as a theoretical physicist, specializing in <a href="#projects">computational neuroscience</a>, while working on projects of various scale across finance, healthcare, and regulatory compliance. During this time, I <a href="https://kunskap.substack.com">actively contributed</a> to the research community through publications and open-source tools.</p>
+    </div>
+
+    <div class="bio">
+      <p>After several years of research, I pivoted to a field I am deeply passionate about — artificial intelligence governance and regulatory compliance. I transitioned from academia to industry, starting with data science roles at Swiss Federal Railways and later at Roche, pursuing leadership opportunities that complement technical depth with strategic business understanding.</p>
+    </div>
+
+    <div class="bio">
+      <p>Today, I lead a team of data scientists developing <a href="#projects">AI audit frameworks</a> for regulated pharmaceutical environments, building comprehensive systems that use advanced machine learning, topological data analysis, and governance methodologies to move beyond deterministic checklists toward probabilistic, resilience-based assurance.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>My long-term vision is to bridge healthcare and technology — connecting life sciences, government, and big tech to drive responsible innovation at scale in Europe and beyond.</p>
+    </div>
+
+    <div class="bio">
+      <p>I write regularly on <a href="https://kunskap.substack.com">Substack</a> about applying advanced mathematical concepts — from differential geometry to Bayesian governance — to real-world audit challenges. I hold a PhD in Physics from CEA-Saclay / Université Paris VII-Diderot and over six years of research experience in computational neuroscience and machine learning.</p>
+    </div>
+
+    <hr class="section-rule" />
+
+    <div class="scorecards-label">Focus Areas</div>
+
+    <div class="scorecards">
+
+      <!-- SCORECARD 1: AI Assurance -->
+      <div class="scorecard scorecard--assurance">
+        <div class="scorecard-header" onclick="toggleCard(this)">
+          <div class="scorecard-number">01</div>
+          <div class="scorecard-header-text">
+            <div class="scorecard-title">AI Assurance, Risk &amp; Governance</div>
+            <div class="scorecard-subtitle">Regulation · Compliance · Audit Frameworks</div>
+          </div>
+          <div class="scorecard-toggle"></div>
+        </div>
+        <div class="scorecard-body">
+          <div class="scorecard-body-inner">
+            <div class="scorecard-content">
+              <div class="scorecard-description">
+                Building next-generation assurance systems for regulated industries — moving from deterministic checklists to probabilistic, resilience-based frameworks. Developing the AI Assurance Framework for pharma and pioneering audit-as-set-cover methodologies with cascade-blocking models.
+              </div>
+              <div class="scorecard-tags">
+                <span class="scorecard-tag">AI Act</span>
+                <span class="scorecard-tag">GxP Compliance</span>
+                <span class="scorecard-tag">ISACA</span>
+                <span class="scorecard-tag">Bayesian Governance</span>
+                <span class="scorecard-tag">Control Decay</span>
+                <span class="scorecard-tag">Enterprise Risk</span>
+              </div>
+              <div class="scorecard-highlights">
+                <span class="highlight-item"><span class="highlight-dot"></span>GARA 2026 candidate project</span>
+                <span class="highlight-item"><span class="highlight-dot"></span>auditcover package</span>
+                <span class="highlight-item"><span class="highlight-dot"></span>Substack series</span>
+              </div>
+            </div>
+            <div class="scorecard-stats">
+              <div class="stat-block">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Team members</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-value">6+</div>
+                <div class="stat-label">Years in audit</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Conferences</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCORECARD 2: Mathematical Foundations -->
+      <div class="scorecard scorecard--math">
+        <div class="scorecard-header" onclick="toggleCard(this)">
+          <div class="scorecard-number">02</div>
+          <div class="scorecard-header-text">
+            <div class="scorecard-title">Mathematical Foundations of AI/ML</div>
+            <div class="scorecard-subtitle">Geometry · Topology · Information Theory</div>
+          </div>
+          <div class="scorecard-toggle"></div>
+        </div>
+        <div class="scorecard-body">
+          <div class="scorecard-body-inner">
+            <div class="scorecard-content">
+              <div class="scorecard-description">
+                Applying deep mathematical structures — differential geometry, algebraic topology, persistent homology, and Ricci curvature — to real-world machine learning and data quality problems. Treating data integration as manifold gluing where curvature singularities encode risk.
+              </div>
+              <div class="scorecard-tags">
+                <span class="scorecard-tag">TDA</span>
+                <span class="scorecard-tag">Persistent Homology</span>
+                <span class="scorecard-tag">Ricci Curvature</span>
+                <span class="scorecard-tag">Differential Geometry</span>
+                <span class="scorecard-tag">Information Entropy</span>
+                <span class="scorecard-tag">Sheaf Theory</span>
+              </div>
+              <div class="scorecard-highlights">
+                <span class="highlight-item"><span class="highlight-dot"></span>PhD in Theoretical Physics</span>
+                <span class="highlight-item"><span class="highlight-dot"></span>Stanford CS233</span>
+                <span class="highlight-item"><span class="highlight-dot"></span>RNA topology benchmarks</span>
+              </div>
+            </div>
+            <div class="scorecard-stats">
+              <div class="stat-block">
+                <div class="stat-value">PhD</div>
+                <div class="stat-label">CEA-Saclay / Paris VII</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-value">6+</div>
+                <div class="stat-label">Research years</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Languages</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCORECARD 3: Healthcare × Tech Bridge -->
+      <div class="scorecard scorecard--bridge">
+        <div class="scorecard-header" onclick="toggleCard(this)">
+          <div class="scorecard-number">03</div>
+          <div class="scorecard-header-text">
+            <div class="scorecard-title">Healthcare &amp; Tech: Bridging Two Worlds</div>
+            <div class="scorecard-subtitle">Switzerland · Europe · Global Innovation</div>
+          </div>
+          <div class="scorecard-toggle"></div>
+        </div>
+        <div class="scorecard-body">
+          <div class="scorecard-body-inner">
+            <div class="scorecard-content">
+              <div class="scorecard-description">
+                Connecting life sciences and big tech to drive responsible innovation — building cross-sector partnerships between pharma, government, and technology companies. Vision: creating a healthcare innovation sandbox model starting in Switzerland, scaling across Europe and beyond.
+              </div>
+              <div class="scorecard-tags">
+                <span class="scorecard-tag">Roche</span>
+                <span class="scorecard-tag">Swiss Ecosystem</span>
+                <span class="scorecard-tag">ETH Nexus</span>
+                <span class="scorecard-tag">SDSC</span>
+                <span class="scorecard-tag">BioTechX</span>
+                <span class="scorecard-tag">Digital Health</span>
+              </div>
+              <div class="scorecard-highlights">
+                <span class="highlight-item"><span class="highlight-dot"></span>BioTechX roundtable host</span>
+                <span class="highlight-item"><span class="highlight-dot"></span>Novartis AICS network</span>
+                <span class="highlight-item"><span class="highlight-dot"></span>AMLD Lausanne speaker</span>
+              </div>
+            </div>
+            <div class="scorecard-stats">
+              <div class="stat-block">
+                <div class="stat-value">CH</div>
+                <div class="stat-label">Base of operations</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Sectors bridged</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">Ambition</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <hr class="footer-rule" />
+    <div class="footer-inner">
+      <span class="footer-text">© 2025 Francesco Orsi</span>
+      <span class="footer-text">Built with care</span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function toggleCard(header) {
+      const card = header.closest('.scorecard');
+      const wasOpen = card.classList.contains('is-open');
+
+      // Close all cards
+      document.querySelectorAll('.scorecard.is-open').forEach(c => {
+        c.classList.remove('is-op
