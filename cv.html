@@ -3,301 +3,435 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Francesco Orsi — CV</title>
+<title>Francesco Orsi — Journey</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <style>
-  :root{--ink:#1a1a1a;--ink-light:#444;--ink-faint:#888;--ink-ghost:#bbb;--paper:#faf8f4;--accent:#8b2500;--accent-light:#c4522a;--rule:#d4cfc6;--serif:'Cormorant Garamond','Georgia',serif;--body:'Newsreader','Georgia',serif;--mono:'IBM Plex Mono','Courier New',monospace}
-  *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-  body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
-  body>*{position:relative;z-index:1}::selection{background:rgba(139,37,0,.15);color:var(--ink)}
-  a{color:var(--accent);text-decoration:none;transition:color .25s ease}a:hover{color:var(--accent-light)}
+:root{
+  --ink:#1a1a1a;--ink-light:#444;--ink-faint:#888;--ink-ghost:#bbb;
+  --paper:#faf8f4;--accent:#8b2500;--accent-light:#c4522a;--rule:#d4cfc6;
+  --hl:#f2da6e;--hl-stroke:#c9ab30;
+  --serif:'Cormorant Garamond','Georgia',serif;
+  --body:'Newsreader','Georgia',serif;
+  --mono:'IBM Plex Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+body>*{position:relative;z-index:1}
+::selection{background:rgba(139,37,0,.15)}
+a{color:var(--accent);text-decoration:none;transition:color .25s}a:hover{color:var(--accent-light)}
 
-  .header{max-width:740px;margin:0 auto;padding:2rem 2rem 0}
-  .header-rule{border:none;border-top:2px solid var(--ink);margin-bottom:.6rem}
-  .header-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:.6rem;border-bottom:.5px solid var(--rule)}
-  .back-link{font-family:var(--mono);font-size:12px;color:var(--ink-faint);display:flex;align-items:center;gap:.4rem;transition:color .25s ease}
-  .back-link:hover{color:var(--accent)}.header-title{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-ghost)}
+.header{max-width:1200px;margin:0 auto;padding:1.5rem 2rem 0}
+.header-rule{border:none;border-top:2px solid var(--ink);margin-bottom:.5rem}
+.header-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:.5rem;border-bottom:.5px solid var(--rule)}
+.back-link{font-family:var(--mono);font-size:12px;color:var(--ink-faint);transition:color .25s}
+.back-link:hover{color:var(--accent)}
+.header-title{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-ghost)}
 
-  .page{max-width:740px;margin:0 auto;padding:3rem 2rem 4rem}
-  .section-rule{border:none;border-top:.5px solid var(--rule);margin-bottom:1.25rem}
-  .section-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(--ink-ghost);font-weight:500;margin-bottom:1.5rem}
-  .section-group{margin-bottom:2.5rem;opacity:0;animation:fadeSlideUp .8s ease forwards}
-  .section-group:nth-of-type(1){animation-delay:.15s}.section-group:nth-of-type(2){animation-delay:.3s}.section-group:nth-of-type(3){animation-delay:.45s}
+.hero{max-width:1200px;margin:0 auto;padding:1.5rem 2rem .5rem;text-align:center}
+.hero-name{font-family:var(--serif);font-size:42px;font-weight:300;letter-spacing:1px;margin-bottom:.15rem}
+.hero-sub{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);letter-spacing:3px;text-transform:uppercase}
 
-  .cards{display:flex;flex-direction:column;gap:0}
-  .card{border:.5px solid var(--rule);border-bottom:none;overflow:hidden;position:relative;transition:box-shadow .4s ease}
-  .card:last-child{border-bottom:.5px solid var(--rule)}.card.is-open{box-shadow:0 6px 30px rgba(0,0,0,.05);z-index:2}
-  .card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;transition:opacity .4s ease;opacity:.3}.card.is-open::before{opacity:1}
-  .card--roche::before{background:linear-gradient(180deg,#8b2500,#c4522a)}.card--sbb::before{background:linear-gradient(180deg,#b71c1c,#e53935)}
-  .card--bio::before{background:linear-gradient(180deg,#1a3a4a,#2d6a7e)}.card--bern::before{background:linear-gradient(180deg,#2c4a2e,#4a7a3a)}
-  .card--janelia::before{background:linear-gradient(180deg,#4a148c,#7b1fa2)}.card--phd::before{background:linear-gradient(180deg,#bf360c,#e65100)}
-  .card--msc::before{background:linear-gradient(180deg,#1a3a4a,#2d6a7e)}.card--bsc::before{background:linear-gradient(180deg,#1a3a4a,#2d6a7e)}
+/* ═══ STAGE ═══ */
+.stage{max-width:1200px;margin:1.5rem auto 0;padding:0 2rem}
+.stage-row{
+  display:flex;position:relative;
+  border:.5px solid var(--rule);border-radius:3px;overflow:hidden;
+  height:560px;
+  background:linear-gradient(145deg,#f5f2ec,#ece8df,#f0ece4);
+}
 
-  .card-header{display:grid;grid-template-columns:1fr 28px;align-items:center;gap:1rem;padding:1.2rem 1.75rem 1.2rem 2rem;cursor:pointer;user-select:none;transition:background .3s ease}
-  .card-header:hover{background:rgba(0,0,0,.012)}.card-period{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.3px;font-weight:500;margin-top:.2rem}
-  .card-header-text{min-width:0}.card-title{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--ink);line-height:1.2;transition:color .3s ease}
-  .card-header:hover .card-title{color:var(--accent)}.card-role{font-family:var(--mono);font-size:11px;color:var(--ink-ghost);letter-spacing:.3px;margin-top:.15rem}
-  .card-toggle{width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative}
-  .card-toggle::before,.card-toggle::after{content:'';position:absolute;background:var(--ink-ghost);transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s ease}
-  .card-toggle::before{width:12px;height:1.5px}.card-toggle::after{width:1.5px;height:12px}
-  .card.is-open .card-toggle::after{transform:rotate(90deg);opacity:0}.card-header:hover .card-toggle::before,.card-header:hover .card-toggle::after{background:var(--accent)}
+.map-pane{flex:1;position:relative;overflow:hidden}
+#map-svg{display:block;width:100%;height:100%}
+.land{fill:#e8e4dc;stroke:#c8c3b8;stroke-width:.25px}
+.border-line{fill:none;stroke:#c8c3b8;stroke-width:.15px}
+.country-hl{cursor:pointer;fill:#e8e4dc;stroke:#c8c3b8;stroke-width:.25px;transition:fill .35s,stroke .35s}
+.country-hl:hover{fill:#efe8c8;stroke:#ccc060}
+.country-hl.selected{fill:var(--hl);stroke:var(--hl-stroke);stroke-width:1px}
 
-  .card-body{max-height:0;overflow:hidden;opacity:0;transition:max-height .6s cubic-bezier(.4,0,.2,1),opacity .4s ease}
-  .card.is-open .card-body{max-height:1100px;opacity:1}.card-body-inner{padding:0 1.75rem 1.75rem 2rem}
-  .card-topics{font-family:var(--body);font-size:14.5px;font-style:italic;color:var(--ink-light);line-height:1.7;margin-bottom:1.25rem}
+/* Idle breathing on the 4 highlighted countries */
+@keyframes breathe0{0%,100%{transform:translate(0,0)}50%{transform:translate(0.8px,-1.2px)}}
+@keyframes breathe1{0%,100%{transform:translate(0,0)}50%{transform:translate(-1px,0.8px)}}
+@keyframes breathe2{0%,100%{transform:translate(0,0)}50%{transform:translate(0.6px,1px)}}
+@keyframes breathe3{0%,100%{transform:translate(0,0)}50%{transform:translate(-0.7px,-0.9px)}}
+.country-hl[data-country="italy"]{animation:breathe0 4s ease-in-out infinite}
+.country-hl[data-country="france"]{animation:breathe1 4.5s ease-in-out infinite .3s}
+.country-hl[data-country="usa"]{animation:breathe2 5s ease-in-out infinite .6s}
+.country-hl[data-country="switzerland"]{animation:breathe3 3.5s ease-in-out infinite .15s}
+.country-hl.selected{animation:none !important}
 
-  .tag-tier{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.65rem;padding-left:0}.tag-tier:last-child{margin-bottom:0}
-  .tier-label{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-ghost);flex-shrink:0;width:52px;padding-top:.35rem;text-align:right}
-  .tier-tags{display:flex;flex-wrap:wrap;gap:.35rem}
-  .tag-tier+.tag-tier{position:relative}.tag-tier+.tag-tier::before{content:'';position:absolute;left:49px;top:-.35rem;width:.5px;height:.35rem;background:var(--rule)}
+/* City pins on map */
+@keyframes pinPulse{0%,100%{r:5;opacity:.45}50%{r:14;opacity:0}}
+.pin-pulse{animation:pinPulse 3s ease-in-out infinite}
+.city-pin-group{display:none}
+.city-pin-group.visible{display:block}
+.city-pin{cursor:default}
+.city-label{font-family:'IBM Plex Mono',monospace;font-size:9px;fill:var(--ink);letter-spacing:.4px;font-weight:500;pointer-events:none}
 
-  .tag-t1{font-family:var(--mono);font-size:10.5px;letter-spacing:.3px;padding:.3rem .75rem;border:1px solid var(--ink-faint);border-radius:2px;color:var(--ink-light);text-decoration:none;font-weight:500;transition:border-color .25s ease,color .25s ease,background .25s ease}
-  .tag-t1:hover{border-color:var(--accent);color:var(--accent);background:rgba(139,37,0,.03)}
-  .tag-t2{font-family:var(--mono);font-size:10px;letter-spacing:.4px;padding:.25rem .65rem;border:.5px solid var(--rule);border-radius:2px;color:var(--ink-faint);text-decoration:none;transition:border-color .25s ease,color .25s ease,background .25s ease}
-  .tag-t2:hover{border-color:var(--accent);color:var(--accent);background:rgba(139,37,0,.03)}
-  .tag-t2::after{content:' ↗';font-size:7px;opacity:.3}
-  .tag-t3{font-family:var(--mono);font-size:9.5px;letter-spacing:.3px;padding:.2rem .6rem;border:.5px dashed var(--rule);border-radius:2px;color:var(--ink-ghost);text-decoration:none;transition:border-color .25s ease,color .25s ease,background .25s ease}
-  .tag-t3:hover{border-color:var(--accent);color:var(--accent);background:rgba(139,37,0,.02)}
-  .tag-t3::after{content:' ↗';font-size:7px;opacity:.3}
-  .tag-t4{font-family:var(--mono);font-size:9.5px;letter-spacing:.3px;padding:.2rem .6rem;border:.5px solid rgba(139,37,0,.25);border-radius:2px;color:var(--accent);background:rgba(139,37,0,.035);text-decoration:none;font-weight:500;transition:border-color .25s ease,color .25s ease,background .25s ease}
-  .tag-t4:hover{border-color:var(--accent);color:#fff;background:var(--accent)}.tag-t4::after{content:' ↗';font-size:7px;opacity:.6}
+/* ═══ LEFT HALF: magnified country ═══ */
+.mag-half{
+  position:absolute;top:0;left:0;width:50%;height:100%;z-index:20;
+  pointer-events:none;opacity:0;
+  background:rgba(250,248,244,.6);
+  backdrop-filter:blur(3px);
+  transition:opacity .3s ease;
+  overflow:hidden;
+}
+.mag-half.open{opacity:1;pointer-events:auto}
+.mag-close{
+  position:absolute;top:14px;left:14px;width:30px;height:30px;border-radius:50%;
+  background:rgba(250,248,244,.9);border:.5px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-family:var(--mono);font-size:14px;color:var(--ink-faint);
+  transition:all .25s;z-index:5;
+}
+.mag-close:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 
-  .footer{max-width:740px;margin:0 auto;padding:0 2rem}
-  .footer-rule{border:none;border-top:2px solid var(--ink);margin-bottom:1rem}
-  .footer-inner{display:flex;justify-content:space-between;padding-bottom:2rem}
-  .footer-text{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);letter-spacing:.5px}
-  @keyframes fadeSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-  @media(max-width:768px){.card-header{grid-template-columns:1fr 28px}.tier-label{width:40px;font-size:7px}}
+/* Canvas for the magnified country — fills the ENTIRE left half */
+#mag-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+}
+.mag-path{fill:var(--hl);stroke:var(--hl-stroke);stroke-width:1.8px;filter:drop-shadow(3px 6px 12px rgba(0,0,0,.15))}
+.mag-flag{font-size:36px}
+.mag-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;fill:var(--ink);font-weight:500;letter-spacing:.5px}
+.mag-pin-dot{fill:var(--accent);stroke:#fff;stroke-width:1.2}
+.mag-pin-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;fill:var(--ink);letter-spacing:.4px;font-weight:500}
+
+/* ═══ RIGHT HALF: info panel ═══ */
+.info-panel{
+  width:0;overflow:hidden;opacity:0;flex-shrink:0;
+  background:var(--paper);border-left:.5px solid var(--rule);
+  transition:width .5s cubic-bezier(.4,0,.2,1),opacity .3s ease .06s;
+}
+.info-panel.open{width:50%;opacity:1}
+.info-scroll{width:100%;min-width:280px;padding:2rem 2.25rem 1.5rem;overflow-y:auto;height:560px}
+.info-flag{font-size:36px;margin-bottom:.1rem}
+.info-country{font-family:var(--serif);font-size:34px;font-weight:500;line-height:1.1;margin-bottom:.05rem}
+.info-period{font-family:var(--mono);font-size:12px;color:var(--ink-faint);letter-spacing:.5px;margin-bottom:.15rem}
+.info-cities{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);letter-spacing:1px;text-transform:uppercase;margin-bottom:1.3rem;padding-bottom:.7rem;border-bottom:.5px solid var(--rule)}
+
+.info-entry{margin-bottom:1.3rem;padding-bottom:1.1rem;border-bottom:.5px solid rgba(212,207,198,.45);
+  opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+.info-entry.vis{opacity:1;transform:translateY(0)}
+.info-entry:last-of-type{border-bottom:none;margin-bottom:.5rem;padding-bottom:0}
+.ie-head{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.2rem}
+.ie-year{font-family:var(--mono);font-size:11px;color:var(--ink-ghost);flex-shrink:0;min-width:52px}
+.ie-org{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--ink);line-height:1.2}
+.ie-role{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);letter-spacing:.2px;margin-left:calc(52px + .75rem);margin-bottom:.3rem}
+.ie-desc{font-family:var(--body);font-size:14px;color:var(--ink-light);line-height:1.6;font-style:italic;margin-left:calc(52px + .75rem)}
+.ie-tags{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.4rem;margin-left:calc(52px + .75rem)}
+.ie-tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.3px;padding:.2rem .5rem;border:.5px solid var(--rule);border-radius:2px;color:var(--ink-faint)}
+
+.info-cta{
+  display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--accent);padding:.45rem .9rem;border:1px solid var(--accent);border-radius:2px;
+  cursor:pointer;transition:all .25s;
+}
+.info-cta:hover{background:var(--accent);color:#fff}
+
+.map-hint{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-ghost);text-align:center;padding:.6rem 0;max-width:1200px;margin:0 auto}
+
+.legend{display:flex;justify-content:center;gap:1.5rem;padding:.4rem 2rem .25rem;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.legend-item{display:flex;align-items:center;gap:.5rem;cursor:pointer;padding:.3rem .6rem;border-radius:2px;border:.5px solid transparent;transition:all .3s;user-select:none}
+.legend-item:hover{border-color:var(--rule);background:rgba(0,0,0,.02)}
+.legend-item.active{border-color:var(--hl-stroke);background:rgba(242,218,110,.15)}
+.legend-dot{width:10px;height:10px;border-radius:50%;background:var(--ink-ghost);box-shadow:0 1px 2px rgba(0,0,0,.1);transition:background .3s}
+.legend-item.active .legend-dot{background:var(--hl-stroke)}
+.legend-label{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:1px;text-transform:uppercase}
+.legend-item.active .legend-label{color:var(--ink)}
+
+/* ═══ DETAILED CV ═══ */
+.detail-section{max-width:1200px;margin:0 auto;padding:1.5rem 2rem 3rem}
+.dp{overflow:hidden;max-height:0;opacity:0;transition:max-height .6s cubic-bezier(.4,0,.2,1),opacity .4s,margin .3s;margin-top:0}
+.dp.active{max-height:3000px;opacity:1;margin-top:1rem}
+.dh{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;padding-top:.75rem;border-top:2px solid var(--ink)}
+.dh-flag{font-size:24px}
+.dh-title{font-family:var(--serif);font-size:28px;font-weight:400}
+.dh-period{font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:.5px;margin-left:auto}
+.tl{position:relative;padding-left:2rem;border-left:1.5px solid var(--rule)}
+.te{position:relative;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:.5px solid rgba(212,207,198,.5);opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s}
+.te.vis{opacity:1;transform:translateY(0)}
+.te:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.te::before{content:'';position:absolute;left:calc(-2rem - 4.5px);top:.5rem;width:9px;height:9px;border-radius:50%;border:2px solid var(--rule);background:var(--paper);transition:border-color .3s,background .3s}
+.te:hover::before{border-color:var(--accent);background:var(--accent)}
+.te-org{font-family:var(--serif);font-size:21px;font-weight:500;line-height:1.2;margin-bottom:.1rem}
+.te-role{font-family:var(--mono);font-size:11px;color:var(--ink-ghost);letter-spacing:.3px}
+.te-per{font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:.3px;font-weight:500}
+.te-desc{font-family:var(--body);font-size:14.5px;color:var(--ink-light);line-height:1.65;margin-top:.5rem;font-style:italic}
+.te-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem}
+.te-tag{font-family:var(--mono);font-size:9px;letter-spacing:.3px;padding:.2rem .55rem;border:.5px solid var(--rule);border-radius:2px;color:var(--ink-faint);transition:border-color .25s,color .25s}
+.te-tag:hover{border-color:var(--accent);color:var(--accent)}
+
+.footer{max-width:1200px;margin:0 auto;padding:0 2rem}
+.footer-rule{border:none;border-top:2px solid var(--ink);margin-bottom:1rem}
+.footer-inner{display:flex;justify-content:space-between;padding-bottom:2rem}
+.footer-text{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);letter-spacing:.5px}
+
+@media(max-width:900px){
+  .stage-row{flex-direction:column;height:auto}
+  .mag-half{width:100%;height:50%;position:relative}
+  .info-panel.open{width:100%}
+  .info-scroll{min-width:0;height:auto;max-height:400px}
+  .hero-name{font-size:28px}
+}
 </style>
 </head>
 <body>
 
-<header class="header"><hr class="header-rule"/><div class="header-top"><a href="index.html" class="back-link">← Home</a><div class="header-title">Curriculum Vitae</div></div></header>
+<header class="header"><hr class="header-rule"/><div class="header-top"><a href="index.html" class="back-link">← Home</a><div class="header-title">The Journey</div></div></header>
+<div class="hero"><div class="hero-name">Francesco Orsi</div><div class="hero-sub">From Theoretical Physics to Data Science — Across Four Countries</div></div>
 
-<div style="display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.5rem 0 0.5rem;">
-  <img src="bear.png" alt="Francesco Orsi" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" />
-  <div style="font-family:var(--serif);font-size:24px;font-weight:500;color:var(--ink);line-height:1.2;">Francesco Orsi</div>
+<div class="stage">
+<div class="stage-row">
+  <div class="map-pane">
+    <svg id="map-svg" viewBox="0 0 960 560"></svg>
+    <!-- Left half overlay for magnified country -->
+    <div class="mag-half" id="mag-half">
+      <div class="mag-close" onclick="deselect()">✕</div>
+      <svg id="mag-canvas" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+  </div>
+  <div class="info-panel" id="info-panel">
+    <div class="info-scroll" id="info-scroll"></div>
+  </div>
+</div>
+</div>
+<div class="map-hint">Click a country to explore</div>
+
+<div class="legend">
+  <div class="legend-item" data-country="italy" onclick="selectCountry('italy')"><div class="legend-dot"></div><div class="legend-label">Italy · 2003–2008</div></div>
+  <div class="legend-item" data-country="france" onclick="selectCountry('france')"><div class="legend-dot"></div><div class="legend-label">France · 2008–2012</div></div>
+  <div class="legend-item" data-country="usa" onclick="selectCountry('usa')"><div class="legend-dot"></div><div class="legend-label">USA · 2012–2014</div></div>
+  <div class="legend-item" data-country="switzerland" onclick="selectCountry('switzerland')"><div class="legend-dot"></div><div class="legend-label">Switzerland · 2014–now</div></div>
 </div>
 
-<main class="page">
-
-<!-- ====== EXPERIENCE ====== -->
-<div class="section-group">
-<hr class="section-rule"/><div class="section-label">Experience</div>
-<div class="cards">
-
-<!-- ROCHE -->
-<div class="card card--roche"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">F. Hoffmann-La Roche AG</div><div class="card-role">Data Science Manager — Audit &amp; Risk Data Analytics</div><div class="card-period">2021 – now</div></div><div class="card-toggle"></div></div>
-<div class="card-body"><div class="card-body-inner">
-<div class="card-topics">AI audit frameworks for regulated pharma, GenAI adoption and LLM integration, advanced analytics governance, cross-functional team leadership.</div>
-<div class="tag-tiers">
-  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
-    <a class="tag-t1" href="https://www.who.int/publications/i/item/9789240029200" target="_blank">WHO — Ethics &amp; Governance of AI for Health</a>
-    <a class="tag-t1" href="https://www.theiia.org/en/standards/" target="_blank">IIA — Global Internal Audit Standards</a>
+<div class="detail-section">
+  <div class="dp" id="detail-italy"><div class="dh"><div class="dh-flag">🇮🇹</div><div class="dh-title">Italy</div><div class="dh-period">2003 – 2008 · Bologna</div></div><div class="tl">
+    <div class="te"><div class="te-org">MSc in Theoretical Physics</div><div class="te-role">University of Bologna</div><div class="te-per">2006 – 2008</div><div class="te-desc">Aspects of supersymmetric theories in low dimensions.</div><div class="te-tags"><span class="te-tag">Supersymmetry</span><span class="te-tag">QFT</span><span class="te-tag">Theoretical Physics</span></div></div>
+    <div class="te"><div class="te-org">BSc in Physics</div><div class="te-role">University of Bologna</div><div class="te-per">2003 – 2006</div><div class="te-desc">Path integrals and functional integration.</div><div class="te-tags"><span class="te-tag">Path Integrals</span><span class="te-tag">Functional Integration</span><span class="te-tag">Mathematical Physics</span></div></div>
   </div></div>
-  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
-    <a class="tag-t2" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank">EU AI Act — Official Text</a>
-    <a class="tag-t2" href="https://www.isaca.org/resources/frameworks" target="_blank">ISACA — COBIT &amp; AI Frameworks</a>
-    <a class="tag-t2" href="https://www.ema.europa.eu/en/human-regulatory-overview/research-and-development/compliance-research-and-development/good-manufacturing-practice" target="_blank">EMA — GxP Manufacturing</a>
+  <div class="dp" id="detail-france"><div class="dh"><div class="dh-flag">🇫🇷</div><div class="dh-title">France</div><div class="dh-period">2008 – 2012 · Paris / Saclay</div></div><div class="tl">
+    <div class="te"><div class="te-org">PhD in Theoretical Physics</div><div class="te-role">CEA-Saclay / Université Paris VII-Diderot</div><div class="te-per">2008 – 2012</div><div class="te-desc">Geometrical structure of flux compactifications in string theory, exceptional generalized geometry, N=1 and N=2 vacua in type II compactifications.</div><div class="te-tags"><span class="te-tag">String Theory</span><span class="te-tag">Differential Geometry</span><span class="te-tag">Generalized Complex Geometry</span><span class="te-tag">Exceptional Geometry</span></div></div>
   </div></div>
-  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
-    <a class="tag-t2" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9197564/" target="_blank">Quantitative Models for SC Risk — PMC Review</a>
-    <a class="tag-t2" href="https://arxiv.org/abs/2405.06624" target="_blank">Guaranteed Safe AI — Dalrymple et al.</a>
+  <div class="dp" id="detail-usa"><div class="dh"><div class="dh-flag">🇺🇸</div><div class="dh-title">United States</div><div class="dh-period">2012 – 2014 · Ashburn, Virginia</div></div><div class="tl">
+    <div class="te"><div class="te-org">Janelia Research Campus (HHMI)</div><div class="te-role">Post-Doctoral Researcher — Computational Neuroscience</div><div class="te-per">2012 – 2014</div><div class="te-desc">Online learning, regret minimization, Moon–Weissman optimal adversarial strategies, universal estimation for stochastic time series.</div><div class="te-tags"><span class="te-tag">Computational Neuroscience</span><span class="te-tag">Information Theory</span><span class="te-tag">Online Convex Optimization</span><span class="te-tag">Mirror Descent</span></div></div>
   </div></div>
-  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
-    <a class="tag-t3" href="https://arxiv.org/abs/1709.05254" target="_blank">Deep Autoencoders for Audit — Schreyer et al.</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/1908.00734" target="_blank">Adversarial Autoencoders — Audit Anomalies</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/2112.13215" target="_blank">Continual Learning for Continuous Auditing</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/2411.05815" target="_blank">GNNs for Financial Fraud — Review</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/0904.1067" target="_blank">Bayesian Operational Risk — Shevchenko &amp; Wüthrich</a>
+  <div class="dp" id="detail-switzerland"><div class="dh"><div class="dh-flag">🇨🇭</div><div class="dh-title">Switzerland</div><div class="dh-period">2014 – present · Bern &amp; Basel</div></div><div class="tl">
+    <div class="te"><div class="te-org">F. Hoffmann-La Roche AG</div><div class="te-role">Data Science Manager — Audit &amp; Risk Data Analytics</div><div class="te-per">2021 – present</div><div class="te-desc">AI audit frameworks for regulated pharma, GenAI adoption and LLM integration, advanced analytics governance, cross-functional team leadership.</div><div class="te-tags"><span class="te-tag">AI Governance</span><span class="te-tag">EU AI Act</span><span class="te-tag">Internal Audit</span><span class="te-tag">LLM Integration</span><span class="te-tag">GxP</span><span class="te-tag">Pharma</span></div></div>
+    <div class="te"><div class="te-org">Schweizerische Bundesbahnen (SBB)</div><div class="te-role">Product Owner / Senior Data Scientist</div><div class="te-per">2018 – 2021</div><div class="te-desc">Corporate safety and quality analytical platform, ML for rail operations, innovation board for AI/ML incubation.</div><div class="te-tags"><span class="te-tag">Predictive Maintenance</span><span class="te-tag">Visual Analytics</span><span class="te-tag">Data Pipelines</span><span class="te-tag">Rail Operations</span></div></div>
+    <div class="te"><div class="te-org">Biozentrum / Swiss Institute for Bioinformatics</div><div class="te-role">Bioinformatics / ML Specialist</div><div class="te-per">2018</div><div class="te-desc">Statistical benchmarking of protein structure prediction, supervised ML methods for the CAMEO platform.</div><div class="te-tags"><span class="te-tag">Protein Structure Prediction</span><span class="te-tag">CASP / CAMEO</span><span class="te-tag">Bioinformatics</span></div></div>
+    <div class="te"><div class="te-org">University of Bern</div><div class="te-role">Post-Doctoral Researcher — Computational Neuroscience</div><div class="te-per">2014 – 2017</div><div class="te-desc">Reinforcement learning with biological recurrent neural networks under sparse feedback, roving experiments in collaboration with EPFL.</div><div class="te-tags"><span class="te-tag">Reinforcement Learning</span><span class="te-tag">Biological RNNs</span><span class="te-tag">Dendritic Computation</span><span class="te-tag">Three-Factor Learning</span></div></div>
   </div></div>
 </div>
-</div></div></div>
-
-<!-- SBB -->
-<div class="card card--sbb"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">Schweizerische Bundesbahnen (SBB)</div><div class="card-role">Product Owner / Senior Data Scientist</div><div class="card-period">2018 – 2021</div></div><div class="card-toggle"></div></div>
-<div class="card-body"><div class="card-body-inner">
-<div class="card-topics">Corporate safety and quality analytical platform, ML for rail operations, innovation board for AI/ML incubation.</div>
-<div class="tag-tiers">
-  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
-    <a class="tag-t1" href="https://datascienceassn.org/content/data-science" target="_blank">Data Science</a>
-    <a class="tag-t1" href="https://arxiv.org/abs/1901.10170" target="_blank">Predictive Maintenance — Survey</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
-    <a class="tag-t2" href="https://arxiv.org/abs/1901.10170" target="_blank">ML for Predictive Maintenance — Survey</a>
-    <a class="tag-t2" href="https://arxiv.org/abs/1906.11248" target="_blank">Visual Analytics — State of the Art</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
-    <a class="tag-t3" href="https://arxiv.org/abs/2006.00116" target="_blank">Hypothesis Testing — Modern Review</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/2106.11346" target="_blank">Modern Data Pipelines — Survey</a>
-  </div></div>
-</div>
-</div></div></div>
-
-<!-- BIOZENTRUM -->
-<div class="card card--bio"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">Biozentrum / Swiss Institute for Bioinformatics</div><div class="card-role">Bioinformatics / ML Specialist</div><div class="card-period">2018</div></div><div class="card-toggle"></div></div>
-<div class="card-body"><div class="card-body-inner">
-<div class="card-topics">Statistical benchmarking of protein structure prediction, supervised ML methods for the CAMEO platform.</div>
-<div class="tag-tiers">
-  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
-    <a class="tag-t1" href="https://www.sib.swiss/" target="_blank">Swiss Institute of Bioinformatics</a>
-    <a class="tag-t1" href="https://predictioncenter.org/" target="_blank">CASP — Protein Structure Prediction</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
-    <a class="tag-t2" href="https://arxiv.org/abs/2203.15076" target="_blank">AlphaFold &amp; Beyond — Jumper et al.</a>
-    <a class="tag-t2" href="https://www.cameo3d.org/about/" target="_blank">CAMEO Methodology</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Output</div><div class="tier-tags">
-    <a class="tag-t4" href="https://www.cameo3d.org/" target="_blank">CAMEO Platform — cameo3d.org</a>
-  </div></div>
-</div>
-</div></div></div>
-
-</div></div>
-
-<!-- ====== POST-DOCS ====== -->
-<div class="section-group">
-<hr class="section-rule"/><div class="section-label">Post-Doctoral Research</div>
-<div class="cards">
-
-<!-- BERN -->
-<div class="card card--bern"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">University of Bern</div><div class="card-role">Computational Neuroscience</div><div class="card-period">2014 – 2017</div></div><div class="card-toggle"></div></div>
-<div class="card-body"><div class="card-body-inner">
-<div class="card-topics">Reinforcement learning with biological recurrent neural networks under sparse feedback, roving experiments in collaboration with EPFL.</div>
-<div class="tag-tiers">
-  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
-    <a class="tag-t1" href="https://www.nature.com/subjects/computational-neuroscience" target="_blank">Computational Neuroscience (Nature)</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
-    <a class="tag-t2" href="http://incompleteideas.net/book/the-book-2nd.html" target="_blank">Sutton &amp; Barto — RL: An Introduction</a>
-    <a class="tag-t2" href="https://arxiv.org/abs/2007.03750" target="_blank">Deep RL &amp; Neuroscience — Botvinick et al.</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
-    <a class="tag-t3" href="https://www.cell.com/neuron/fulltext/S0896-6273(13)01127-6" target="_blank">Dendritic Prediction of Somatic Spiking — Urbanczik &amp; Senn (2014)</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/1810.11393" target="_blank">Dendritic Microcircuits ≈ Backprop — Sacramento, Senn et al.</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/1803.09922" target="_blank">Biological RNNs — Sussillo (Review)</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/1810.11927" target="_blank">Three-Factor Learning Rules — Gerstner et al.</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Papers</div><div class="tier-tags">
-    <a class="tag-t4" href="https://www.biorxiv.org/content/10.1101/2024.09.30.615819v1" target="_blank">Prediction Errors &amp; Context Learning — Tsai, Senn et al. (2024)</a>
-    <a class="tag-t4" href="https://jov.arvojournals.org/article.aspx?articleid=2122233" target="_blank">Roving &amp; Bisection — Parkosadze et al., JOV 2008</a>
-    <a class="tag-t4" href="https://pubmed.ncbi.nlm.nih.gov/19258021/" target="_blank">Perceptual Learning &amp; Roving — Tartaglia et al. 2009</a>
-    <a class="tag-t4" href="https://www.epfl.ch/labs/lpsy/" target="_blank">EPFL Psychophysics Lab (Herzog)</a>
-    <a class="tag-t4" href="https://physiologie.unibe.ch/~senn/" target="_blank">Senn Group — Computational Neuroscience, Bern</a>
-  </div></div>
-</div>
-</div></div></div>
-
-<!-- JANELIA -->
-<div class="card card--janelia"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">Janelia Research Campus (HHMI)</div><div class="card-role">Computational Neuroscience</div><div class="card-period">2012 – 2014</div></div><div class="card-toggle"></div></div>
-<div class="card-body"><div class="card-body-inner">
-<div class="card-topics">Online learning, regret minimization, Moon–Weissman optimal adversarial strategies, universal estimation for stochastic time series.</div>
-<div class="tag-tiers">
-  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
-    <a class="tag-t1" href="https://www.nature.com/subjects/computational-neuroscience" target="_blank">Computational Neuroscience (Nature)</a>
-    <a class="tag-t1" href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" target="_blank">Information Theory (Shannon 1948)</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
-    <a class="tag-t2" href="https://www.cs.huji.ac.il/~shais/papers/OLsurvey.pdf" target="_blank">Online Convex Optimization — Shalev-Shwartz (Survey)</a>
-    <a class="tag-t2" href="https://arxiv.org/abs/1912.13213" target="_blank">Modern Online Learning — Orabona (Monograph)</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
-    <a class="tag-t3" href="https://arxiv.org/abs/1204.0870" target="_blank">Relax and Localize — Rakhlin, Shamir &amp; Sridharan</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/1006.1138" target="_blank">Sequential Complexities — Rakhlin, Sridharan &amp; Tewari</a>
-    <a class="tag-t3" href="https://www.mit.edu/~rakhlin/courses/stat928/stat928_notes.pdf" target="_blank">Statistical Learning &amp; Sequential Prediction — Rakhlin (Lectures)</a>
-    <a class="tag-t3" href="https://en.wikipedia.org/wiki/Bregman_divergence" target="_blank">Bregman Divergence &amp; Mirror Descent</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Papers</div><div class="tier-tags">
-    <a class="tag-t4" href="https://arxiv.org/abs/1908.01867" target="_blank">Online Unsupervised Learning — Pehlevan, Hu &amp; Chklovskii</a>
-    <a class="tag-t4" href="https://arxiv.org/abs/1210.1530" target="_blank">Spiking Nets for Sparse Representations — Hu &amp; Chklovskii</a>
-    <a class="tag-t4" href="https://arxiv.org/abs/1210.1544" target="_blank">RESCUME: Sparse Circuit Reconstruction — Hu &amp; Chklovskii</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Detail</div><div class="tier-tags">
-    <a class="tag-t4" href="https://www.janelia.org/" target="_blank">Janelia Research Campus</a>
-  </div></div>
-</div>
-</div></div></div>
-
-</div></div>
-
-<!-- ====== EDUCATION ====== -->
-<div class="section-group">
-<hr class="section-rule"/><div class="section-label">Education</div>
-<div class="cards">
-
-<!-- PHD -->
-<div class="card card--phd"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">PhD in Theoretical Physics</div><div class="card-role">CEA-Saclay / Université Paris VII-Diderot</div><div class="card-period">2008 – 2012</div></div><div class="card-toggle"></div></div>
-<div class="card-body"><div class="card-body-inner">
-<div class="card-topics">Geometrical structure of flux compactifications in string theory, exceptional generalized geometry, N=1 and N=2 vacua in type II compactifications.</div>
-<div class="tag-tiers">
-  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
-    <a class="tag-t1" href="https://arxiv.org/abs/hep-th/0209261" target="_blank">String Theory — Kiritsis (Lectures)</a>
-    <a class="tag-t1" href="https://arxiv.org/abs/1006.1536" target="_blank">Differential &amp; Generalized Geometry</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
-    <a class="tag-t2" href="https://arxiv.org/abs/hep-th/0509003" target="_blank">Flux Compactifications — Graña (Review)</a>
-    <a class="tag-t2" href="https://arxiv.org/abs/0804.1362" target="_blank">Exceptional Generalized Geometry — Pacheco &amp; Waldram</a>
-    <a class="tag-t2" href="https://arxiv.org/abs/hep-th/9702155" target="_blank">String Theory on Calabi-Yau — Greene (TASI Lectures)</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
-    <a class="tag-t3" href="https://arxiv.org/abs/math/0401221" target="_blank">Generalized Complex Geometry — Gualtieri (Thesis)</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/1008.0973" target="_blank">Lectures on Generalized Geometry — Hitchin</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/1006.1536" target="_blank">GCG for Physicists — Koerber (Lectures)</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/hep-th/0006034" target="_blank">E₇₍₇₎ U-duality — Koepsell, Nicolai, Samtleben</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Papers</div><div class="tier-tags">
-    <a class="tag-t4" href="https://arxiv.org/abs/1105.4855" target="_blank">N=1 Vacua in EGG — arXiv:1105.4855</a>
-    <a class="tag-t4" href="https://link.springer.com/article/10.1007/JHEP08(2011)109" target="_blank">Graña &amp; Orsi — JHEP 08 (2011) 109</a>
-    <a class="tag-t4" href="https://arxiv.org/abs/1207.3004" target="_blank">N=2 Vacua in GCG — arXiv:1207.3004</a>
-    <a class="tag-t4" href="https://link.springer.com/article/10.1007/JHEP11(2012)052" target="_blank">Graña &amp; Orsi — JHEP 11 (2012) 052</a>
-    <a class="tag-t4" href="https://independent.academia.edu/FOrsi" target="_blank">All Publications — Academia.edu</a>
-    <a class="tag-t4" href="https://www.ipht.fr/en/" target="_blank">IPhT — Institut de Physique Théorique, CEA-Saclay</a>
-  </div></div>
-</div>
-</div></div></div>
-
-<!-- MSC -->
-<div class="card card--msc"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">MSc in Theoretical Physics</div><div class="card-role">University of Bologna</div><div class="card-period">2006 – 2008</div></div><div class="card-toggle"></div></div>
-<div class="card-body"><div class="card-body-inner">
-<div class="card-topics">Aspects of supersymmetric theories in low dimensions.</div>
-<div class="tag-tiers">
-  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
-    <a class="tag-t1" href="https://www.unibo.it/en/study/phd-professional-masters-specialisation-schools-and-other-programmes/course-unit-catalogue?codiceMateria=26339&annoAccademico=2024&codiceCorso=8025&single=True&search=True" target="_blank">Theoretical Physics (Bologna)</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Domain</div><div class="tier-tags">
-    <a class="tag-t2" href="https://arxiv.org/abs/hep-ph/9709356" target="_blank">Supersymmetry — Martin (Primer)</a>
-    <a class="tag-t2" href="https://arxiv.org/abs/hep-th/9912205" target="_blank">QFT — Srednicki (Textbook)</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Detail</div><div class="tier-tags">
-    <a class="tag-t4" href="https://www.unibo.it/en" target="_blank">University of Bologna</a>
-  </div></div>
-</div>
-</div></div></div>
-
-<!-- BSC -->
-<div class="card card--bsc"><div class="card-header" onclick="toggle(this)"><div class="card-header-text"><div class="card-title">BSc in Physics</div><div class="card-role">University of Bologna</div><div class="card-period">2003 – 2006</div></div><div class="card-toggle"></div></div>
-<div class="card-body"><div class="card-body-inner">
-<div class="card-topics">Path integrals and functional integration.</div>
-<div class="tag-tiers">
-  <div class="tag-tier"><div class="tier-label">Field</div><div class="tier-tags">
-    <a class="tag-t1" href="https://www.unibo.it/en/study/phd-professional-masters-specialisation-schools-and-other-programmes/course-unit-catalogue/course-unit/2024/434428" target="_blank">Physics (Bologna)</a>
-  </div></div>
-  <div class="tag-tier"><div class="tier-label">Methods</div><div class="tier-tags">
-    <a class="tag-t3" href="https://arxiv.org/abs/quant-ph/0004090" target="_blank">Path Integrals — Grosche (Review)</a>
-    <a class="tag-t3" href="https://arxiv.org/abs/0810.1261" target="_blank">Functional Integrals — Cartier &amp; DeWitt-Morette</a>
-  </div></div>
-</div>
-</div></div></div>
-
-</div></div>
-
-</main>
 
 <footer class="footer"><hr class="footer-rule"/><div class="footer-inner"><span class="footer-text">© 2025 Francesco Orsi</span><span class="footer-text"><a href="index.html" style="color:var(--ink-ghost);">← Home</a></span></div></footer>
 
 <script>
-function toggle(h){const c=h.closest('.card'),o=c.classList.contains('is-open');document.querySelectorAll('.card.is-open').forEach(x=>x.classList.remove('is-open'));if(!o)c.classList.add('is-open')}
+const W=960,H=560;
+const projection=d3.geoConicConformal().center([-15,45]).scale(420).translate([W/2,H/2]);
+const pathGen=d3.geoPath().projection(projection);
+
+const HL={
+  italy:{iso:'380',flag:'🇮🇹',name:'Italy',period:'2003 – 2008',cities:'Bologna'},
+  france:{iso:'250',flag:'🇫🇷',name:'France',period:'2008 – 2012',cities:'Paris · Saclay'},
+  usa:{iso:'840',flag:'🇺🇸',name:'United States',period:'2012 – 2014',cities:'Ashburn, Virginia'},
+  switzerland:{iso:'756',flag:'🇨🇭',name:'Switzerland',period:'2014 – present',cities:'Bern · Basel'}
+};
+const CITIES={
+  italy:[{name:'Bologna',lat:44.49,lon:11.34}],
+  france:[{name:'Paris',lat:48.86,lon:2.35},{name:'Saclay',lat:48.72,lon:2.17}],
+  usa:[{name:'Ashburn',lat:39.04,lon:-77.49}],
+  switzerland:[{name:'Basel',lat:47.56,lon:7.59},{name:'Bern',lat:46.95,lon:7.45}],
+};
+const INFO={
+  italy:[
+    {year:'2006–08',org:'MSc in Theoretical Physics',role:'University of Bologna',desc:'Supersymmetric theories in low dimensions. Thesis on aspects of extended supersymmetry, supervised field theory methods in the tradition of the Bologna school of mathematical physics.',tags:['Supersymmetry','QFT','Theoretical Physics']},
+    {year:'2003–06',org:'BSc in Physics',role:'University of Bologna',desc:'Path integrals and functional integration. Rigorous mathematical foundations in classical and quantum mechanics, statistical mechanics, and electrodynamics.',tags:['Path Integrals','Functional Integration','Mathematical Physics']},
+  ],
+  france:[
+    {year:'2008–12',org:'PhD in Theoretical Physics',role:'CEA-Saclay / Université Paris VII-Diderot — IPhT',desc:'Geometrical structure of flux compactifications in string theory. Developed exceptional generalized geometry framework for N=1 and N=2 vacua in type II compactifications. Two papers published in JHEP (2011, 2012). Thesis defended at IPhT, CEA-Saclay.',tags:['String Theory','Differential Geometry','Generalized Complex Geometry','Exceptional Geometry','Flux Compactifications','JHEP']},
+  ],
+  usa:[
+    {year:'2012–14',org:'Janelia Research Campus (HHMI)',role:'Post-Doctoral Researcher — Computational Neuroscience',desc:'Online learning and regret minimization in neural circuits. Moon–Weissman optimal adversarial strategies. Universal estimation for stochastic time series. Sparse coding with spiking networks and RESCUME circuit reconstruction (Chklovskii lab).',tags:['Computational Neuroscience','Information Theory','Online Convex Optimization','Mirror Descent','Sparse Representations','Neural Circuits']},
+  ],
+  switzerland:[
+    {year:'2021–now',org:'F. Hoffmann-La Roche AG',role:'Data Science Manager — Audit & Risk Data Analytics',desc:'Leading a team of five data scientists building AI audit frameworks for regulated pharma. GenAI adoption and LLM integration, EU AI Act compliance, advanced analytics governance across R&D and Supply Chain.',tags:['AI Governance','EU AI Act','Internal Audit','LLM','GxP','Pharma','Team Leadership']},
+    {year:'2018–21',org:'Schweizerische Bundesbahnen (SBB)',role:'Product Owner / Senior Data Scientist',desc:'Built the corporate safety and quality analytical platform from scratch. ML for predictive rail maintenance. Member of the innovation board for AI/ML incubation company-wide.',tags:['Predictive Maintenance','Visual Analytics','Data Pipelines','Rail Operations']},
+    {year:'2018',org:'Biozentrum / Swiss Institute for Bioinformatics',role:'Bioinformatics / ML Specialist',desc:'Statistical benchmarking of protein structure prediction methods for the CAMEO platform. Supervised ML approaches serving the CASP community.',tags:['Protein Structure','CASP / CAMEO','Bioinformatics']},
+    {year:'2014–17',org:'University of Bern',role:'Post-Doctoral Researcher — Computational Neuroscience',desc:'Reinforcement learning with biological recurrent neural networks under sparse feedback. Roving experiments with EPFL Psychophysics Lab (Herzog). Three-factor Hebbian learning rules in the Senn group.',tags:['Reinforcement Learning','Biological RNNs','Dendritic Computation','Three-Factor Learning']},
+  ]
+};
+
+const isoToKey={};Object.entries(HL).forEach(([k,v])=>isoToKey[v.iso]=k);
+const hlIsoSet=new Set(Object.values(HL).map(c=>c.iso));
+
+let activeCountry=null,countryFeatures={},currentBounceAnim=null;
+
+const svg=d3.select('#map-svg');
+const mainG=svg.append('g');
+const landL=mainG.append('g'),hlL=mainG.append('g'),borderL=mainG.append('g');
+const pinGroups={};
+
+d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json').then(world=>{
+  const countries=topojson.feature(world,world.objects.countries);
+  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
+  countries.features.forEach(f=>{const k=isoToKey[String(f.id)];if(k)countryFeatures[k]=f});
+
+  const vis=countries.features.filter(f=>{const b=pathGen.bounds(f);return b&&isFinite(b[0][0])&&b[1][0]>-50&&b[0][0]<W+50&&b[1][1]>-50&&b[0][1]<H+50});
+
+  landL.selectAll('path').data(vis.filter(f=>!hlIsoSet.has(String(f.id))))
+    .join('path').attr('class','land').attr('d',pathGen);
+
+  hlL.selectAll('path').data(vis.filter(f=>hlIsoSet.has(String(f.id))))
+    .join('path').attr('class','country-hl').attr('d',pathGen)
+    .attr('data-country',d=>isoToKey[String(d.id)])
+    .on('click',(ev,d)=>selectCountry(isoToKey[String(d.id)]));
+
+  borderL.append('path').attr('class','border-line').datum(borders).attr('d',pathGen);
+
+  // City pin groups per country (hidden)
+  Object.entries(CITIES).forEach(([country,cities])=>{
+    const g=mainG.append('g').attr('class','city-pin-group').attr('data-country',country);
+    cities.forEach(c=>{
+      const[cx,cy]=projection([c.lon,c.lat]);
+      if(cx<-20||cx>W+20||cy<-20||cy>H+20)return;
+      const pg=g.append('g').attr('class','city-pin').attr('transform',`translate(${cx},${cy})`);
+      pg.append('circle').attr('class','pin-pulse').attr('r',5).attr('fill','none').attr('stroke','var(--accent)').attr('stroke-width',.8);
+      pg.append('circle').attr('r',5).attr('fill','var(--accent)').attr('opacity',.1);
+      pg.append('circle').attr('r',3).attr('fill','var(--accent)').attr('stroke','#fff').attr('stroke-width',.8);
+      pg.append('text').attr('class','city-label').attr('x',8).attr('y',4).text(c.name);
+    });
+    pinGroups[country]=g;
+  });
+});
+
+// ═══ SELECTION ═══
+function selectCountry(country){
+  if(activeCountry===country){deselect();return}
+  deselect(true);
+  activeCountry=country;
+
+  hlL.selectAll('.country-hl').classed('selected',false);
+  hlL.select(`[data-country="${country}"]`).classed('selected',true);
+
+  Object.values(pinGroups).forEach(g=>g.classed('visible',false));
+  if(pinGroups[country])pinGroups[country].classed('visible',true);
+
+  document.querySelectorAll('.legend-item').forEach(el=>el.classList.remove('active'));
+  document.querySelector(`.legend-item[data-country="${country}"]`)?.classList.add('active');
+
+  drawMagnified(country);
+  showInfo(country);
+}
+
+function deselect(silent){
+  activeCountry=null;
+  if(currentBounceAnim){currentBounceAnim.cancel();currentBounceAnim=null}
+  hlL.selectAll('.country-hl').classed('selected',false);
+  Object.values(pinGroups).forEach(g=>g.classed('visible',false));
+  document.getElementById('mag-half').classList.remove('open');
+  d3.select('#mag-canvas').html('');
+  document.getElementById('info-panel').classList.remove('open');
+  document.querySelectorAll('.legend-item').forEach(el=>el.classList.remove('active'));
+  if(!silent)document.querySelectorAll('.dp').forEach(p=>p.classList.remove('active'));
+}
+
+function drawMagnified(country){
+  const feature=countryFeatures[country];
+  if(!feature)return;
+  const cfg=HL[country];
+
+  // Get the actual pixel size of the mag-half container
+  const container=document.getElementById('mag-half');
+  const cw=container.offsetWidth||480;
+  const ch=container.offsetHeight||560;
+
+  const magSvg=d3.select('#mag-canvas');
+  magSvg.html('');
+  // Set viewBox to match container so country fills it
+  magSvg.attr('viewBox',`0 0 ${cw} ${ch}`);
+
+  const pad=40;
+  const fitProj=d3.geoMercator().fitExtent([[pad,pad],[cw-pad,ch-pad-40]],feature);
+  const fitPath=d3.geoPath().projection(fitProj);
+
+  // Wrap everything in a group we can animate
+  const g=magSvg.append('g').attr('id','mag-group');
+
+  g.append('path').attr('class','mag-path').attr('d',fitPath(feature));
+
+  // Cities on the magnified shape
+  (CITIES[country]||[]).forEach(c=>{
+    const[px,py]=fitProj([c.lon,c.lat]);
+    g.append('circle').attr('class','mag-pin-dot').attr('cx',px).attr('cy',py).attr('r',4);
+    g.append('text').attr('class','mag-pin-label').attr('x',px+9).attr('y',py+4).text(c.name);
+  });
+
+  // Flag + name at centroid
+  const cent=fitPath.centroid(feature);
+  g.append('text').attr('class','mag-flag').attr('x',cent[0]).attr('y',cent[1]-10).attr('text-anchor','middle').attr('dominant-baseline','central').text(cfg.flag);
+  g.append('text').attr('class','mag-name').attr('x',cent[0]).attr('y',cent[1]+24).attr('text-anchor','middle').text(cfg.name);
+
+  // Show the overlay
+  container.classList.add('open');
+
+  // ═══ THE BOUNCE — using Web Animations API on the SVG group ═══
+  const groupEl=document.getElementById('mag-group');
+  if(currentBounceAnim){currentBounceAnim.cancel()}
+
+  // Transform origin = center of viewBox
+  groupEl.style.transformOrigin=`${cw/2}px ${ch/2}px`;
+  groupEl.style.transformBox='fill-box';
+
+  currentBounceAnim=groupEl.animate([
+    {transform:'scale(0.3) translateY(60px)',opacity:0,offset:0},
+    {transform:'scale(1.12) translateY(-16px)',opacity:1,offset:0.3},
+    {transform:'scale(0.92) translateY(8px)',opacity:1,offset:0.5},
+    {transform:'scale(1.06) translateY(-6px)',opacity:1,offset:0.65},
+    {transform:'scale(0.97) translateY(3px)',opacity:1,offset:0.8},
+    {transform:'scale(1.02) translateY(-1px)',opacity:1,offset:0.9},
+    {transform:'scale(1) translateY(0)',opacity:1,offset:1},
+  ],{
+    duration:900,
+    easing:'cubic-bezier(.22,.68,.36,1)',
+    fill:'forwards'
+  });
+
+  // Click to dismiss
+  container.addEventListener('click',function handler(e){
+    if(e.target.closest('.mag-close')){deselect();container.removeEventListener('click',handler);return}
+    // Only dismiss if clicking the background, not the shape
+    if(e.target===container){deselect();container.removeEventListener('click',handler)}
+  });
+}
+
+function showInfo(country){
+  const cfg=HL[country],entries=INFO[country];
+  let h=`<div class="info-flag">${cfg.flag}</div><div class="info-country">${cfg.name}</div><div class="info-period">${cfg.period}</div><div class="info-cities">${cfg.cities}</div>`;
+  entries.forEach((e,i)=>{
+    h+=`<div class="info-entry" style="transition-delay:${.1+i*.08}s"><div class="ie-head"><span class="ie-year">${e.year}</span><span class="ie-org">${e.org}</span></div><div class="ie-role">${e.role}</div><div class="ie-desc">${e.desc}</div><div class="ie-tags">${e.tags.map(t=>`<span class="ie-tag">${t}</span>`).join('')}</div></div>`;
+  });
+  h+=`<div class="info-cta" onclick="showDetail('${country}')">View full CV details ↓</div>`;
+  document.getElementById('info-scroll').innerHTML=h;
+  document.getElementById('info-panel').classList.add('open');
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.info-entry').forEach((el,i)=>{setTimeout(()=>el.classList.add('vis'),120+i*80)});
+  });
+}
+
+function showDetail(country){
+  document.querySelectorAll('.dp').forEach(p=>p.classList.remove('active'));
+  const panel=document.getElementById(`detail-${country}`);
+  if(panel){
+    panel.classList.add('active');
+    panel.querySelectorAll('.te').forEach((e,i)=>{e.classList.remove('vis');setTimeout(()=>e.classList.add('vis'),150+i*100)});
+    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),200);
+  }
+}
 </script>
 </body>
 </html>
