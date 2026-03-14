@@ -515,7 +515,7 @@
         <a href="https://kunskap.substack.com" target="_blank" title="Substack">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 6.98H2V4.82h20zM2 10.52h20v-2.2H2zM2 13.04v8.96l10-5.55 10 5.55v-8.96H2z"/></svg>
         </a>
-        <a href="https://github.com/FranzuBaren" target="_blank" title="GitHub">
+        <a href="https://github.com/FranzuBaren/" target="_blank" title="GitHub">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
         </a>
         <a href="projects.html" title="Projects">
@@ -571,36 +571,19 @@
               <span class="project-tag">Python</span>
             </div>
 
-            <img src="https://www.frontiersin.org/files/Articles/631316/fmolb-08-631316-HTML/image_m/fmolb-08-631316-g001.jpg" alt="RNA 3D structure prediction and topological analysis" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);" />
-
-            <div class="results-grid">
-              <div class="result-card">
-                <div class="result-value">TQS</div>
-                <div class="result-label">Topological Quality Score</div>
-              </div>
-              <div class="result-card">
-                <div class="result-value">TCI</div>
-                <div class="result-label">Topological Complexity Index</div>
-              </div>
-              <div class="result-card">
-                <div class="result-value">λ₁</div>
-                <div class="result-label">Persistent Laplacian Gap</div>
-              </div>
+            <div class="deep-section">
+              <div class="deep-heading">Context</div>
+              <div class="deep-text">RNA structure prediction has advanced rapidly with deep learning models like RhoFold, AlphaFold 3, and ARES, yet evaluation remains stuck in the RMSD era. Root-mean-square deviation measures geometric distance between atoms but ignores whether the predicted structure preserves the <em>topological</em> features of the ground truth — the loops, cavities, and higher-dimensional holes that define RNA function. A prediction can score well on RMSD while missing an entire stem-loop. For RNA therapeutics — mRNA vaccines, antisense oligonucleotides, riboswitches — getting the topology right is often more important than getting the coordinates right.</div>
             </div>
 
             <div class="deep-section">
-              <div class="deep-heading">The Problem</div>
-              <div class="deep-text">RNA structure prediction has advanced rapidly, but evaluation remains stuck in the RMSD era. Root-mean-square deviation measures geometric distance between atoms but ignores whether the predicted structure preserves the <em>topological</em> features of the ground truth – the loops, cavities, and higher-dimensional holes that define RNA function. A prediction can score well on RMSD while missing an entire stem-loop.</div>
-            </div>
-
-            <div class="deep-section">
-              <div class="deep-heading">The Approach</div>
-              <div class="deep-text">We build persistence diagrams from both predicted and ground-truth RNA structures, then compare them using bottleneck and Wasserstein distances across homological dimensions. The <strong>Topological Quality Score (TQS)</strong> aggregates these into a single metric that captures how faithfully the topological skeleton is reproduced. The <strong>Topological Complexity Index (TCI)</strong> quantifies the inherent structural richness of each molecule. The <strong>persistent Laplacian spectral gap</strong> (λ₁) provides a continuous measure of topological connectivity that is more sensitive than discrete Betti numbers alone.</div>
+              <div class="deep-heading">My Contribution</div>
+              <div class="deep-text">I developed a benchmarking framework that builds persistence diagrams from both predicted and ground-truth RNA structures, then compares them using bottleneck and Wasserstein distances across homological dimensions. The framework introduces three novel metrics: a <strong>Topological Quality Score (TQS)</strong> that aggregates topological fidelity into a single number, a <strong>Topological Complexity Index (TCI)</strong> that quantifies the inherent structural richness of each molecule, and the <strong>persistent Laplacian spectral gap</strong> (λ₁) — a continuous measure of topological connectivity more sensitive than discrete Betti numbers alone. The full pipeline is implemented in Python with reproducible notebooks and public data.</div>
             </div>
 
             <div class="deep-section">
               <div class="deep-heading">Why It Matters</div>
-              <div class="deep-text">These metrics are invariant to rigid-body transformations, robust to small perturbations, and capture structural features that are invisible to geometric metrics. For RNA therapeutics – mRNA vaccines, antisense oligonucleotides, riboswitches – getting the topology right is often more important than getting the coordinates right. This benchmark provides the tools to measure that.</div>
+              <div class="deep-text">These metrics are invariant to rigid-body transformations, robust to small perturbations, and capture structural features that are invisible to geometric metrics. They provide the mathematical tools needed to evaluate whether an RNA structure prediction model is getting the <em>biology</em> right, not just the geometry. This work sits at the intersection of topological data analysis and computational biology — a space I believe is underexplored and full of potential for pharma applications.</div>
             </div>
 
             <a class="github-link" href="https://github.com/FranzuBaren/ML-Projects/tree/main/RNA%20Topology%20Benchmark" target="_blank">
@@ -612,13 +595,13 @@
               <div class="ref-tier">
                 <div class="ref-tier-label">📄 Paper</div>
                 <div class="ref-tags">
-                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/ML-Projects/blob/main/RNA%20Topology%20Benchmark/RNA_Topology_Benchmark.pdf" target="_blank">RNA Topology Benchmark (PDF)</a>
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/ML-Projects/blob/main/RNA%20Topology%20Benchmark/paper/main.pdf" target="_blank">RNA Topology Benchmark (PDF)</a>
                 </div>
               </div>
               <div class="ref-tier">
-                <div class="ref-tier-label">Related</div>
+                <div class="ref-tier-label">Key Ref</div>
                 <div class="ref-tags">
-                  <a class="ref-tag" href="https://kunskap.substack.com" target="_blank">Audit 2.0 Substack — Geometric Foundations</a>
+                  <a class="ref-tag" href="https://link.springer.com/protocol/10.1007/978-1-0716-2974-1_12" target="_blank">Xia et al. — Persistent Homology for RNA Data Analysis</a>
                   <a class="ref-tag" href="https://en.wikipedia.org/wiki/Persistent_homology" target="_blank">Persistent Homology — Background</a>
                 </div>
               </div>
@@ -659,39 +642,22 @@
               <span class="project-tag">PyTorch</span>
             </div>
 
-            <img src="https://raw.githubusercontent.com/pathwaycom/bdh/main/figs/architecture.png" alt="Baby Dragon Hatchling — Architecture" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);" />
-
-            <div class="results-grid">
-              <div class="result-card">
-                <div class="result-value">Q=K</div>
-                <div class="result-label">Shared Query-Key Space</div>
-              </div>
-              <div class="result-card">
-                <div class="result-value">ReLU</div>
-                <div class="result-label">Non-Negative Activations</div>
-              </div>
-              <div class="result-card">
-                <div class="result-value">G<sub>x</sub></div>
-                <div class="result-label">Causal Circuit Topology</div>
-              </div>
+            <div class="deep-section">
+              <div class="deep-heading">Context</div>
+              <div class="deep-text">The Dragon Hatchling architecture (Kosowski et al., 2025) is one of the most interesting post-transformer proposals in recent memory. It reimagines neural computation by scaling in a high-dimensional <em>neuron</em> dimension rather than the latent dimension of standard transformers. Parameters are localized to neuron pairs, mirroring biological connectivity. Attention emerges naturally from sparse graph-based interactions rather than being explicitly computed — a fundamental shift in how we think about information flow in neural networks. The architecture matches GPT-2–scale transformers on language and translation tasks while retaining full causal interpretability at the neuron level.</div>
             </div>
 
             <div class="deep-section">
-              <div class="deep-heading">The Core Idea</div>
-              <div class="deep-text">The Dragon Hatchling architecture (Kosowski et al., 2025) reimagines neural computation by scaling in a high-dimensional <em>neuron</em> dimension rather than the latent dimension of standard transformers. Parameters are localized to neuron pairs, mirroring biological connectivity. Attention emerges naturally from sparse graph-based interactions rather than being explicitly computed.</div>
-            </div>
-
-            <div class="deep-section">
-              <div class="deep-heading">What This Repository Does</div>
-              <div class="deep-text">This project provides an independent implementation and analysis of the BDH-GPU architecture, exploring its key design choices: shared-weight layers that act as "learned programs" (the causal circuit G<sub>x</sub> and output circuit G<sub>y</sub>), non-negative ReLU activations for biological plausibility, and the constrained Q=K attention mechanism with causal masking. The implementation includes interpretability tools for visualizing the emergent hub structure and signal propagation dynamics.</div>
+              <div class="deep-heading">My Contribution</div>
+              <div class="deep-text">This repository provides an independent review, implementation, and analysis of the BDH-GPU architecture. I explore its key design choices in depth: shared-weight layers that act as "learned programs" (the causal circuit G<sub>x</sub> and output circuit G<sub>y</sub>), non-negative ReLU activations for biological plausibility, and the constrained Q=K attention mechanism with causal masking. The implementation includes interpretability tools for visualizing the emergent hub structure and signal propagation dynamics. My review critically examines BDH's claims through the lens of both computational neuroscience (my PhD background) and practical AI engineering.</div>
             </div>
 
             <div class="deep-section">
               <div class="deep-heading">Why It Matters</div>
-              <div class="deep-text">BDH demonstrates that biologically plausible architectures can follow transformer-like scaling laws while maintaining full causal interpretability at the neuron level. Understanding these bridges between neuroscience and deep learning is central to building AI systems that can be meaningfully audited – a direct connection to my work in AI assurance for regulated industries.</div>
+              <div class="deep-text">BDH demonstrates that biologically plausible architectures can follow transformer-like scaling laws while maintaining full causal interpretability. This has direct implications for AI governance: if we can <em>trace</em> how a model reaches a decision through its neuron-level graph dynamics, we can build genuinely auditable AI systems. Understanding these bridges between neuroscience and deep learning is central to my work in AI assurance for regulated industries — a model you can explain is a model you can govern.</div>
             </div>
 
-            <a class="github-link" href="https://github.com/FranzuBaren/ML-Theory/tree/main/Dragon%20Hatchling%20Architectureg" target="_blank">
+            <a class="github-link" href="https://github.com/FranzuBaren/ML-Theory/tree/main/Dragon%20Hatchling%20Architecture" target="_blank">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               View on GitHub
             </a>
@@ -700,18 +666,13 @@
               <div class="ref-tier">
                 <div class="ref-tier-label">📄 Paper</div>
                 <div class="ref-tags">
-                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/ML-Theory/blob/main/Dragon%20Hatchling%20Architectureg/Dragon_Hatchling_Analysis.pdf" target="_blank">Dragon Hatchling Analysis (PDF)</a>
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/ML-Theory/blob/main/Dragon%20Hatchling%20Architecture/BDH_Review.pdf" target="_blank">Dragon Hatchling Review (PDF)</a>
                 </div>
               </div>
               <div class="ref-tier">
-                <div class="ref-tier-label">Paper</div>
+                <div class="ref-tier-label">Key Ref</div>
                 <div class="ref-tags">
                   <a class="ref-tag ref-tag--highlight" href="https://arxiv.org/abs/2509.26507" target="_blank">Kosowski et al. — The Dragon Hatchling (arXiv 2025)</a>
-                </div>
-              </div>
-              <div class="ref-tier">
-                <div class="ref-tier-label">Related</div>
-                <div class="ref-tags">
                   <a class="ref-tag" href="https://github.com/pathwaycom/bdh" target="_blank">Original BDH Repository — Pathway</a>
                 </div>
               </div>
@@ -752,36 +713,19 @@
               <span class="project-tag">Python</span>
             </div>
 
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Bayesian_inference_for_binomial_proportion_-_beta-binomial_model.svg/1200px-Bayesian_inference_for_binomial_proportion_-_beta-binomial_model.svg.png" alt="Beta-Binomial Bayesian posterior update" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);background:#fff;padding:0.75rem;" />
-
-            <div class="results-grid">
-              <div class="result-card">
-                <div class="result-value">114d</div>
-                <div class="result-label">Early Detection Advantage</div>
-              </div>
-              <div class="result-card">
-                <div class="result-value">β(α,β)</div>
-                <div class="result-label">Posterior Distribution</div>
-              </div>
-              <div class="result-card">
-                <div class="result-value">H(p)</div>
-                <div class="result-label">Entropy Monitoring</div>
-              </div>
+            <div class="deep-section">
+              <div class="deep-heading">Context</div>
+              <div class="deep-text">Traditional audit reporting operates on a cycle of months or quarters. A control is either "effective" or "deficient" — a binary judgment delivered long after the underlying reality has changed. In regulated industries like pharma, where a single compliance failure can affect patient safety, this latency is unacceptable. The audit profession has discussed risk-based approaches for decades, but the mathematical tooling has lagged behind: most frameworks still rely on static heatmaps, ordinal risk ratings, and threshold-based alerts that lack probabilistic grounding.</div>
             </div>
 
             <div class="deep-section">
-              <div class="deep-heading">The Problem</div>
-              <div class="deep-text">Traditional audit reporting operates on a cycle of months or quarters. A control is either "effective" or "deficient" – a binary judgment delivered long after the underlying reality has changed. In regulated industries like pharma, where a single compliance failure can affect patient safety, this latency is unacceptable. We need continuous, probabilistic monitoring that detects deterioration <em>before</em> it crosses the failure threshold.</div>
+              <div class="deep-heading">My Contribution</div>
+              <div class="deep-text">I developed a complete mathematical framework that models each control as a Beta-Binomial process: the prior encodes historical performance, and each new observation (finding, exception, test result) updates the posterior distribution. <strong>Shannon entropy</strong> of the posterior serves as the monitoring signal — rising entropy means increasing uncertainty about control effectiveness, which is itself a leading indicator of governance breakdown. Simulations demonstrate a <strong>114-day early detection advantage</strong> over traditional threshold-based methods. The framework extends to Monte Carlo stress-testing with strategic adversary modeling (what happens if an intelligent adversary targets the weakest controls?) and Jensen's inequality-based antifragility metrics (which controls actually improve under stress?). All simulation code is public, and the theoretical foundations were published as a six-part series on the <a href="https://kunskap.substack.com" target="_blank">Audit 2.0 Substack</a>.</div>
             </div>
 
             <div class="deep-section">
-              <div class="deep-heading">The Framework</div>
-              <div class="deep-text">The system models each control as a Beta-Binomial process: the prior encodes historical performance, and each new observation (finding, exception, test result) updates the posterior distribution. <strong>Shannon entropy</strong> of the posterior serves as the monitoring signal – rising entropy means increasing uncertainty about control effectiveness, which is itself a leading indicator of governance breakdown. Simulations demonstrate a <strong>114-day early detection advantage</strong> over traditional threshold-based methods.</div>
-            </div>
-
-            <div class="deep-section">
-              <div class="deep-heading">Extensions</div>
-              <div class="deep-text">The framework includes Monte Carlo stress-testing with strategic adversary modeling (what happens if an intelligent adversary targets the weakest controls?) and Jensen's inequality-based antifragility metrics (which controls actually improve under stress?). These extensions were developed and published as part of the <a href="https://kunskap.substack.com" target="_blank">Audit 2.0 Substack series</a>, with full simulation code on GitHub.</div>
+              <div class="deep-heading">Why It Matters</div>
+              <div class="deep-text">This is the mathematical backbone of the AI Assurance argument I'm building at Roche. If audit can move from "we checked last quarter and it was fine" to "the posterior probability of control effectiveness is 0.87 and falling, with entropy crossing the alert threshold in approximately three weeks," then assurance becomes predictive rather than reactive. It's the difference between a smoke detector and a fire investigation. The framework is designed to be implemented on top of existing audit data — no new data collection required, just a new way of thinking about what the data already tells us.</div>
             </div>
 
             <a class="github-link" href="https://github.com/FranzuBaren/Audit-Risk/tree/main/Bayesian%20Governance" target="_blank">
@@ -793,7 +737,7 @@
               <div class="ref-tier">
                 <div class="ref-tier-label">📄 Paper</div>
                 <div class="ref-tags">
-                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/Audit-Risk/blob/main/Bayesian%20Governance/Bayesian_Governance.pdf" target="_blank">Bayesian Governance (PDF)</a>
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/Audit-Risk/blob/main/Bayesian%20Governance/bayesian_governance_review.pdf" target="_blank">Bayesian Governance Review (PDF)</a>
                 </div>
               </div>
               <div class="ref-tier">
@@ -849,36 +793,19 @@
               <span class="project-tag">Python</span>
             </div>
 
-            <img src="https://raw.githubusercontent.com/atorus-research/CDISC_pilot_replication/master/figures/fig14_5_1.png" alt="CDISC clinical trial data analysis" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);background:#fff;padding:0.5rem;" />
-
-            <div class="results-grid">
-              <div class="result-card">
-                <div class="result-value">8</div>
-                <div class="result-label">Model Ablation Study</div>
-              </div>
-              <div class="result-card">
-                <div class="result-value">254</div>
-                <div class="result-label">Patients (PHUSE Pilot)</div>
-              </div>
-              <div class="result-card">
-                <div class="result-value">N&lt;∞</div>
-                <div class="result-label">Honest Small-N Analysis</div>
-              </div>
+            <div class="deep-section">
+              <div class="deep-heading">Context</div>
+              <div class="deep-text">Clinical trial safety monitoring generates massive volumes of structured adverse event, lab, and vital sign data in CDISC/SDTM format. Data Safety Monitoring Boards (DSMBs) need to detect safety signals early, but traditional statistical methods struggle with the multivariate, longitudinal, and often imbalanced nature of clinical safety data. Meanwhile, deep learning papers in clinical AI routinely report impressive benchmarks on large datasets — but pharma trials often have N=200–500 patients in early phases. The question nobody asks honestly: at what sample size does deep learning actually outperform simpler methods?</div>
             </div>
 
             <div class="deep-section">
-              <div class="deep-heading">The Problem</div>
-              <div class="deep-text">Clinical trial safety monitoring generates massive volumes of structured adverse event, lab, and vital sign data in CDISC/SDTM format. Data Safety Monitoring Boards (DSMBs) need to detect safety signals early, but traditional statistical methods struggle with the multivariate, longitudinal, and often imbalanced nature of clinical safety data. Can modern deep learning add value – and at what sample size does it actually outperform simpler methods?</div>
+              <div class="deep-heading">My Contribution</div>
+              <div class="deep-text">I built an end-to-end pipeline that ingests SAS binary transport files (no SAS license required), validates through Pydantic schemas, loads into DuckDB for analytics, and trains 8 models in a rigorous ablation study: from regularized logistic regression through random forests, gradient boosting, MLP, LSTM, GRU, GRU+Attention, and a Conditional VAE. Feature attribution uses <strong>Integrated Gradients</strong>; uncertainty quantification uses <strong>MC Dropout</strong>. Nine publication-quality figures are generated automatically, including a DSMB-ready safety dashboard. The pipeline runs on real FDA-grade CDISC data from the PHUSE pilot study (254 Alzheimer's patients). A <strong>data leakage bug was caught and fixed</strong> mid-development and documented transparently in the report. The CVAE overfitting anomaly was explicitly flagged rather than hidden.</div>
             </div>
 
             <div class="deep-section">
-              <div class="deep-heading">The Pipeline</div>
-              <div class="deep-text">The system ingests SAS binary transport files (no SAS license required), validates through Pydantic schemas, loads into DuckDB for analytics, and trains 8 models in an ablation study: from regularized logistic regression through random forests, gradient boosting, MLP, LSTM, GRU, GRU+Attention, and a Conditional VAE. Feature attribution uses <strong>Integrated Gradients</strong>; uncertainty quantification uses <strong>MC Dropout</strong>. Nine publication-quality figures are generated automatically, including a DSMB-ready safety dashboard.</div>
-            </div>
-
-            <div class="deep-section">
-              <div class="deep-heading">Key Findings</div>
-              <div class="deep-text">At N=254, <strong>regularized logistic regression outperforms most neural models</strong> – a finding many papers would bury, but one that matters for honest clinical AI. The GRU+Attention model showed promise on temporal patterns but couldn't overcome the sample size constraint. A <strong>data leakage bug was caught and fixed</strong> mid-development (documented in the report), and the CVAE overfitting anomaly was explicitly flagged rather than hidden. The intellectual honesty is the point: in regulated environments, knowing when <em>not</em> to use deep learning is as important as knowing how.</div>
+              <div class="deep-heading">Why It Matters</div>
+              <div class="deep-text">The key finding is one many papers would bury: at N=254, <strong>regularized logistic regression outperforms most neural models</strong>. The GRU+Attention model showed promise on temporal patterns but couldn't overcome the sample size constraint. This intellectual honesty is the point — in regulated environments, knowing when <em>not</em> to use deep learning is as important as knowing how. The pipeline also demonstrates that modern Python tooling (Pydantic, DuckDB, PyTorch) can replace legacy SAS-dependent workflows entirely, lowering the barrier to rigorous safety analytics in smaller organizations and academic clinical research.</div>
             </div>
 
             <a class="github-link" href="https://github.com/FranzuBaren/ML-Projects/tree/main/ClinOps_AI" target="_blank">
@@ -890,7 +817,7 @@
               <div class="ref-tier">
                 <div class="ref-tier-label">📄 Paper</div>
                 <div class="ref-tags">
-                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/ML-Projects/blob/main/ClinOps_AI/ClinOps_AI_Report.pdf" target="_blank">ClinOps AI Technical Report (PDF)</a>
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/ML-Projects/blob/main/ClinOps_AI/ClinOps_AI.pdf" target="_blank">ClinOps AI Technical Report (PDF)</a>
                 </div>
               </div>
               <div class="ref-tier">
