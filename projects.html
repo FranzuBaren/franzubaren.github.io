@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Projects — Francesco Orsi, PhD</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-light: #444;
+    --ink-faint: #888;
+    --ink-ghost: #bbb;
+    --paper: #faf8f4;
+    --paper-warm: #f5f1ea;
+    --accent: #8b2500;
+    --accent-light: #c4522a;
+    --rule: #d4cfc6;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --body: 'Newsreader', 'Georgia', serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --blue: #1a3a4a;
+    --blue-light: #2d6a7e;
+    --green: #2c4a2e;
+    --green-light: #4a7a3a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body > * { position: relative; z-index: 1; }
+
+  ::selection {
+    background: rgba(139, 37, 0, 0.15);
+    color: var(--ink);
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+  a:hover { color: var(--accent-light); }
+
+  /* ============================================
+     HEADER
+     ============================================ */
+  .header {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 2rem 0;
+  }
+
+  .header-rule {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.6rem;
+    border-bottom: 0.5px solid var(--rule);
+  }
+
+  .back-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  .connect-links {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .connect-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    position: relative;
+  }
+
+  .connect-links a:hover {
+    color: var(--accent);
+    background: rgba(139, 37, 0, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .connect-links a svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ============================================
+     CONTENT
+     ============================================ */
+  .manuscript {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 3rem;
+  }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease 0.1s forwards;
+  }
+
+  .page-subtitle {
+    font-family: var(--body);
+    font-size: 17px;
+    color: var(--ink-faint);
+    line-height: 1.7;
+    max-width: 680px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease 0.2s forwards;
+  }
+
+  .section-rule {
+    border: none;
+    border-top: 0.5px solid var(--rule);
+    margin: 0 0 2rem;
+  }
+
+  /* ============================================
+     PROJECT CARDS
+     ============================================ */
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease 0.35s forwards;
+  }
+
+  .project {
+    border: 0.5px solid var(--rule);
+    border-bottom: none;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.4s ease;
+  }
+
+  .project:last-child { border-bottom: 0.5px solid var(--rule); }
+
+  .project.is-open {
+    box-shadow: 0 6px 30px rgba(0,0,0,0.05);
+    z-index: 2;
+  }
+
+  .project::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    transition: opacity 0.4s ease;
+    opacity: 0.35;
+  }
+
+  .project.is-open::before { opacity: 1; }
+
+  .project--rna::before { background: linear-gradient(180deg, #1a3a4a, #2d6a7e); }
+  .project--bdh::before { background: linear-gradient(180deg, #5a2d6a, #8e4aad); }
+  .project--bayes::before { background: linear-gradient(180deg, #8b2500, #c4522a); }
+  .project--clinops::before { background: linear-gradient(180deg, #1a5c2e, #2d8a4e); }
+
+  /* Header */
+  .project-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.35rem 2rem 1.35rem 2.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+    position: relative;
+  }
+
+  .project-header:hover { background: rgba(0,0,0,0.012); }
+
+  .project-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+  }
+
+  .project--rna .project-icon { background: rgba(26,58,74,0.08); color: var(--blue); }
+  .project--bdh .project-icon { background: rgba(90,45,106,0.08); color: #5a2d6a; }
+  .project--bayes .project-icon { background: rgba(139,37,0,0.06); color: var(--accent); }
+  .project--clinops .project-icon { background: rgba(26,92,46,0.08); color: #1a5c2e; }
+
+  .project-icon svg { width: 18px; height: 18px; }
+
+  .project-header-text { flex: 1; min-width: 0; }
+
+  .project-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+    transition: color 0.3s ease;
+  }
+
+  .project-header:hover .project-title { color: var(--accent); }
+
+  .project-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-ghost);
+    letter-spacing: 0.5px;
+    margin-top: 0.2rem;
+  }
+
+  .project-toggle {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  .project-toggle::before,
+  .project-toggle::after {
+    content: '';
+    position: absolute;
+    background: var(--ink-ghost);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  }
+
+  .project-toggle::before { width: 14px; height: 1.5px; }
+  .project-toggle::after { width: 1.5px; height: 14px; }
+
+  .project.is-open .project-toggle::after {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+
+  .project-header:hover .project-toggle::before,
+  .project-header:hover .project-toggle::after {
+    background: var(--accent);
+  }
+
+  /* Body */
+  .project-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    opacity: 0;
+  }
+
+  .project.is-open .project-body {
+    max-height: 5000px;
+    opacity: 1;
+  }
+
+  .project-body-inner {
+    padding: 0 2rem 2rem 2.5rem;
+  }
+
+  /* Summary box */
+  .project-summary {
+    padding: 0.7rem 1rem;
+    border: 0.5px solid var(--rule);
+    border-radius: 3px;
+    font-family: var(--body);
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  .project--rna .project-summary { border-left: 3px solid var(--blue-light); background: rgba(26,58,74,0.02); }
+  .project--bdh .project-summary { border-left: 3px solid #8e4aad; background: rgba(90,45,106,0.02); }
+  .project--bayes .project-summary { border-left: 3px solid var(--accent); background: rgba(139,37,0,0.02); }
+  .project--clinops .project-summary { border-left: 3px solid #2d8a4e; background: rgba(26,92,46,0.02); }
+
+  .summary-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .project--rna .summary-label { color: var(--blue-light); }
+  .project--bdh .summary-label { color: #8e4aad; }
+  .project--bayes .summary-label { color: var(--accent); }
+  .project--clinops .summary-label { color: #2d8a4e; }
+
+  /* Tags */
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    padding: 0.3rem 0.7rem;
+    border: 0.5px solid var(--rule);
+    border-radius: 2px;
+    color: var(--ink-faint);
+  }
+
+  /* Deep sections */
+  .deep-section { margin-bottom: 1.5rem; }
+  .deep-section:last-child { margin-bottom: 0; }
+  .deep-heading {
+    font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--ink);
+    margin-bottom: 0.6rem; line-height: 1.3;
+    letter-spacing: 0.2px;
+    padding-bottom: 0.35rem;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .deep-text {
+    font-family: var(--body); font-size: 14px; line-height: 1.75; color: var(--ink-light);
+    margin-bottom: 0.75rem;
+  }
+  .deep-text a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid rgba(139,37,0,0.3); transition: border-color 0.25s; }
+  .deep-text a:hover { border-color: var(--accent); }
+
+  /* Results grid */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .result-card {
+    padding: 0.85rem 1rem;
+    border: 0.5px solid var(--rule);
+    border-radius: 3px;
+    background: var(--paper);
+  }
+
+  .result-value {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .project--rna .result-value { color: var(--blue); }
+  .project--bdh .result-value { color: #5a2d6a; }
+  .project--bayes .result-value { color: var(--accent); }
+  .project--clinops .result-value { color: #1a5c2e; }
+
+  .result-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--ink-ghost);
+  }
+
+  /* GitHub link */
+  .github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    color: var(--ink-faint);
+    padding: 0.5rem 1rem;
+    border: 0.5px solid var(--rule);
+    border-radius: 4px;
+    transition: all 0.25s;
+    margin-top: 0.5rem;
+  }
+
+  .github-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(139,37,0,0.02);
+  }
+
+  .github-link svg { width: 14px; height: 14px; }
+
+  /* Ref tiers */
+  .ref-tiers { display:flex; flex-direction:column; gap:0.5rem; margin-top:1rem; }
+  .ref-tier { display:flex; gap:0.75rem; align-items:center; }
+  .ref-tier-label { font-family:var(--mono); font-size:8px; text-transform:uppercase; letter-spacing:1.5px; color:var(--ink-ghost); flex-shrink:0; width:58px; text-align:right; line-height:1.2; }
+  .ref-tags { display:flex; gap:0.3rem; overflow-x:auto; flex:1; padding-bottom:2px; scrollbar-width:none; }
+  .ref-tags::-webkit-scrollbar { display:none; }
+  .ref-tag { font-family:var(--mono); font-size:9px; letter-spacing:0.3px; padding:0.2rem 0.55rem; border:0.5px solid var(--rule); border-radius:2px; color:var(--ink-faint); text-decoration:none; transition:border-color 0.25s, color 0.25s, background 0.25s; display:inline-block; white-space:nowrap; flex-shrink:0; }
+  .ref-tag:hover { border-color:var(--accent); color:var(--accent); background:rgba(139,37,0,0.03); }
+  .ref-tag::after { content:' ↗'; font-size:7px; opacity:0.3; }
+  .ref-tag--highlight { border:0.5px solid rgba(139,37,0,0.25); color:var(--accent); background:rgba(139,37,0,0.035); font-weight:500; }
+  .ref-tag--highlight:hover { border-color:var(--accent); color:#fff; background:var(--accent); }
+  .ref-tag--highlight::after { opacity:0.6; }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .footer-rule {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+  }
+
+  .footer-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-ghost);
+    letter-spacing: 0.5px;
+  }
+
+  /* ============================================
+     ANIMATIONS
+     ============================================ */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 768px) {
+    .header-top { flex-direction: column; gap: 0.75rem; }
+    .page-title { font-size: 32px; }
+    .project-header { padding: 1rem 1.25rem 1rem 1.5rem; gap: 1rem; }
+    .project-title { font-size: 20px; }
+    .project-body-inner { padding: 0 1.25rem 1.5rem 1.5rem; }
+    .results-grid { grid-template-columns: 1fr; }
+    .project-icon { width: 28px; height: 28px; }
+    .project-icon svg { width: 15px; height: 15px; }
+  }
+
+  @media (max-width: 480px) {
+    .header { padding: 1.5rem 1.25rem 0; }
+    .manuscript { padding: 2rem 1.25rem; }
+    .page-title { font-size: 28px; }
+    .project-title { font-size: 18px; }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="header">
+    <hr class="header-rule" />
+    <div class="header-top">
+      <a href="index.html" class="back-link">← Francesco Orsi, PhD</a>
+      <div class="connect-links">
+        <a href="/cdn-cgi/l/email-protection#254357444b464056464a0b4a57564c1d11654248444c490b464a48" title="Email">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/francesco-o-ab73437b/" target="_blank" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </a>
+        <a href="https://kunskap.substack.com" target="_blank" title="Substack">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 6.98H2V4.82h20zM2 10.52h20v-2.2H2zM2 13.04v8.96l10-5.55 10 5.55v-8.96H2z"/></svg>
+        </a>
+        <a href="https://github.com/FranzuBaren" target="_blank" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="projects.html" title="Projects">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 2v6.5L4.8 18.3A2 2 0 006.6 21h10.8a2 2 0 001.8-2.7L14 8.5V2h1a1 1 0 100-2H9a1 1 0 000 2h1zm2 7.3l5 9.7H7l5-9.7V4h0z"/></svg>
+        </a>
+        <a href="challenges.html" title="Challenges">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0011 15.9V19H7v2h10v-2h-4v-3.1a5.01 5.01 0 003.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+        </a>
+        <a href="cv.html" title="CV">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.2v6l7 3.8 7-3.8v-6L21 9.8V17h2V9L12 3zm6.8 6L12 12.7 5.2 9 12 5.3 18.8 9zM17 16.2l-5 2.7-5-2.7v-4l5 2.7 5-2.7v4z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="manuscript">
+
+    <h1 class="page-title">Projects</h1>
+    <p class="page-subtitle">Open-source work at the intersection of geometric mathematics, machine learning theory, and risk analytics in regulated industries. All code and data are public.</p>
+
+    <hr class="section-rule" />
+
+    <div class="projects">
+
+      <!-- ============================================
+           PROJECT 1: RNA Topology Benchmark
+           ============================================ -->
+      <div class="project project--rna">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div class="project-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4m0 12v4M6 8c0-2 2-4 6-4s6 2 6 4-2 4-6 4"/><path d="M6 16c0-2 2-4 6-4s6 2 6 4"/><circle cx="6" cy="12" r="1.5" fill="currentColor"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/></svg>
+          </div>
+          <div class="project-header-text">
+            <div class="project-title">RNA Topology Benchmark</div>
+            <div class="project-meta">ML-Projects · Topological Data Analysis · Computational Biology</div>
+          </div>
+          <div class="project-toggle"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+
+            <div class="project-summary">
+              <div class="summary-label">What this is</div>
+              A novel benchmarking framework for RNA structure prediction that introduces topological metrics – persistent homology, Betti numbers, and a custom Topological Quality Score (TQS) – to evaluate how well predicted structures capture the true topological features of RNA molecules. Traditional metrics like RMSD miss structural invariants; this framework doesn't.
+            </div>
+
+            <div class="project-tags">
+              <span class="project-tag">Persistent Homology</span>
+              <span class="project-tag">Betti Numbers</span>
+              <span class="project-tag">Persistent Laplacian</span>
+              <span class="project-tag">TDA</span>
+              <span class="project-tag">RNA Structure</span>
+              <span class="project-tag">Python</span>
+            </div>
+
+            <img src="https://www.frontiersin.org/files/Articles/631316/fmolb-08-631316-HTML/image_m/fmolb-08-631316-g001.jpg" alt="RNA 3D structure prediction and topological analysis" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);" />
+
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="result-value">TQS</div>
+                <div class="result-label">Topological Quality Score</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">TCI</div>
+                <div class="result-label">Topological Complexity Index</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">λ₁</div>
+                <div class="result-label">Persistent Laplacian Gap</div>
+              </div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">The Problem</div>
+              <div class="deep-text">RNA structure prediction has advanced rapidly, but evaluation remains stuck in the RMSD era. Root-mean-square deviation measures geometric distance between atoms but ignores whether the predicted structure preserves the <em>topological</em> features of the ground truth – the loops, cavities, and higher-dimensional holes that define RNA function. A prediction can score well on RMSD while missing an entire stem-loop.</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">The Approach</div>
+              <div class="deep-text">We build persistence diagrams from both predicted and ground-truth RNA structures, then compare them using bottleneck and Wasserstein distances across homological dimensions. The <strong>Topological Quality Score (TQS)</strong> aggregates these into a single metric that captures how faithfully the topological skeleton is reproduced. The <strong>Topological Complexity Index (TCI)</strong> quantifies the inherent structural richness of each molecule. The <strong>persistent Laplacian spectral gap</strong> (λ₁) provides a continuous measure of topological connectivity that is more sensitive than discrete Betti numbers alone.</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">Why It Matters</div>
+              <div class="deep-text">These metrics are invariant to rigid-body transformations, robust to small perturbations, and capture structural features that are invisible to geometric metrics. For RNA therapeutics – mRNA vaccines, antisense oligonucleotides, riboswitches – getting the topology right is often more important than getting the coordinates right. This benchmark provides the tools to measure that.</div>
+            </div>
+
+            <a class="github-link" href="https://github.com/FranzuBaren/ML-Projects/tree/main/RNA%20Topology%20Benchmark" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              View on GitHub
+            </a>
+
+            <div class="ref-tiers">
+              <div class="ref-tier">
+                <div class="ref-tier-label">📄 Paper</div>
+                <div class="ref-tags">
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/ML-Projects/blob/main/RNA%20Topology%20Benchmark/RNA_Topology_Benchmark.pdf" target="_blank">RNA Topology Benchmark (PDF)</a>
+                </div>
+              </div>
+              <div class="ref-tier">
+                <div class="ref-tier-label">Related</div>
+                <div class="ref-tags">
+                  <a class="ref-tag" href="https://kunskap.substack.com" target="_blank">Audit 2.0 Substack — Geometric Foundations</a>
+                  <a class="ref-tag" href="https://en.wikipedia.org/wiki/Persistent_homology" target="_blank">Persistent Homology — Background</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           PROJECT 2: Dragon Hatchling Architecture
+           ============================================ -->
+      <div class="project project--bdh">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div class="project-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4m-7.07-15.07l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83"/></svg>
+          </div>
+          <div class="project-header-text">
+            <div class="project-title">Dragon Hatchling Architecture</div>
+            <div class="project-meta">ML-Theory · Biologically-Inspired Neural Networks · Architecture Analysis</div>
+          </div>
+          <div class="project-toggle"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+
+            <div class="project-summary">
+              <div class="summary-label">What this is</div>
+              An independent implementation, analysis, and extension of the Baby Dragon Hatchling (BDH) architecture – a biologically-inspired neural network that bridges transformers and models of the brain through scale-free, neuron-level graph interactions with emergent attention mechanisms.
+            </div>
+
+            <div class="project-tags">
+              <span class="project-tag">BDH Architecture</span>
+              <span class="project-tag">Scale-Free Networks</span>
+              <span class="project-tag">Emergent Attention</span>
+              <span class="project-tag">Hebbian Learning</span>
+              <span class="project-tag">Sparse Computation</span>
+              <span class="project-tag">PyTorch</span>
+            </div>
+
+            <img src="https://raw.githubusercontent.com/pathwaycom/bdh/main/figs/architecture.png" alt="Baby Dragon Hatchling — Architecture" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);" />
+
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="result-value">Q=K</div>
+                <div class="result-label">Shared Query-Key Space</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">ReLU</div>
+                <div class="result-label">Non-Negative Activations</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">G<sub>x</sub></div>
+                <div class="result-label">Causal Circuit Topology</div>
+              </div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">The Core Idea</div>
+              <div class="deep-text">The Dragon Hatchling architecture (Kosowski et al., 2025) reimagines neural computation by scaling in a high-dimensional <em>neuron</em> dimension rather than the latent dimension of standard transformers. Parameters are localized to neuron pairs, mirroring biological connectivity. Attention emerges naturally from sparse graph-based interactions rather than being explicitly computed.</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">What This Repository Does</div>
+              <div class="deep-text">This project provides an independent implementation and analysis of the BDH-GPU architecture, exploring its key design choices: shared-weight layers that act as "learned programs" (the causal circuit G<sub>x</sub> and output circuit G<sub>y</sub>), non-negative ReLU activations for biological plausibility, and the constrained Q=K attention mechanism with causal masking. The implementation includes interpretability tools for visualizing the emergent hub structure and signal propagation dynamics.</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">Why It Matters</div>
+              <div class="deep-text">BDH demonstrates that biologically plausible architectures can follow transformer-like scaling laws while maintaining full causal interpretability at the neuron level. Understanding these bridges between neuroscience and deep learning is central to building AI systems that can be meaningfully audited – a direct connection to my work in AI assurance for regulated industries.</div>
+            </div>
+
+            <a class="github-link" href="https://github.com/FranzuBaren/ML-Theory/tree/main/Dragon%20Hatchling%20Architectureg" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              View on GitHub
+            </a>
+
+            <div class="ref-tiers">
+              <div class="ref-tier">
+                <div class="ref-tier-label">📄 Paper</div>
+                <div class="ref-tags">
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/ML-Theory/blob/main/Dragon%20Hatchling%20Architectureg/Dragon_Hatchling_Analysis.pdf" target="_blank">Dragon Hatchling Analysis (PDF)</a>
+                </div>
+              </div>
+              <div class="ref-tier">
+                <div class="ref-tier-label">Paper</div>
+                <div class="ref-tags">
+                  <a class="ref-tag ref-tag--highlight" href="https://arxiv.org/abs/2509.26507" target="_blank">Kosowski et al. — The Dragon Hatchling (arXiv 2025)</a>
+                </div>
+              </div>
+              <div class="ref-tier">
+                <div class="ref-tier-label">Related</div>
+                <div class="ref-tags">
+                  <a class="ref-tag" href="https://github.com/pathwaycom/bdh" target="_blank">Original BDH Repository — Pathway</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           PROJECT 3: Bayesian Governance
+           ============================================ -->
+      <div class="project project--bayes">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div class="project-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16c0-4 1-8 4-10s5 2 6 0 2-3 4-3"/><circle cx="11" cy="6" r="1.5" fill="currentColor"/></svg>
+          </div>
+          <div class="project-header-text">
+            <div class="project-title">Bayesian Governance</div>
+            <div class="project-meta">Audit-Risk · Bayesian Inference · Enterprise Risk Monitoring</div>
+          </div>
+          <div class="project-toggle"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+
+            <div class="project-summary">
+              <div class="summary-label">What this is</div>
+              A mathematical framework for continuous governance monitoring using Bayesian Beta-Binomial models. Instead of binary pass/fail audit judgments, this system maintains calibrated probability distributions over control effectiveness, updates them with each new observation, and provides principled early-warning signals for governance deterioration.
+            </div>
+
+            <div class="project-tags">
+              <span class="project-tag">Beta-Binomial</span>
+              <span class="project-tag">Bayesian Inference</span>
+              <span class="project-tag">Shannon Entropy</span>
+              <span class="project-tag">Monte Carlo</span>
+              <span class="project-tag">Governance</span>
+              <span class="project-tag">Python</span>
+            </div>
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Bayesian_inference_for_binomial_proportion_-_beta-binomial_model.svg/1200px-Bayesian_inference_for_binomial_proportion_-_beta-binomial_model.svg.png" alt="Beta-Binomial Bayesian posterior update" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);background:#fff;padding:0.75rem;" />
+
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="result-value">114d</div>
+                <div class="result-label">Early Detection Advantage</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">β(α,β)</div>
+                <div class="result-label">Posterior Distribution</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">H(p)</div>
+                <div class="result-label">Entropy Monitoring</div>
+              </div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">The Problem</div>
+              <div class="deep-text">Traditional audit reporting operates on a cycle of months or quarters. A control is either "effective" or "deficient" – a binary judgment delivered long after the underlying reality has changed. In regulated industries like pharma, where a single compliance failure can affect patient safety, this latency is unacceptable. We need continuous, probabilistic monitoring that detects deterioration <em>before</em> it crosses the failure threshold.</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">The Framework</div>
+              <div class="deep-text">The system models each control as a Beta-Binomial process: the prior encodes historical performance, and each new observation (finding, exception, test result) updates the posterior distribution. <strong>Shannon entropy</strong> of the posterior serves as the monitoring signal – rising entropy means increasing uncertainty about control effectiveness, which is itself a leading indicator of governance breakdown. Simulations demonstrate a <strong>114-day early detection advantage</strong> over traditional threshold-based methods.</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">Extensions</div>
+              <div class="deep-text">The framework includes Monte Carlo stress-testing with strategic adversary modeling (what happens if an intelligent adversary targets the weakest controls?) and Jensen's inequality-based antifragility metrics (which controls actually improve under stress?). These extensions were developed and published as part of the <a href="https://kunskap.substack.com" target="_blank">Audit 2.0 Substack series</a>, with full simulation code on GitHub.</div>
+            </div>
+
+            <a class="github-link" href="https://github.com/FranzuBaren/Audit-Risk/tree/main/Bayesian%20Governance" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              View on GitHub
+            </a>
+
+            <div class="ref-tiers">
+              <div class="ref-tier">
+                <div class="ref-tier-label">📄 Paper</div>
+                <div class="ref-tags">
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/Audit-Risk/blob/main/Bayesian%20Governance/Bayesian_Governance.pdf" target="_blank">Bayesian Governance (PDF)</a>
+                </div>
+              </div>
+              <div class="ref-tier">
+                <div class="ref-tier-label">Series</div>
+                <div class="ref-tags">
+                  <a class="ref-tag ref-tag--highlight" href="https://kunskap.substack.com" target="_blank">Audit 2.0 — Substack Series (6 posts)</a>
+                </div>
+              </div>
+              <div class="ref-tier">
+                <div class="ref-tier-label">Methods</div>
+                <div class="ref-tags">
+                  <a class="ref-tag" href="https://en.wikipedia.org/wiki/Beta-binomial_distribution" target="_blank">Beta-Binomial Distribution</a>
+                  <a class="ref-tag" href="https://en.wikipedia.org/wiki/Entropy_(information_theory)" target="_blank">Shannon Entropy</a>
+                  <a class="ref-tag" href="https://en.wikipedia.org/wiki/Jensen%27s_inequality" target="_blank">Jensen's Inequality</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           PROJECT 4: ClinOps_AI
+           ============================================ -->
+      <div class="project project--clinops">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div class="project-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 12h4m2 0h4"/><path d="M12 7v4m0 2v4"/></svg>
+          </div>
+          <div class="project-header-text">
+            <div class="project-title">ClinOps AI</div>
+            <div class="project-meta">ML-Projects · Clinical Trial Safety Intelligence · Deep Learning · CDISC</div>
+          </div>
+          <div class="project-toggle"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-inner">
+
+            <div class="project-summary">
+              <div class="summary-label">What this is</div>
+              An end-to-end deep learning pipeline for clinical trial safety intelligence, built on real FDA-grade CDISC data (254 Alzheimer's patients, PHUSE pilot study). From SAS binary parsing through Pydantic validation, DuckDB analytics, 9 publication-quality figures, and an 8-model ablation study – including a 14-page LaTeX technical report.
+            </div>
+
+            <div class="project-tags">
+              <span class="project-tag">CDISC / SDTM</span>
+              <span class="project-tag">Clinical Safety</span>
+              <span class="project-tag">Deep Learning</span>
+              <span class="project-tag">GRU + Attention</span>
+              <span class="project-tag">Integrated Gradients</span>
+              <span class="project-tag">MC Dropout</span>
+              <span class="project-tag">DuckDB</span>
+              <span class="project-tag">Python</span>
+            </div>
+
+            <img src="https://raw.githubusercontent.com/atorus-research/CDISC_pilot_replication/master/figures/fig14_5_1.png" alt="CDISC clinical trial data analysis" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);background:#fff;padding:0.5rem;" />
+
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="result-value">8</div>
+                <div class="result-label">Model Ablation Study</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">254</div>
+                <div class="result-label">Patients (PHUSE Pilot)</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">N&lt;∞</div>
+                <div class="result-label">Honest Small-N Analysis</div>
+              </div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">The Problem</div>
+              <div class="deep-text">Clinical trial safety monitoring generates massive volumes of structured adverse event, lab, and vital sign data in CDISC/SDTM format. Data Safety Monitoring Boards (DSMBs) need to detect safety signals early, but traditional statistical methods struggle with the multivariate, longitudinal, and often imbalanced nature of clinical safety data. Can modern deep learning add value – and at what sample size does it actually outperform simpler methods?</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">The Pipeline</div>
+              <div class="deep-text">The system ingests SAS binary transport files (no SAS license required), validates through Pydantic schemas, loads into DuckDB for analytics, and trains 8 models in an ablation study: from regularized logistic regression through random forests, gradient boosting, MLP, LSTM, GRU, GRU+Attention, and a Conditional VAE. Feature attribution uses <strong>Integrated Gradients</strong>; uncertainty quantification uses <strong>MC Dropout</strong>. Nine publication-quality figures are generated automatically, including a DSMB-ready safety dashboard.</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">Key Findings</div>
+              <div class="deep-text">At N=254, <strong>regularized logistic regression outperforms most neural models</strong> – a finding many papers would bury, but one that matters for honest clinical AI. The GRU+Attention model showed promise on temporal patterns but couldn't overcome the sample size constraint. A <strong>data leakage bug was caught and fixed</strong> mid-development (documented in the report), and the CVAE overfitting anomaly was explicitly flagged rather than hidden. The intellectual honesty is the point: in regulated environments, knowing when <em>not</em> to use deep learning is as important as knowing how.</div>
+            </div>
+
+            <a class="github-link" href="https://github.com/FranzuBaren/ML-Projects/tree/main/ClinOps_AI" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              View on GitHub
+            </a>
+
+            <div class="ref-tiers">
+              <div class="ref-tier">
+                <div class="ref-tier-label">📄 Paper</div>
+                <div class="ref-tags">
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/ML-Projects/blob/main/ClinOps_AI/ClinOps_AI_Report.pdf" target="_blank">ClinOps AI Technical Report (PDF)</a>
+                </div>
+              </div>
+              <div class="ref-tier">
+                <div class="ref-tier-label">Data</div>
+                <div class="ref-tags">
+                  <a class="ref-tag" href="https://advance.phuse.global/pages/viewpage.action?pageId=327874" target="_blank">PHUSE CDISC Pilot Study</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <hr class="footer-rule" />
+    <div class="footer-inner">
+      <span class="footer-text">© 2026 Francesco Orsi, PhD</span>
+      <span class="footer-text">Built with care</span>
+    </div>
+  </footer>
+
+  <script>
+    function toggleProject(header) {
+      const card = header.closest('.project');
+      const wasOpen = card.classList.contains('is-open');
+      document.querySelectorAll('.project.is-open').forEach(c => c.classList.remove('is-open'));
+      if (!wasOpen) card.classList.add('is-open');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Open Challenges — Francesco Orsi, PhD</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="challenges-style.css" />
+<style>
+  :root {
+    --ink:#1a1a1a;--ink-light:#444;--ink-faint:#888;--ink-ghost:#bbb;
+    --paper:#faf8f4;--paper-warm:#f5f1ea;--accent:#8b2500;--accent-light:#c4522a;--rule:#d4cfc6;
+    --serif:'Cormorant Garamond','Georgia',serif;--body:'Newsreader','Georgia',serif;--mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+  body>*{position:relative;z-index:1}
+  ::selection{background:rgba(139,37,0,0.15);color:var(--ink)}
+  a{color:var(--accent);text-decoration:none;transition:color 0.25s}a:hover{color:var(--accent-light)}
+
+  .header{max-width:1100px;margin:0 auto;padding:2rem 2rem 0}
+  .header-rule{border:none;border-top:2px solid var(--ink);margin-bottom:0.6rem}
+  .header-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:0.6rem;border-bottom:0.5px solid var(--rule)}
+  .back-link{font-family:var(--mono);font-size:11px;letter-spacing:0.5px;color:var(--ink-faint);text-decoration:none;transition:color 0.25s;display:flex;align-items:center;gap:0.4rem}.back-link:hover{color:var(--accent)}
+  .connect-links{display:flex;gap:0.35rem}
+  .connect-links a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;color:var(--ink-faint);text-decoration:none;transition:color 0.3s,background 0.3s,transform 0.3s;position:relative}
+  .connect-links a:hover{color:var(--accent);background:rgba(139,37,0,0.06);transform:translateY(-2px)}
+  .connect-links a svg{width:16px;height:16px}
+
+  .manuscript{max-width:1100px;margin:0 auto;padding:3rem 2rem 3rem}
+  .page-title{font-family:var(--serif);font-size:42px;font-weight:500;color:var(--ink);letter-spacing:-0.5px;line-height:1.15;margin-bottom:0.5rem;opacity:0;animation:fadeSlideUp 0.8s ease 0.1s forwards}
+  .page-subtitle{font-family:var(--body);font-size:17px;color:var(--ink-faint);line-height:1.7;max-width:680px;margin-bottom:2.5rem;opacity:0;animation:fadeSlideUp 0.8s ease 0.2s forwards}
+  .section-rule{border:none;border-top:0.5px solid var(--rule);margin:0 0 2rem}
+
+  .challenges{display:flex;flex-direction:column;gap:0;opacity:0;animation:fadeSlideUp 0.8s ease 0.35s forwards}
+  .challenge{border:0.5px solid var(--rule);border-bottom:none;overflow:hidden;position:relative;transition:box-shadow 0.4s}
+  .challenge:last-child{border-bottom:0.5px solid var(--rule)}
+  .challenge.is-open{box-shadow:0 6px 30px rgba(0,0,0,0.05);z-index:2}
+  .challenge::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;transition:opacity 0.4s;opacity:0.35}
+  .challenge.is-open::before{opacity:1}
+  .challenge--medgemma::before{background:linear-gradient(180deg,#1a5c2e,#2d8a4e)}
+  .challenge--obesity::before{background:linear-gradient(180deg,#5a3d0a,#a87c1e)}
+
+  .challenge-header{display:flex;align-items:center;gap:1.25rem;padding:1.35rem 2rem 1.35rem 2.5rem;cursor:pointer;user-select:none;transition:background 0.3s;position:relative}
+  .challenge-header:hover{background:rgba(0,0,0,0.012)}
+  .challenge-icon{flex-shrink:0;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px}
+  .challenge--medgemma .challenge-icon{background:rgba(26,92,46,0.08);color:#1a5c2e}
+  .challenge--obesity .challenge-icon{background:rgba(168,124,30,0.08);color:#5a3d0a}
+  .challenge-icon svg{width:18px;height:18px}
+  .challenge-header-text{flex:1;min-width:0}
+  .challenge-title{font-family:var(--serif);font-size:24px;font-weight:500;color:var(--ink);line-height:1.2;transition:color 0.3s}
+  .challenge-header:hover .challenge-title{color:var(--accent)}
+  .challenge-meta{font-family:var(--mono);font-size:11px;color:var(--ink-ghost);letter-spacing:0.5px;margin-top:0.2rem}
+  .challenge-toggle{width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative}
+  .challenge-toggle::before,.challenge-toggle::after{content:'';position:absolute;background:var(--ink-ghost);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1),opacity 0.3s}
+  .challenge-toggle::before{width:14px;height:1.5px}.challenge-toggle::after{width:1.5px;height:14px}
+  .challenge.is-open .challenge-toggle::after{transform:rotate(90deg);opacity:0}
+  .challenge-header:hover .challenge-toggle::before,.challenge-header:hover .challenge-toggle::after{background:var(--accent)}
+
+  .challenge-body{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1),opacity 0.4s;opacity:0}
+  .challenge.is-open .challenge-body{max-height:5000px;opacity:1}
+  .challenge-body-inner{padding:0 2rem 2rem 2.5rem}
+
+  .challenge-summary{padding:0.7rem 1rem;border:0.5px solid var(--rule);border-radius:3px;font-family:var(--body);font-size:14px;color:var(--ink-light);line-height:1.65;margin-bottom:1.5rem}
+  .challenge--medgemma .challenge-summary{border-left:3px solid #2d8a4e;background:rgba(26,92,46,0.02)}
+  .challenge--obesity .challenge-summary{border-left:3px solid #a87c1e;background:rgba(168,124,30,0.02)}
+  .summary-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:0.35rem}
+  .challenge--medgemma .summary-label{color:#2d8a4e}
+  .challenge--obesity .summary-label{color:#a87c1e}
+
+  .challenge-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem}
+  .challenge-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.5px;padding:0.3rem 0.7rem;border:0.5px solid var(--rule);border-radius:2px;color:var(--ink-faint)}
+
+  .results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1rem 0 1.5rem}
+  .result-card{padding:0.85rem 1rem;border:0.5px solid var(--rule);border-radius:3px;background:var(--paper)}
+  .result-value{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1;margin-bottom:0.25rem}
+  .challenge--medgemma .result-value{color:#1a5c2e}
+  .challenge--obesity .result-value{color:#5a3d0a}
+  .result-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-ghost)}
+
+  .deep-section{margin-bottom:1.5rem}.deep-section:last-child{margin-bottom:0}
+  .deep-heading{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink);margin-bottom:0.6rem;line-height:1.3;letter-spacing:0.2px;padding-bottom:0.35rem;border-bottom:0.5px solid var(--rule)}
+  .deep-text{font-family:var(--body);font-size:14px;line-height:1.75;color:var(--ink-light);margin-bottom:0.75rem}
+  .deep-text a{color:var(--accent);text-decoration:none;border-bottom:0.5px solid rgba(139,37,0,0.3);transition:border-color 0.25s}.deep-text a:hover{border-color:var(--accent)}
+
+  .github-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:11px;letter-spacing:0.3px;color:var(--ink-faint);padding:0.5rem 1rem;border:0.5px solid var(--rule);border-radius:4px;transition:all 0.25s;margin-top:0.5rem}
+  .github-link:hover{color:var(--accent);border-color:var(--accent);background:rgba(139,37,0,0.02)}
+  .github-link svg{width:14px;height:14px}
+
+  .ref-tiers{display:flex;flex-direction:column;gap:0.5rem;margin-top:1rem}
+  .ref-tier{display:flex;gap:0.75rem;align-items:center}
+  .ref-tier-label{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-ghost);flex-shrink:0;width:58px;text-align:right;line-height:1.2}
+  .ref-tags{display:flex;gap:0.3rem;overflow-x:auto;flex:1;padding-bottom:2px;scrollbar-width:none}.ref-tags::-webkit-scrollbar{display:none}
+  .ref-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.3px;padding:0.2rem 0.55rem;border:0.5px solid var(--rule);border-radius:2px;color:var(--ink-faint);text-decoration:none;transition:border-color 0.25s,color 0.25s,background 0.25s;display:inline-block;white-space:nowrap;flex-shrink:0}
+  .ref-tag:hover{border-color:var(--accent);color:var(--accent);background:rgba(139,37,0,0.03)}
+  .ref-tag::after{content:' ↗';font-size:7px;opacity:0.3}
+  .ref-tag--highlight{border:0.5px solid rgba(139,37,0,0.25);color:var(--accent);background:rgba(139,37,0,0.035);font-weight:500}
+  .ref-tag--highlight:hover{border-color:var(--accent);color:#fff;background:var(--accent)}
+  .ref-tag--highlight::after{opacity:0.6}
+
+  /* Status badge */
+  .status-badge{display:inline-flex;align-items:center;gap:0.35rem;font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:0.25rem 0.6rem;border-radius:2px;margin-left:0.75rem;vertical-align:middle}
+  .status-badge--submitted{background:rgba(26,92,46,0.08);color:#1a5c2e;border:0.5px solid rgba(26,92,46,0.2)}
+  .status-badge--active{background:rgba(168,124,30,0.08);color:#5a3d0a;border:0.5px solid rgba(168,124,30,0.2)}
+  .status-dot{width:5px;height:5px;border-radius:50%}
+  .status-badge--submitted .status-dot{background:#2d8a4e}
+  .status-badge--active .status-dot{background:#a87c1e}
+
+  .footer{max-width:1100px;margin:0 auto;padding:0 2rem}
+  .footer-rule{border:none;border-top:2px solid var(--ink);margin-bottom:1rem}
+  .footer-inner{display:flex;justify-content:space-between;padding-bottom:2rem}
+  .footer-text{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);letter-spacing:0.5px}
+
+  @keyframes fadeSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:768px){.header-top{flex-direction:column;gap:0.75rem}.page-title{font-size:32px}.challenge-header{padding:1rem 1.25rem 1rem 1.5rem;gap:1rem}.challenge-title{font-size:20px}.challenge-body-inner{padding:0 1.25rem 1.5rem 1.5rem}.results-grid{grid-template-columns:1fr}}
+  @media(max-width:480px){.header{padding:1.5rem 1.25rem 0}.manuscript{padding:2rem 1.25rem}.page-title{font-size:28px}.challenge-title{font-size:18px}.results-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+  <header class="header">
+    <hr class="header-rule" />
+    <div class="header-top">
+      <a href="index.html" class="back-link">← Francesco Orsi, PhD</a>
+      <div class="connect-links">
+        <a href="/cdn-cgi/l/email-protection#254357444b464056464a0b4a57564c1d11654248444c490b464a48" title="Email" data-tooltip="email">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/francesco-o-ab73437b/" target="_blank" title="LinkedIn" data-tooltip="linkedin">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </a>
+        <a href="https://kunskap.substack.com" target="_blank" title="Substack" data-tooltip="substack">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 6.98H2V4.82h20zM2 10.52h20v-2.2H2zM2 13.04v8.96l10-5.55 10 5.55v-8.96H2z"/></svg>
+        </a>
+        <a href="https://github.com/FranzuBaren" target="_blank" title="GitHub" data-tooltip="github">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="projects.html" title="Projects" data-tooltip="projects">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 2v6.5L4.8 18.3A2 2 0 006.6 21h10.8a2 2 0 001.8-2.7L14 8.5V2h1a1 1 0 100-2H9a1 1 0 000 2h1zm2 7.3l5 9.7H7l5-9.7V4h0z"/></svg>
+        </a>
+        <a href="challenges.html" title="Challenges" data-tooltip="challenges">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0011 15.9V19H7v2h10v-2h-4v-3.1a5.01 5.01 0 003.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+        </a>
+        <a href="cv.html" title="CV" data-tooltip="cv">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.2v6l7 3.8 7-3.8v-6L21 9.8V17h2V9L12 3zm6.8 6L12 12.7 5.2 9 12 5.3 18.8 9zM17 16.2l-5 2.7-5-2.7v-4l5 2.7 5-2.7v4z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="manuscript">
+
+    <h1 class="page-title">Open Challenges</h1>
+    <p class="page-subtitle">Competition entries and open benchmarking challenges – predicting gene perturbation effects, validating radiology AI, and pushing models against real-world data.</p>
+
+    <hr class="section-rule" />
+
+    <div class="challenges">
+
+      <!-- ============================================
+           CHALLENGE 1: Kaggle MedGemma Impact Challenge
+           ============================================ -->
+      <div class="challenge challenge--medgemma">
+        <div class="challenge-header" onclick="toggleChallenge(this)">
+          <div class="challenge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="11" r="4"/><path d="M12 7v4l2.5 1.5"/></svg>
+          </div>
+          <div class="challenge-header-text">
+            <div class="challenge-title">Kaggle MedGemma Impact Challenge <span class="status-badge status-badge--submitted"><span class="status-dot"></span>Submitted</span></div>
+            <div class="challenge-meta">CXR-Sentinel · Multi-Agent Adversarial Validation · Radiology AI Assurance</div>
+          </div>
+          <div class="challenge-toggle"></div>
+        </div>
+        <div class="challenge-body">
+          <div class="challenge-body-inner">
+
+            <div class="challenge-summary">
+              <div class="summary-label">The submission</div>
+              CXR-Sentinel: a multi-agent adversarial validation framework for radiology AI built on Google's MedGemma. Independent AI agents cross-validate chest X-ray interpretations, generate targeted perturbations to stress-test robustness, and escalate uncertain cases to human review. Submitted before the February 24, 2026 deadline.
+            </div>
+
+            <div class="challenge-tags">
+              <span class="challenge-tag">MedGemma</span>
+              <span class="challenge-tag">Multi-Agent</span>
+              <span class="challenge-tag">Adversarial Validation</span>
+              <span class="challenge-tag">Chest X-Ray</span>
+              <span class="challenge-tag">MIMIC-CXR</span>
+              <span class="challenge-tag">AI Assurance</span>
+            </div>
+
+            <img src="https://lh3.googleusercontent.com/4fXKkjSqlXUkjMi-NkOlufE4Z6CnXx4LKGP6Xr9aB_-F49uOOm6V5fGdZ1hIWg7BpqSMEDv3c4JCFyGqzK07TBE0tFk9PRXVHA=rw-e365-w1440" alt="MedGemma — Google Health AI" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);" />
+
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="result-value">73.8%</div>
+                <div class="result-label">Entity-Level Agreement</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">35%</div>
+                <div class="result-label">Escalation Rate</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">88.4%</div>
+                <div class="result-label">Perturbation Stability</div>
+              </div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">Architecture</div>
+              <div class="deep-text">A <strong>primary reader</strong> generates CXR interpretations via MedGemma, an <strong>adversarial challenger</strong> generates perturbations (rephrased clinical context, cropped regions, synthetic noise), and a <strong>sentinel judge</strong> evaluates cross-reading consistency. Cases below agreement threshold are escalated to human review. A counterintuitive finding: text-only analysis slightly outperformed multimodal – reframed as evidence that independent verification channels add assurance value.</div>
+            </div>
+
+            <a class="github-link" href="https://github.com/FranzuBaren/Open-Challenges/tree/main/Kaggle%20MedGemma%20Impact%20Challenge" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              View on GitHub
+            </a>
+
+            <div class="ref-tiers">
+              <div class="ref-tier">
+                <div class="ref-tier-label">📄 Paper</div>
+                <div class="ref-tags">
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/Open-Challenges/blob/main/Kaggle%20MedGemma%20Impact%20Challenge/CXR_Sentinel_Report.pdf" target="_blank">CXR-Sentinel Report (PDF)</a>
+                </div>
+              </div>
+              <div class="ref-tier">
+                <div class="ref-tier-label">Platform</div>
+                <div class="ref-tags">
+                  <a class="ref-tag" href="https://www.kaggle.com/competitions/medgemma-impact-challenge" target="_blank">Kaggle — MedGemma Impact Challenge</a>
+                  <a class="ref-tag" href="https://developers.google.com/health-ai-developer-foundations/medgemma" target="_blank">Google MedGemma</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           CHALLENGE 2: Obesity ML Competition (CrunchDAO / Broad Institute)
+           ============================================ -->
+      <div class="challenge challenge--obesity">
+        <div class="challenge-header" onclick="toggleChallenge(this)">
+          <div class="challenge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+          </div>
+          <div class="challenge-header-text">
+            <div class="challenge-title">Obesity ML Competition <span class="status-badge status-badge--active"><span class="status-dot"></span>Active</span></div>
+            <div class="challenge-meta">CrunchDAO · Broad Institute · Single-Cell Genomics · CRISPR Perturbation Prediction</div>
+          </div>
+          <div class="challenge-toggle"></div>
+        </div>
+        <div class="challenge-body">
+          <div class="challenge-body-inner">
+
+            <div class="challenge-summary">
+              <div class="summary-label">The challenge</div>
+              Predicting how CRISPR/Cas9 gene perturbations influence adipocyte cell fate – shifting fat cells between energy-storing and energy-burning states. Hosted by the Eric and Wendy Schmidt Center at the Broad Institute in collaboration with CrunchDAO. Top predictions will be experimentally validated in the lab. Running December 2025 – April 2026.
+            </div>
+
+            <div class="challenge-tags">
+              <span class="challenge-tag">Single-Cell RNA-seq</span>
+              <span class="challenge-tag">CRISPR/Cas9</span>
+              <span class="challenge-tag">Adipocyte Differentiation</span>
+              <span class="challenge-tag">Perturbation Prediction</span>
+              <span class="challenge-tag">AnnData / h5ad</span>
+              <span class="challenge-tag">CrunchDAO</span>
+            </div>
+
+            <img src="https://cdn.prod.website-files.com/65a26922ad93ff406e074755/690d0bac89a81e7b862c9206_Obesity%20ML%20Comp%202025%20smaller.jpg" alt="Obesity ML Competition — Broad Institute / CrunchDAO" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);" />
+
+            <div class="deep-section">
+              <div class="deep-heading">Crunch 1 — Held-Out Gene Perturbations</div>
+              <div class="deep-text">The first round focuses on predicting single-cell transcriptomic responses to single-gene perturbations not seen in training. The dataset contains perturbations targeting 157 genes (150 transcription factors), with single-cell expression profiles measured at day 14 of adipocyte differentiation. The task: given a held-out gene, predict the resulting expression profile distribution across cell programs.</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">Why It Matters</div>
+              <div class="deep-text">Obesity affects over 890 million people worldwide. Despite the success of GLP-1 agonists (Ozempic, Mounjaro), many patients don't respond or face side effects. Understanding the molecular switches that determine whether adipocytes store or burn energy could unlock entirely new therapeutic targets. This competition bridges computational prediction and wet-lab validation – the winning models will be tested experimentally at the Broad.</div>
+            </div>
+
+            <a class="github-link" href="https://github.com/FranzuBaren/Open-Challenges/tree/main/Obesity%20ML%20Competition/Crunch%201" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              View on GitHub
+            </a>
+
+            <div class="ref-tiers">
+              <div class="ref-tier">
+                <div class="ref-tier-label">Platform</div>
+                <div class="ref-tags">
+                  <a class="ref-tag ref-tag--highlight" href="https://hub.crunchdao.com/competitions/broad-obesity-1" target="_blank">CrunchDAO — Obesity ML Crunch 1</a>
+                  <a class="ref-tag" href="https://www.ericandwendyschmidtcenter.org/ml-competitions/obesity-ml-competition" target="_blank">Broad Institute — Competition Overview</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <hr class="footer-rule" />
+    <div class="footer-inner">
+      <span class="footer-text">© 2026 Francesco Orsi, PhD</span>
+      <span class="footer-text">Built with care</span>
+    </div>
+  </footer>
+
+  <script>
+    function toggleChallenge(header) {
+      const card = header.closest('.challenge');
+      const wasOpen = card.classList.contains('is-open');
+      document.querySelectorAll('.challenge.is-open').forEach(c => c.classList.remove('is-open'));
+      if (!wasOpen) card.classList.add('is-open');
+    }
+  </script>
+
+</body>
+</html>
