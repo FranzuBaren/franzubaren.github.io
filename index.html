@@ -1667,8 +1667,13 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     function toggleCard(header) {
       const card = header.closest('.scorecard');
       const wasOpen = card.classList.contains('is-open');
-      document.querySelect
+      document.querySelectorAll('.scorecard.is-open').forEach(c => c.classList.remove('is-open'));
+      if (!wasOpen) card.classList.add('is-open');
+    }
+  </script>
+</body>
+</html>
