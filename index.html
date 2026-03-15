@@ -462,7 +462,7 @@
   }
 
   .scorecard.is-open .scorecard-body {
-    max-height: 5000px;
+    max-height: 12000px;
     opacity: 1;
   }
 
@@ -1671,9 +1671,14 @@
     function toggleCard(header) {
       const card = header.closest('.scorecard');
       const wasOpen = card.classList.contains('is-open');
-      document.querySelectorAll('.scorecard.is-open').forEach(c => c.classList.remove('is-open'));
+      document.querySelectorAll('.scorecard.is-open').forEach(function(c) { c.classList.remove('is-open'); });
       if (!wasOpen) card.classList.add('is-open');
     }
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.scorecard-header').forEach(function(header) {
+        header.addEventListener('click', function() { toggleCard(this); });
+      });
+    });
   </script>
 </body>
 </html>
