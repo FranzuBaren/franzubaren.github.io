@@ -116,6 +116,7 @@
   @media(max-width:768px){.header-top{flex-direction:column;gap:0.75rem}.page-title{font-size:32px}.challenge-header{padding:1rem 1.25rem 1rem 1.5rem;gap:1rem}.challenge-title{font-size:20px}.challenge-body-inner{padding:0 1.25rem 1.5rem 1.5rem}.results-grid{grid-template-columns:1fr}}
   @media(max-width:480px){.header{padding:1.5rem 1.25rem 0}.manuscript{padding:2rem 1.25rem}.page-title{font-size:28px}.challenge-title{font-size:18px}.results-grid{grid-template-columns:1fr 1fr}}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" async></script>
 </head>
 <body>
 
@@ -191,6 +192,42 @@
               <span class="challenge-tag">MIMIC-CXR</span>
               <span class="challenge-tag">AI Assurance</span>
             </div>
+
+            <img src="https://cdn-thumbnails.huggingface.co/social-thumbnails/models/google/medgemma-4b-it.png" alt="MedGemma 4B — Google Health AI Foundation Model" style="width:100%;border-radius:4px;margin:0 0 1.25rem;border:0.5px solid var(--rule);box-shadow:0 2px 16px rgba(0,0,0,0.04);" />
+
+            <div style="background:rgba(26,92,46,0.03);border:0.5px solid var(--rule);border-radius:4px;padding:1.2rem 1.5rem;margin:0 0 1.25rem;overflow-x:auto;">
+              <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-ghost);margin-bottom:0.6rem;">Key Metric — RadGraph Entity Agreement</div>
+              <div style="font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.8;">$$\mathrm{DCR} = \frac{|\mathcal{E}_{\text{primary}} \cap \mathcal{E}_{\text{challenger}}|}{|\mathcal{E}_{\text{primary}} \cup \mathcal{E}_{\text{challenger}}|}$$</div>
+              <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Diagnostic Concordance Rate — Jaccard similarity of RadGraph entities extracted from independent agent readings. Text-only DCR = 74.6% vs. multimodal DCR = 73.8%.</div>
+            </div>
+
+            <div class="deep-section">
+              <div class="deep-heading">Architecture</div>
+              <div class="deep-text">A <strong>primary reader</strong> generates CXR interpretations via MedGemma, an <strong>adversarial challenger</strong> generates perturbations (rephrased clinical context, cropped regions, synthetic noise), and a <strong>sentinel judge</strong> evaluates cross-reading consistency. Cases below agreement threshold are escalated to human review. A counterintuitive finding: text-only analysis slightly outperformed multimodal — reframed as evidence that independent verification channels add assurance value.</div>
+            </div>
+
+            <a class="github-link" href="https://github.com/FranzuBaren/Open-Challenges/tree/main/Kaggle%20MedGemma%20Impact%20Challenge" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              View on GitHub
+            </a>
+
+            <div class="ref-tiers">
+              <div class="ref-tier">
+                <div class="ref-tier-label">📄 Paper</div>
+                <div class="ref-tags">
+                  <a class="ref-tag ref-tag--highlight" href="https://github.com/FranzuBaren/Open-Challenges/blob/main/Kaggle%20MedGemma%20Impact%20Challenge/docs/CXR-Sentinel_Technical_Overview.pdf" target="_blank">CXR-Sentinel Technical Overview (PDF)</a>
+                </div>
+              </div>
+              <div class="ref-tier">
+                <div class="ref-tier-label">Platform</div>
+                <div class="ref-tags">
+                  <a class="ref-tag" href="https://www.kaggle.com/competitions/medgemma-impact-challenge" target="_blank">Kaggle — MedGemma Impact Challenge</a>
+                  <a class="ref-tag" href="https://developers.google.com/health-ai-developer-foundations/medgemma" target="_blank">Google MedGemma</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -225,7 +262,15 @@
               <span class="challenge-tag">CrunchDAO</span>
             </div>
 
-            <img src="https://cdn.prod.website-files.com/65a26922ad93ff406e074755/690d0bac89a81e7b862c9206_Obesity%20ML%20Comp%202025%20smaller.jpg" alt="Obesity ML Competition — Broad Institute / CrunchDAO" style="width:100%;border-radius:3px;margin:0 0 1.5rem;border:0.5px solid var(--rule);box-shadow:0 2px 12px rgba(0,0,0,0.04);" />
+            <img src="https://cdn.prod.website-files.com/65a26922ad93ff406e074755/690d0bac89a81e7b862c9206_Obesity%20ML%20Comp%202025%20smaller.jpg" alt="Obesity ML Competition — Broad Institute / CrunchDAO" style="width:100%;border-radius:4px;margin:0 0 1.25rem;border:0.5px solid var(--rule);box-shadow:0 2px 16px rgba(0,0,0,0.04);" />
+
+            <div style="background:rgba(168,124,30,0.03);border:0.5px solid var(--rule);border-radius:4px;padding:1.2rem 1.5rem;margin:0 0 1.25rem;overflow-x:auto;">
+              <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-ghost);margin-bottom:0.6rem;">Perturbation Prediction Objective</div>
+              <div style="font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.8;">$$\hat{p}_g = f_\theta\!\left(X_{\text{train}},\, g\right) \in \Delta^{K-1}$$</div>
+              <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Predict the program proportion vector for a held-out gene perturbation g, where K is the number of cell programs and Δ is the probability simplex.</div>
+              <div style="font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.8;margin-top:0.6rem;">$$\mathcal{L} = D_{\mathrm{KL}}\!\left(\hat{p}_g \,\|\, p_g^*\right) + \lambda\, \mathrm{MMD}^2\!\left(\hat{X}_g,\, X_g^*\right)$$</div>
+              <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Combined loss: KL divergence on program proportions + Maximum Mean Discrepancy on expression distributions.</div>
+            </div>
 
             <div class="deep-section">
               <div class="deep-heading">Crunch 1 — Held-Out Gene Perturbations</div>

@@ -549,6 +549,7 @@
     .results-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" async></script>
 </head>
 <body>
 
@@ -637,9 +638,9 @@
 
             <div class="formula-box">
               <div class="formula-label">Key Equations</div>
-              <div class="formula">TQS<sub>k</sub> = W<sub>1</sub>( PD<sub>k</sub>(X<sub>nat</sub>), PD<sub>k</sub>(X<sub>pred</sub>) )</div>
-              <div class="formula-note">1-Wasserstein distance between dimension-k persistence diagrams. TQS₁ (loops) is the most informative for RNA.</div>
-              <div class="formula" style="margin-top:0.8rem;">TCI(X) = ∫<sub>0</sub><sup>r<sub>max</sub></sup> β<sub>1</sub>( VR(X, r) ) dr</div>
+              <div class="formula">$$\mathrm{TQS}_k = W_1\!\left(\mathrm{PD}_k(X_{\text{nat}}),\, \mathrm{PD}_k(X_{\text{pred}})\right)$$</div>
+              <div class="formula-note">1-Wasserstein (earth mover's) distance between dimension-k persistence diagrams. TQS₁ (loops) is the most informative for RNA.</div>
+              <div class="formula">$$\mathrm{TCI}(X) = \int_0^{r_{\max}} \beta_1\!\left(\mathrm{VR}(X, r)\right) \, dr$$</div>
               <div class="formula-note">Topological Complexity Index — integral of the first Betti number across the Vietoris–Rips filtration.</div>
             </div>
 
@@ -722,11 +723,11 @@
 
             <div class="formula-box">
               <div class="formula-label">Hebbian Synaptic Update</div>
-              <div class="formula">q = k = ReLU(W<sub>qk</sub> · x<sup>(t)</sup>)</div>
-              <div class="formula" style="margin-top:0.5rem;">σ<sup>(t+1)</sup> = (1 − λ) σ<sup>(t)</sup> + q ⊗ k<sup>⊤</sup></div>
-              <div class="formula-note">Q=K sharing makes σ PSD rank-1 — a Hebbian rule. The synaptic state achieves cosine similarity 0.901 with the empirical co-activation matrix (17× stronger than Linear Attention).</div>
-              <div class="formula" style="margin-top:0.8rem;">y<sup>(t)</sup> = Σ<sub>τ&lt;t</sub> (1−λ)<sup>t−τ</sup> q<sub>τ</sub> (q<sub>τ</sub><sup>⊤</sup> k<sub>t</sub>)</div>
-              <div class="formula-note">Unrolled kernel form — attention weights emerge from exponentially decayed Hebbian traces, not explicit softmax computation.</div>
+              <div class="formula">$$q = k = \mathrm{ReLU}(W_{qk} \cdot x^{(t)})$$</div>
+              <div class="formula">$$\sigma^{(t+1)} = (1-\lambda)\,\sigma^{(t)} + q \otimes k^\top$$</div>
+              <div class="formula-note">Q=K sharing makes σ PSD rank-1 — a Hebbian rule. Cosine similarity 0.901 with empirical co-activation matrix (17× stronger than Linear Attention).</div>
+              <div class="formula">$$y^{(t)} = \sum_{\tau < t} (1-\lambda)^{t-\tau}\, q_\tau \left(q_\tau^\top k_t\right)$$</div>
+              <div class="formula-note">Unrolled kernel form — attention weights emerge from exponentially decayed Hebbian traces, not explicit softmax.</div>
             </div>
 
             <img class="project-figure" src="https://raw.githubusercontent.com/pathwaycom/bdh/main/figs/architecture.png" alt="BDH Architecture — Pathway" />
@@ -805,10 +806,10 @@
 
             <div class="formula-box">
               <div class="formula-label">Beta-Binomial Conjugate Update</div>
-              <div class="formula">π(θ | data) = Beta(α + failures, β + (n − failures))</div>
-              <div class="formula-note">Prior belief Beta(α, β) updates to posterior after observing n controls with k failures. No MCMC required — closed-form conjugate update.</div>
-              <div class="formula" style="margin-top:0.8rem;">H(θ) = −∫ p(θ) log p(θ) dθ</div>
-              <div class="formula-note">Shannon entropy of the posterior — rising entropy signals increasing uncertainty about control effectiveness. Crosses warning threshold ~114 days before traditional quarterly audit detects the same deterioration.</div>
+              <div class="formula">$$\pi(\theta \mid \text{data}) = \mathrm{Beta}\!\left(\alpha + k,\; \beta + (n - k)\right)$$</div>
+              <div class="formula-note">Prior belief Beta(α, β) updates to posterior after observing n controls with k failures. Closed-form conjugate update — no MCMC required.</div>
+              <div class="formula">$$H(\theta) = -\int p(\theta) \log p(\theta)\, d\theta$$</div>
+              <div class="formula-note">Shannon entropy of the posterior. Rising entropy = increasing uncertainty about control effectiveness. Crosses warning threshold ~114 days before traditional quarterly audit.</div>
             </div>
 
             <img class="project-figure" src="https://raw.githubusercontent.com/FranzuBaren/Audit-Risk/main/Bayesian%20Governance/images/bayesian_vs_checklist.png" alt="Continuous Bayesian monitoring vs traditional quarterly audits" />
@@ -896,9 +897,9 @@
 
             <div class="formula-box">
               <div class="formula-label">Fisher's Exact Test (Safety Signal Detection)</div>
-              <div class="formula">p<sub>j</sub> = Σ<sub>k≥a<sub>j</sub></sub> C(a<sub>j</sub>+b<sub>j</sub>, k) · C(c<sub>j</sub>+d<sub>j</sub>, n₁−k) / C(N, n₁)</div>
-              <div class="formula-note">Exact p-value for the 2×2 contingency table (Drug × AE). Used to generate the volcano plot flagging disproportionate adverse events.</div>
-              <div class="formula" style="margin-top:0.8rem;">Ŝ(t) = ∏<sub>t<sub>k</sub>≤t</sub> (1 − d<sub>k</sub> / n<sub>k</sub>)</div>
+              <div class="formula">$$p_j = \sum_{k \geq a_j} \frac{\binom{a_j + b_j}{k}\,\binom{c_j + d_j}{n_1 - k}}{\binom{N}{n_1}}$$</div>
+              <div class="formula-note">Fisher's exact test p-value for the 2×2 contingency table (Drug × AE). Drives the volcano plot flagging disproportionate adverse events.</div>
+              <div class="formula">$$\hat{S}(t) = \prod_{t_k \leq t}\left(1 - \frac{d_k}{n_k}\right)$$</div>
               <div class="formula-note">Kaplan-Meier survival estimator — time-to-first-SAE analysis stratified by treatment arm.</div>
             </div>
 
