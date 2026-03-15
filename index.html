@@ -738,6 +738,8 @@
     .avatar-initials { font-size: 26px; }
   }
 </style>
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["$$","$$"]]}}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" async></script>
 </head>
 <body>
 
@@ -916,13 +918,23 @@
 
                   <g font-family="'Newsreader',serif" font-size="10" fill="#4a3a2e">
                     <text x="370" y="78" font-style="italic">Objective:</text>
-                    <text x="370" y="95" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#8b2500">min |𝒮| s.t. ∪𝒮 ⊇ 𝒰</text>
-                    <text x="370" y="120" font-style="italic">Dynamic extension:</text>
-                    <text x="370" y="137" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8b2500">η(t) = η₀ · exp(−λt)</text>
-                    <text x="370" y="155" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#888">control effectiveness decays</text>
-                    <text x="370" y="175" font-style="italic">Probabilistic coverage:</text>
-                    <text x="370" y="192" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8b2500">P(∪𝒮(t) ⊇ 𝒰) ≥ 1 − δ</text>
                   </g>
+                  <foreignObject x="365" y="82" width="225" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:14px;color:#8b2500;">$$\min |\mathcal{S}| \;\;\text{s.t.}\;\; \bigcup \mathcal{S} \supseteq \mathcal{U}$$</div>
+                  </foreignObject>
+                  <g font-family="'Newsreader',serif" font-size="10" fill="#4a3a2e">
+                    <text x="370" y="128" font-style="italic">Dynamic extension:</text>
+                  </g>
+                  <foreignObject x="365" y="132" width="225" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:14px;color:#8b2500;">$$\eta(t) = \eta_0 \cdot e^{-\lambda t}$$</div>
+                  </foreignObject>
+                  <text x="370" y="170" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#888">control effectiveness decays</text>
+                  <g font-family="'Newsreader',serif" font-size="10" fill="#4a3a2e">
+                    <text x="370" y="185" font-style="italic">Probabilistic coverage:</text>
+                  </g>
+                  <foreignObject x="365" y="188" width="225" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:14px;color:#8b2500;">$$\mathbb{P}\!\left(\bigcup \mathcal{S}(t) \supseteq \mathcal{U}\right) \geq 1 - \delta$$</div>
+                  </foreignObject>
 
                   <!-- Bottom caption -->
                   <text x="310" y="215" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">Each control covers a risk subset – the optimal audit plan is the minimum cover that holds over time</text>
@@ -931,6 +943,14 @@
                 <div class="deep-section">
                   <div class="deep-heading">From Checklists to Topology</div>
                   <div class="deep-text">My approach treats the audit universe as a <em>set-cover problem</em>: each control mitigates a subset of risks, and the optimal audit plan is the minimum collection of controls that covers the full risk space. I model control effectiveness as a decaying exponential – controls erode over time through organizational drift, software updates, and personnel changes. When a control drops below a threshold θ, its risk set becomes uncovered, potentially triggering cascading exposures in downstream controls. This transforms audit planning from a static exercise into a dynamic optimization problem with deep connections to <a href="https://arxiv.org/abs/1709.05254" target="_blank">anomaly detection in financial records</a>, <a href="https://arxiv.org/abs/0904.1067" target="_blank">Bayesian operational risk modeling</a>, and percolation theory from statistical physics. I'm developing this framework in a <a href="https://kunskap.substack.com" target="_blank">Substack series on AI governance</a> and the open-source <em>auditcover</em> package.</div>
+                </div>
+
+                <div style="background:rgba(139,37,0,0.02);border:0.5px solid var(--rule);border-radius:4px;padding:1.2rem 1.5rem;margin:0 0 1.5rem;overflow-x:auto;">
+                  <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-ghost);margin-bottom:0.6rem;">Core Formulation</div>
+                  <div style="font-size:15px;color:var(--ink);line-height:2;">$$\min_{S \subseteq \mathcal{C}} |S| \quad \text{s.t.} \quad \bigcup_{c \in S} R(c) \supseteq \mathcal{U}, \quad \eta_c(t) = \eta_{c,0}\, e^{-\lambda_c t} \geq \theta \;\;\forall\, c \in S$$</div>
+                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Minimum set of controls S covering the full risk universe 𝒰, subject to each control's effectiveness remaining above threshold θ over time.</div>
+                  <div style="font-size:15px;color:var(--ink);line-height:2;margin-top:0.6rem;">$$\mathbb{P}\!\left(\bigcup_{c \in S} R_c(t) \supseteq \mathcal{U}\right) \geq 1 - \delta \quad \Longleftrightarrow \quad \text{Bayesian credible coverage}$$</div>
+                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Probabilistic extension: the audit plan must maintain coverage with confidence 1−δ, using Beta-Binomial posteriors on control effectiveness.</div>
                 </div>
 
                 <div class="deep-section">
@@ -1162,7 +1182,9 @@
                   </g>
 
                   <!-- Bottom formulas -->
-                  <text x="310" y="322" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#1a3a4a">X → VR(X, ε) → { Hₖ(ε) }ₖ₌₀,₁,… → Dgmₖ(X) → sparse SNN input</text>
+                  <foreignObject x="60" y="305" width="500" height="35">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:13px;color:#1a3a4a;text-align:center;">$$X \to \mathrm{VR}(X,\varepsilon) \to \{H_k(\varepsilon)\}_{k=0,1,\ldots} \to \mathrm{Dgm}_k(X) \to \text{sparse SNN input}$$</div>
+                  </foreignObject>
                   <text x="310" y="340" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">Topologically-guided spiking architectures: attend only to geometrically significant features</text>
                   <text x="310" y="358" text-anchor="middle" font-family="'Newsreader',serif" font-size="8.5" fill="#888" font-style="italic">Stability Theorem (Cohen-Steiner, Edelsbrunner, Harer 2007) guarantees robustness under noise</text>
                   <text x="310" y="373" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#2d6a7e" opacity="0.5">Applications: FAERS safety signals · patient subpopulation detection · control drift measurement</text>
@@ -1176,6 +1198,14 @@
                 <div class="deep-section">
                   <div class="deep-heading">Geometric Data Science – Applied</div>
                   <div class="deep-text">Concretely, I apply persistent homology to FDA adverse event data for topological safety signal detection – persistent 1-cycles in the co-occurrence graph of adverse events identify drug-reaction clusters invisible to frequency-based methods. I use <a href="https://arxiv.org/abs/0810.3015" target="_blank">Ollivier-Ricci curvature</a> on control networks to find structurally fragile audit pathways (negative curvature = bottleneck). And I frame data integration across clinical systems as a <a href="https://arxiv.org/abs/1303.3255" target="_blank">sheaf-theoretic consistency</a> problem where local-to-global obstructions reveal systemic data quality failures that no row-level validation can catch. The broader vision: <a href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">information geometry</a> (Fisher-Rao manifolds of probability distributions) as a natural language for measuring control drift, model divergence, and data quality degradation over time.</div>
+                </div>
+
+                <div style="background:rgba(26,58,74,0.02);border:0.5px solid var(--rule);border-radius:4px;padding:1.2rem 1.5rem;margin:0 0 1.5rem;overflow-x:auto;">
+                  <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-ghost);margin-bottom:0.6rem;">Key Mathematical Tools</div>
+                  <div style="font-size:15px;color:var(--ink);line-height:2;">$$\beta_k(\varepsilon) = \mathrm{rank}\, H_k\!\left(\mathrm{VR}(X,\varepsilon);\, \mathbb{F}\right), \quad d_B\!\left(\mathrm{Dgm}(f), \mathrm{Dgm}(g)\right) \leq \|f - g\|_\infty$$</div>
+                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Betti numbers count k-dimensional holes at scale ε. The Stability Theorem guarantees that small perturbations in the input produce small perturbations in persistence diagrams.</div>
+                  <div style="font-size:15px;color:var(--ink);line-height:2;margin-top:0.6rem;">$$\kappa(x,y) = 1 - \frac{W_1(m_x, m_y)}{d(x,y)}, \quad \quad ds^2_{\mathrm{FR}} = g_{ij}\, d\theta^i\, d\theta^j = E_\theta\!\left[\partial_i \log p \;\partial_j \log p\right] d\theta^i d\theta^j$$</div>
+                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Ollivier-Ricci curvature κ detects structural bottlenecks (κ < 0) in control networks. The Fisher-Rao metric on probability distributions measures natural distance between statistical models — the right geometry for tracking model drift.</div>
                 </div>
 
                 <div class="deep-section">
@@ -1253,6 +1283,14 @@
                 <div class="deep-section">
                   <div class="deep-heading">From Structure to Treatment: Drug Repurposing</div>
                   <div class="deep-text">The convergence of structural biology and pharmacogenomics opens a powerful axis: take a patient's genetic variant, predict the mutant protein structure, and screen existing FDA-approved drugs for repurposing opportunities. Boltz-2 predicts both structure and binding affinity (r ≈ 0.66 on the FEP+ benchmark – approaching physics-based simulation accuracy at 1,000× the speed), making virtual repurposing screens feasible at scale. Combined with topological data analysis to map drug-reaction clusters in adverse event data, this creates a feedback loop: population-level safety signals inform individual-level treatment hypotheses, and vice versa.</div>
+                </div>
+
+                <div style="background:rgba(44,74,46,0.02);border:0.5px solid var(--rule);border-radius:4px;padding:1.2rem 1.5rem;margin:0 0 1.5rem;overflow-x:auto;">
+                  <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-ghost);margin-bottom:0.6rem;">Computational Drug Repurposing Pipeline</div>
+                  <div style="font-size:15px;color:var(--ink);line-height:2;">$$\text{SNP}_i \;\xrightarrow{\text{Boltz-2}}\; \mathcal{S}_{\text{mut}} \;\xrightarrow{\Delta\Delta G}\; \text{rank}(\text{FDA library}) \;\xrightarrow{\text{TDA filter}}\; \text{candidates}$$</div>
+                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Variant → mutant structure → binding affinity screen → topological adverse-event filter → repurposing candidates.</div>
+                  <div style="font-size:15px;color:var(--ink);line-height:2;margin-top:0.6rem;">$$\hat{S}(t) = \prod_{t_k \leq t}\left(1 - \frac{d_k}{n_k}\right), \quad \text{RR}_j = \frac{a_j / (a_j + c_j)}{b_j / (b_j + d_j)}$$</div>
+                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Kaplan-Meier survival analysis for safety signal timing. Risk Ratio for disproportionality analysis of adverse events across treatment arms.</div>
                 </div>
 
                 <div class="deep-section">
