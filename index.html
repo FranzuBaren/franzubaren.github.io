@@ -880,115 +880,99 @@
 
                 <!-- Inline SVG: Audit-as-Set-Cover conceptual diagram -->
                 <div style="width:100%;margin:1.5rem auto;border:0.5px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--paper);box-shadow:0 2px 16px rgba(0,0,0,0.04);">
-                <svg viewBox="0 0 760 480" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 720 380" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <marker id="arr1" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto"><polygon points="0 0, 8 2.5, 0 5" fill="#c4522a" opacity="0.6"/></marker>
                     <marker id="arr1b" markerWidth="7" markerHeight="4" refX="7" refY="2" orient="auto"><polygon points="0 0, 7 2, 0 4" fill="#8b2500" opacity="0.4"/></marker>
                     <filter id="sc1-shadow"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/></filter>
                   </defs>
 
-                  <!-- Title bar -->
-                  <text x="380" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#8b2500" letter-spacing="2.5" font-weight="500">AUDIT AS SET COVER — THE FRAMEWORK</text>
-                  <line x1="120" y1="40" x2="640" y2="40" stroke="#d4cfc6" stroke-width="0.5"/>
+                  <!-- Title -->
+                  <text x="360" y="26" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#8b2500" letter-spacing="2.5" font-weight="500">AUDIT AS SET COVER</text>
+                  <line x1="140" y1="36" x2="580" y2="36" stroke="#d4cfc6" stroke-width="0.5"/>
 
-                  <!-- ===== LEFT PANEL: Risk Universe ===== -->
-                  <rect x="30" y="58" width="340" height="310" rx="5" fill="#faf5ef" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
-                  <text x="200" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888" letter-spacing="2">RISK UNIVERSE  𝒰</text>
+                  <!-- ===== LEFT: Risk Universe ===== -->
+                  <rect x="28" y="50" width="310" height="260" rx="5" fill="#faf5ef" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                  <text x="183" y="70" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888" letter-spacing="2">RISK UNIVERSE  𝒰</text>
 
-                  <!-- Risk items — 3×3 grid, generous spacing -->
+                  <!-- Risk items — 3×3 grid -->
                   <g font-family="'IBM Plex Mono',monospace" font-size="9" fill="#555">
-                    <rect x="55" y="100" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
-                    <text x="95" y="121" text-anchor="middle" font-weight="500">R₁ data</text>
+                    <rect x="48" y="86" width="78" height="32" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="87" y="106" text-anchor="middle" font-weight="500">R₁ data</text>
+                    <rect x="140" y="86" width="78" height="32" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="179" y="106" text-anchor="middle" font-weight="500">R₂ model</text>
+                    <rect x="232" y="86" width="78" height="32" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="271" y="106" text-anchor="middle" font-weight="500">R₃ deploy</text>
 
-                    <rect x="155" y="100" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
-                    <text x="195" y="121" text-anchor="middle" font-weight="500">R₂ model</text>
+                    <rect x="48" y="132" width="78" height="32" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="87" y="152" text-anchor="middle" font-weight="500">R₄ access</text>
+                    <rect x="140" y="132" width="78" height="32" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="179" y="152" text-anchor="middle" font-weight="500">R₅ drift</text>
+                    <rect x="232" y="132" width="78" height="32" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="271" y="152" text-anchor="middle" font-weight="500">R₆ audit</text>
 
-                    <rect x="255" y="100" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
-                    <text x="295" y="121" text-anchor="middle" font-weight="500">R₃ deploy</text>
-
-                    <rect x="55" y="152" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
-                    <text x="95" y="173" text-anchor="middle" font-weight="500">R₄ access</text>
-
-                    <rect x="155" y="152" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
-                    <text x="195" y="173" text-anchor="middle" font-weight="500">R₅ drift</text>
-
-                    <rect x="255" y="152" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
-                    <text x="295" y="173" text-anchor="middle" font-weight="500">R₆ audit</text>
-
-                    <rect x="105" y="204" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
-                    <text x="145" y="225" text-anchor="middle" font-weight="500">R₇ bias</text>
-
-                    <rect x="205" y="204" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
-                    <text x="245" y="225" text-anchor="middle" font-weight="500">R₈ PV</text>
+                    <rect x="94" y="178" width="78" height="32" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="133" y="198" text-anchor="middle" font-weight="500">R₇ bias</text>
+                    <rect x="186" y="178" width="78" height="32" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="225" y="198" text-anchor="middle" font-weight="500">R₈ PV</text>
                   </g>
 
                   <!-- Control coverage ellipses -->
-                  <ellipse cx="150" cy="160" rx="120" ry="80" fill="rgba(139,37,0,0.03)" stroke="#8b2500" stroke-width="1.2" stroke-dasharray="6,4" opacity="0.5"/>
-                  <text x="58" y="266" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#8b2500" opacity="0.8" font-weight="500">C₁ validation</text>
+                  <ellipse cx="140" cy="145" rx="112" ry="72" fill="rgba(139,37,0,0.025)" stroke="#8b2500" stroke-width="1.1" stroke-dasharray="6,4" opacity="0.45"/>
+                  <text x="48" y="238" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#8b2500" opacity="0.7" font-weight="500">C₁ validation</text>
 
-                  <ellipse cx="255" cy="165" rx="105" ry="72" fill="rgba(196,82,42,0.02)" stroke="#c4522a" stroke-width="1.2" stroke-dasharray="6,4" opacity="0.4"/>
-                  <text x="285" y="266" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#c4522a" opacity="0.7" font-weight="500">C₂ monitoring</text>
+                  <ellipse cx="235" cy="148" rx="98" ry="65" fill="rgba(196,82,42,0.015)" stroke="#c4522a" stroke-width="1.1" stroke-dasharray="6,4" opacity="0.35"/>
+                  <text x="254" y="238" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#c4522a" opacity="0.6" font-weight="500">C₂ monitoring</text>
 
-                  <ellipse cx="200" cy="215" rx="85" ry="40" fill="rgba(212,138,106,0.02)" stroke="#d48a6a" stroke-width="1.1" stroke-dasharray="5,4" opacity="0.35"/>
-                  <text x="160" y="290" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#d48a6a" opacity="0.7" font-weight="500">C₃ fairness</text>
+                  <ellipse cx="185" cy="192" rx="78" ry="34" fill="rgba(212,138,106,0.015)" stroke="#d48a6a" stroke-width="1" stroke-dasharray="5,4" opacity="0.3"/>
+                  <text x="150" y="256" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#d48a6a" opacity="0.6" font-weight="500">C₃ fairness</text>
 
-                  <!-- Uncovered gap indicator -->
-                  <rect x="264" y="210" width="64" height="24" rx="3" fill="none" stroke="#c4522a" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.5"/>
-                  <text x="296" y="224" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#c4522a" opacity="0.7">gap?</text>
+                  <!-- Cascade arrows -->
+                  <path d="M 125,118 L 175,130" stroke="#8b2500" stroke-width="0.6" opacity="0.2" marker-end="url(#arr1b)" fill="none"/>
+                  <path d="M 215,118 L 265,130" stroke="#8b2500" stroke-width="0.6" opacity="0.2" marker-end="url(#arr1b)" fill="none"/>
 
-                  <!-- Cascade arrows inside risk universe -->
-                  <path d="M 135,135 L 190,150" stroke="#8b2500" stroke-width="0.6" opacity="0.2" marker-end="url(#arr1b)" fill="none"/>
-                  <path d="M 235,135 L 290,150" stroke="#8b2500" stroke-width="0.6" opacity="0.2" marker-end="url(#arr1b)" fill="none"/>
-                  <path d="M 195,187 L 195,203" stroke="#8b2500" stroke-width="0.6" opacity="0.15" marker-end="url(#arr1b)" fill="none"/>
-
-                  <!-- Legend row -->
-                  <g transform="translate(55, 330)">
-                    <circle cx="0" cy="0" r="4" fill="#8b2500" opacity="0.5"/>
-                    <text x="10" y="3.5" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">covered</text>
-                    <circle cx="80" cy="0" r="4" fill="none" stroke="#c4522a" stroke-width="1.2" stroke-dasharray="2,1.5" opacity="0.6"/>
-                    <text x="90" y="3.5" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">at risk</text>
-                    <line x1="155" y1="-3" x2="172" y2="3" stroke="#8b2500" stroke-width="0.7" opacity="0.3" marker-end="url(#arr1b)"/>
-                    <text x="180" y="3.5" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">cascade</text>
+                  <!-- Legend -->
+                  <g transform="translate(48, 285)">
+                    <circle cx="0" cy="0" r="3.5" fill="#8b2500" opacity="0.5"/>
+                    <text x="9" y="3" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#888">covered</text>
+                    <circle cx="72" cy="0" r="3.5" fill="none" stroke="#c4522a" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.5"/>
+                    <text x="81" y="3" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#888">at risk</text>
+                    <line x1="138" y1="-2" x2="152" y2="2" stroke="#8b2500" stroke-width="0.7" opacity="0.3" marker-end="url(#arr1b)"/>
+                    <text x="160" y="3" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#888">cascade</text>
                   </g>
 
-                  <!-- ===== ARROW BETWEEN PANELS ===== -->
-                  <line x1="380" y1="210" x2="408" y2="210" stroke="#c4522a" stroke-width="1.2" opacity="0.5" marker-end="url(#arr1)"/>
-                  <text x="395" y="228" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#c4522a" opacity="0.5">optimize</text>
+                  <!-- ===== ARROW ===== -->
+                  <line x1="348" y1="180" x2="376" y2="180" stroke="#c4522a" stroke-width="1.2" opacity="0.5" marker-end="url(#arr1)"/>
+                  <text x="363" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#c4522a" opacity="0.5">optimize</text>
 
-                  <!-- ===== RIGHT PANEL: Optimization ===== -->
-                  <rect x="418" y="58" width="312" height="310" rx="5" fill="rgba(139,37,0,0.015)" stroke="#c4522a" stroke-width="0.4" filter="url(#sc1-shadow)"/>
-                  <text x="574" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8b2500" letter-spacing="2" font-weight="500">OPTIMIZATION PROBLEM</text>
+                  <!-- ===== RIGHT: Optimization (plain text, no MathJax) ===== -->
+                  <rect x="386" y="50" width="306" height="260" rx="5" fill="rgba(139,37,0,0.012)" stroke="#c4522a" stroke-width="0.35" filter="url(#sc1-shadow)"/>
+                  <text x="539" y="70" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8b2500" letter-spacing="2" font-weight="500">OPTIMIZATION</text>
 
                   <!-- Objective -->
-                  <text x="445" y="112" font-family="'Newsreader',serif" font-size="13" fill="#4a3a2e" font-style="italic">Objective</text>
-                  <line x1="445" y1="117" x2="700" y2="117" stroke="#d4cfc6" stroke-width="0.4"/>
-                  <foreignObject x="440" y="124" width="280" height="40">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;color:#8b2500;line-height:1.6;">$$\min_{S \subseteq \mathcal{C}} |S| \;\;\text{s.t.}\;\; \bigcup_{c \in S} R(c) \supseteq \mathcal{U}$$</div>
-                  </foreignObject>
+                  <text x="410" y="100" font-family="'Newsreader',serif" font-size="12" fill="#4a3a2e" font-style="italic">Objective</text>
+                  <line x1="410" y1="105" x2="670" y2="105" stroke="#d4cfc6" stroke-width="0.3"/>
+                  <text x="410" y="130" font-family="'Newsreader',serif" font-size="13" fill="#8b2500">min |S|  s.t.  ∪ R(c) ⊇ 𝒰</text>
+                  <text x="410" y="148" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">fewest controls covering all risks</text>
 
-                  <!-- Dynamic extension -->
-                  <text x="445" y="186" font-family="'Newsreader',serif" font-size="13" fill="#4a3a2e" font-style="italic">Temporal decay</text>
-                  <line x1="445" y1="191" x2="700" y2="191" stroke="#d4cfc6" stroke-width="0.4"/>
-                  <foreignObject x="440" y="198" width="280" height="40">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;color:#8b2500;line-height:1.6;">$$\eta_c(t) = \eta_{c,0} \cdot e^{-\lambda_c\, t} \geq \theta$$</div>
-                  </foreignObject>
-                  <text x="445" y="248" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">control effectiveness decays — reaudit when η &lt; θ</text>
+                  <!-- Decay -->
+                  <text x="410" y="178" font-family="'Newsreader',serif" font-size="12" fill="#4a3a2e" font-style="italic">Temporal decay</text>
+                  <line x1="410" y1="183" x2="670" y2="183" stroke="#d4cfc6" stroke-width="0.3"/>
+                  <text x="410" y="208" font-family="'Newsreader',serif" font-size="13" fill="#8b2500">η(t) = η₀ · e</text>
+                  <text x="519" y="201" font-family="'Newsreader',serif" font-size="9" fill="#8b2500">−λt</text>
+                  <text x="545" y="208" font-family="'Newsreader',serif" font-size="13" fill="#8b2500"> ≥ θ</text>
+                  <text x="410" y="226" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">controls erode — reaudit when η drops below θ</text>
 
-                  <!-- Probabilistic coverage -->
-                  <text x="445" y="278" font-family="'Newsreader',serif" font-size="13" fill="#4a3a2e" font-style="italic">Probabilistic coverage guarantee</text>
-                  <line x1="445" y1="283" x2="700" y2="283" stroke="#d4cfc6" stroke-width="0.4"/>
-                  <foreignObject x="440" y="290" width="280" height="42">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;color:#8b2500;line-height:1.6;">$$\mathbb{P}\!\left(\bigcup_{c \in S} R_c(t) \supseteq \mathcal{U}\right) \geq 1 - \delta$$</div>
-                  </foreignObject>
-                  <text x="445" y="344" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">Bayesian credible coverage via Beta-Binomial posteriors</text>
+                  <!-- Coverage -->
+                  <text x="410" y="256" font-family="'Newsreader',serif" font-size="12" fill="#4a3a2e" font-style="italic">Probabilistic guarantee</text>
+                  <line x1="410" y1="261" x2="670" y2="261" stroke="#d4cfc6" stroke-width="0.3"/>
+                  <text x="410" y="286" font-family="'Newsreader',serif" font-size="13" fill="#8b2500">P(coverage) ≥ 1 − δ</text>
+                  <text x="410" y="304" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">Beta-Binomial posteriors on control effectiveness</text>
 
-                  <!-- ===== BOTTOM CAPTION ===== -->
-                  <text x="380" y="410" text-anchor="middle" font-family="'Newsreader',serif" font-size="12" fill="#888" font-style="italic">Each control covers a risk subset — the optimal audit plan is the minimum cover that holds over time.</text>
-                  <text x="380" y="432" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#bbb" letter-spacing="1">CASCADE BLOCKING  ·  SET-COVER NP-HARDNESS  ·  GREEDY APPROXIMATION ln(n)+1</text>
-
-                  <!-- Decorative bottom rule -->
-                  <line x1="180" y1="455" x2="580" y2="455" stroke="#d4cfc6" stroke-width="0.5"/>
-                  <text x="380" y="470" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="10" fill="#bbb" font-style="italic">auditcover — open-source Python package</text>
+                  <!-- ===== BOTTOM ===== -->
+                  <text x="360" y="340" text-anchor="middle" font-family="'Newsreader',serif" font-size="11" fill="#888" font-style="italic">Each control covers a risk subset — the optimal audit plan is the minimum cover that holds over time.</text>
+                  <line x1="180" y1="356" x2="540" y2="356" stroke="#d4cfc6" stroke-width="0.4"/>
+                  <text x="360" y="370" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="9.5" fill="#bbb" font-style="italic">auditcover — open-source Python package</text>
                 </svg>
                 </div>
 
@@ -1236,13 +1220,10 @@
                     <text x="629" y="431" text-anchor="middle" font-size="7.5" fill="#888">signals, not noise</text>
                   </g>
 
-                  <!-- Bottom formulas -->
-                  <foreignObject x="80" y="448" width="600" height="36">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:14px;color:#1a3a4a;text-align:center;">$$X \to \mathrm{VR}(X,\varepsilon) \to \{H_k(\varepsilon)\}_{k=0,1,\ldots} \to \mathrm{Dgm}_k(X) \to \text{sparse SNN input}$$</div>
-                  </foreignObject>
+                  <!-- Bottom pipeline label -->
+                  <text x="380" y="466" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#1a3a4a" opacity="0.7">X → VR(X,ε) → {Hₖ(ε)} → Dgm(X) → sparse SNN input</text>
                   <text x="380" y="496" text-anchor="middle" font-family="'Newsreader',serif" font-size="11" fill="#888" font-style="italic">Topologically-guided spiking architectures: attend only to geometrically significant features</text>
-                  <text x="380" y="514" text-anchor="middle" font-family="'Newsreader',serif" font-size="10" fill="#888" font-style="italic">Stability Theorem (Cohen-Steiner, Edelsbrunner, Harer 2007) guarantees robustness under noise</text>
-                  <text x="380" y="535" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#2d6a7e" opacity="0.5">Applications: FAERS safety signals · patient subpopulation detection · control drift measurement</text>
+                  <text x="380" y="514" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#2d6a7e" opacity="0.5">Applications: FAERS safety signals · patient subpopulation detection · control drift measurement</text>
                 </svg>
                 </div>
 
@@ -1462,19 +1443,14 @@
                     <text x="636" y="293" text-anchor="middle" font-size="7" fill="#bbb">privacy-preserving</text>
                   </g>
 
-                  <!-- ===== FORMULA ZONE ===== -->
+                  <!-- ===== BOTTOM ===== -->
                   <line x1="24" y1="345" x2="736" y2="345" stroke="#d4cfc6" stroke-width="0.4"/>
 
-                  <foreignObject x="60" y="352" width="300" height="32">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:13px;color:#2c4a2e;">$$\text{SNP}_i \;\xrightarrow{\text{Boltz-2}}\; \mathcal{S}_{\text{mut}} \;\xrightarrow{\Delta\Delta G}\; \text{rank}$$</div>
-                  </foreignObject>
-                  <foreignObject x="380" y="352" width="340" height="32">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:13px;color:#2c4a2e;">$$\hat{S}(t) = \prod_{t_k \leq t}\!\left(1 - \frac{d_k}{n_k}\right), \;\; \text{RR}_j = \frac{a_j/(a_j+c_j)}{b_j/(b_j+d_j)}$$</div>
-                  </foreignObject>
+                  <text x="380" y="368" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#2c4a2e" opacity="0.7">SNP → Boltz-2 → structure → ΔΔG → rank(FDA) → TDA filter → candidates</text>
 
                   <!-- Bottom caption -->
-                  <text x="380" y="400" text-anchor="middle" font-family="'Newsreader',serif" font-size="11" fill="#888" font-style="italic">From genetic variant to treatment candidate — with topological safety validation at every stage</text>
-                  <text x="380" y="416" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#bbb" letter-spacing="1">KAPLAN-MEIER SURVIVAL  ·  RISK RATIO DISPROPORTIONALITY  ·  PERSISTENT HOMOLOGY</text>
+                  <text x="380" y="394" text-anchor="middle" font-family="'Newsreader',serif" font-size="11" fill="#888" font-style="italic">From genetic variant to treatment candidate — with topological safety validation at every stage</text>
+                  <text x="380" y="410" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#bbb" letter-spacing="1">KAPLAN-MEIER SURVIVAL  ·  RISK RATIO DISPROPORTIONALITY  ·  PERSISTENT HOMOLOGY</text>
                 </svg>
                 </div>
 
