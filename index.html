@@ -340,7 +340,7 @@
 
   .scorecard:last-child { border-bottom: 0.5px solid var(--rule); }
 
-  .scorecard[open] {
+  .scorecard.is-open {
     box-shadow: 0 6px 30px rgba(0,0,0,0.05);
     z-index: 2;
   }
@@ -357,7 +357,7 @@
     opacity: 0.35;
   }
 
-  .scorecard[open]::before { opacity: 1; }
+  .scorecard.is-open::before { opacity: 1; }
 
   .scorecard--assurance::before { background: linear-gradient(180deg, #8b2500, #c4522a); }
   .scorecard--math::before { background: linear-gradient(180deg, #1a3a4a, #2d6a7e); }
@@ -443,7 +443,7 @@
     height: 14px;
   }
 
-  .scorecard[open] .scorecard-toggle::after {
+  .scorecard.is-open .scorecard-toggle::after {
     transform: rotate(90deg);
     opacity: 0;
   }
@@ -461,7 +461,7 @@
     opacity: 0;
   }
 
-  .scorecard[open] .scorecard-body {
+  .scorecard.is-open .scorecard-body {
     max-height: 5000px;
     opacity: 1;
   }
@@ -506,7 +506,7 @@
     transition: border-color 0.25s ease;
   }
 
-  .scorecard[open] .scorecard-tag { border-color: rgba(0,0,0,0.15); }
+  .scorecard.is-open .scorecard-tag { border-color: rgba(0,0,0,0.15); }
 
   /* Highlights */
   .scorecard-highlights {
@@ -796,15 +796,15 @@
     <div class="scorecards-label">About</div>
 
     <div class="scorecards">
-      <details class="scorecard scorecard--assurance">
-        <summary class="scorecard-header">
+      <div class="scorecard scorecard--assurance">
+        <div class="scorecard-header" onclick="toggleCard(this)">
           <div class="scorecard-number">↬</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">Who I Am</div>
             <div class="scorecard-subtitle">Physicist → Neuroscientist → Data Science Leader</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </summary>
+        </div>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -838,7 +838,7 @@
 
           </div>
         </div>
-      </details>
+      </div>
     </div>
 
     <hr class="section-rule" />
@@ -848,15 +848,15 @@
     <div class="scorecards">
 
       <!-- SCORECARD 1: AI Assurance -->
-      <details class="scorecard scorecard--assurance">
-        <summary class="scorecard-header">
+      <div class="scorecard scorecard--assurance">
+        <div class="scorecard-header" onclick="toggleCard(this)">
           <div class="scorecard-number">01</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">AI Assurance, Risk &amp; Governance</div>
             <div class="scorecard-subtitle">Regulation · Compliance · Audit Frameworks</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </summary>
+        </div>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -991,18 +991,18 @@
 
           </div>
         </div>
-      </details>
+      </div>
 
       <!-- SCORECARD 2: Mathematical Foundations -->
-      <details class="scorecard scorecard--math">
-        <summary class="scorecard-header">
+      <div class="scorecard scorecard--math">
+        <div class="scorecard-header" onclick="toggleCard(this)">
           <div class="scorecard-number">02</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">Mathematical Foundations of AI/ML</div>
             <div class="scorecard-subtitle">Geometry · Topology · Information Theory</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </summary>
+        </div>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -1245,18 +1245,18 @@
 
           </div>
         </div>
-      </details>
+      </div>
 
       <!-- SCORECARD 3: Healthcare × Tech Bridge -->
-      <details class="scorecard scorecard--bridge">
-        <summary class="scorecard-header">
+      <div class="scorecard scorecard--bridge">
+        <div class="scorecard-header" onclick="toggleCard(this)">
           <div class="scorecard-number">03</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">AI for Pharma &amp; Diagnostics</div>
             <div class="scorecard-subtitle">Drug Discovery · Clinical Operations · Patient Outcomes</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </summary>
+        </div>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -1338,7 +1338,7 @@
 
           </div>
         </div>
-      </details>
+      </div>
 
     </div>
 
@@ -1350,15 +1350,15 @@
 
     <div class="scorecards">
       <!-- SCORECARD: Vision – Bridging Health & Tech -->
-      <details class="scorecard scorecard--assurance" id="vision-section">
-        <summary class="scorecard-header">
+      <div class="scorecard scorecard--assurance" id="vision-section">
+        <div class="scorecard-header" onclick="toggleCard(this)">
           <div class="scorecard-number">✦</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">Bridging Healthcare &amp; Technology</div>
             <div class="scorecard-subtitle">Switzerland · Europe · Innovation Ecosystem</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </summary>
+        </div>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -1446,7 +1446,7 @@
 
           </div>
         </div>
-      </details>
+      </div>
 
     </div>
 
@@ -1461,16 +1461,19 @@
     </div>
   </footer>
 
-  <script>
-    document.querySelectorAll('.scorecard').forEach(function(d) {
-      d.addEventListener('toggle', function() {
-        if (d.open) {
-          document.querySelectorAll('.scorecard[open]').forEach(function(other) {
-            if (other !== d) other.removeAttribute('open');
-          });
-        }
-      });
-    });
+    <script>
+    function toggleCard(header) {
+      var card = header.closest('.scorecard');
+      if (!card) return;
+      var wasOpen = card.classList.contains('is-open');
+      var all = document.querySelectorAll('.scorecard.is-open');
+      for (var i = 0; i < all.length; i++) {
+        all[i].classList.remove('is-open');
+      }
+      if (!wasOpen) {
+        card.classList.add('is-open');
+      }
+    }
   </script>
 </body>
 </html>
