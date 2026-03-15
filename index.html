@@ -997,7 +997,7 @@
                     <div class="ref-tier-label">🏗️ My Work</div>
                     <div class="ref-tags">
                       <a class="ref-tag ref-tag--highlight" href="https://kunskap.substack.com" target="_blank">Audit 2.0 – Substack series</a>
-                      <a class="ref-tag ref-tag--highlight" href="https://arxiv.org/abs/1709.05254" target="_blank">Schreyer et al. – Deep Autoencoders for Audit Anomalies (2017)</a>
+                      <a class="ref-tag ref-tag--highlight" href="https://arxiv.org/abs/1709.05254" target="_blank">Deep Autoencoders for Audit Anomalies (2017)</a>
                       <a class="ref-tag ref-tag--highlight" href="https://www.tandfonline.com/doi/full/10.1080/07366981.2024.2312025" target="_blank">ML Across the Internal Audit Lifecycle (2024)</a>
                     </div>
                   </div>
@@ -1007,7 +1007,7 @@
                       <a class="ref-tag" href="https://arxiv.org/abs/1908.00734" target="_blank">Adversarial Autoencoders – Audit Anomalies</a>
                       <a class="ref-tag" href="https://arxiv.org/abs/2112.13215" target="_blank">Continual Learning for Continuous Auditing</a>
                       <a class="ref-tag" href="https://arxiv.org/abs/2411.05815" target="_blank">GNNs for Financial Fraud – Review</a>
-                      <a class="ref-tag" href="https://arxiv.org/abs/0904.1067" target="_blank">Bayesian Operational Risk – Shevchenko &amp; Wüthrich</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/0904.1067" target="_blank">Bayesian Operational Risk Modeling</a>
                     </div>
                   </div>
                   <div class="ref-tier">
@@ -1229,22 +1229,22 @@
 
                 <div class="deep-section">
                   <div class="deep-heading">Topological Data Analysis: The Mathematical Core</div>
-                  <div class="deep-text">The central insight of TDA is that <em>shape is computable</em>. Given a finite point cloud sampled from an unknown space, persistent homology recovers the topological features — connected components, loops, voids — that persist across a range of scales, separating genuine structure from noise. The theoretical foundation rests on the <a href="https://doi.org/10.1090/bull/1794" target="_blank">Stability Theorem</a> (Cohen-Steiner, Edelsbrunner, Harer 2007): the bottleneck distance between persistence diagrams is bounded by the sup-norm distance between the generating functions. <a href="https://geometrica.saclay.inria.fr/team/Fred.Chazal/" target="_blank">Frédéric Chazal</a> and collaborators extended this to a full statistical framework — <a href="https://arxiv.org/abs/1207.3674" target="_blank">convergence rates for persistent homology estimators</a>, bootstrap confidence sets for persistence diagrams, and minimax-optimal rates under Hausdorff noise — establishing TDA as a rigorous inference tool rather than a purely descriptive one. Their <a href="https://arxiv.org/abs/1710.04019" target="_blank">survey on the structure and stability of persistence modules</a> remains the standard theoretical reference. In the applied direction, <a href="https://bastian.rieck.me/" target="_blank">Bastian Rieck</a> (based here in Basel) has been a driving force in making TDA practical for machine learning. His work on <a href="https://arxiv.org/abs/1905.12200" target="_blank">topological autoencoders</a> showed that persistence-based regularization forces latent spaces to preserve topological features of the input data — a structural guarantee that no standard loss function provides. More recently, his group's contributions to <a href="https://github.com/aidos-lab" target="_blank">topological machine learning benchmarks</a> and the <a href="https://arxiv.org/abs/2312.07368" target="_blank">Topological Deep Learning</a> framework (with Hajij, Papillon, and the pyt-team) are building the software ecosystem that makes these ideas deployable at scale.</div>
+                  <div class="deep-text">The central insight of TDA is that <em>shape is computable</em>. Given a finite point cloud sampled from an unknown space, persistent homology recovers the topological features — connected components, loops, voids — that persist across a range of scales, separating genuine structure from noise. The theoretical foundation rests on the <a href="https://doi.org/10.1090/bull/1794" target="_blank">Stability Theorem</a> (2007): the bottleneck distance between persistence diagrams is bounded by the sup-norm distance between the generating functions. This was extended to a full statistical framework — <a href="https://arxiv.org/abs/1207.3674" target="_blank">convergence rates for persistent homology estimators</a>, bootstrap confidence sets for persistence diagrams, and minimax-optimal rates under Hausdorff noise — establishing TDA as a rigorous inference tool rather than a purely descriptive one. On the applied side, <a href="https://arxiv.org/abs/1905.12200" target="_blank">topological autoencoders</a> showed that persistence-based regularization forces latent spaces to preserve topological features of the input data — a structural guarantee that no standard loss function provides. More recently, the <a href="https://arxiv.org/abs/2312.07368" target="_blank">Topological Deep Learning</a> framework and the <a href="https://github.com/aidos-lab" target="_blank">AIDOS Lab benchmarks</a> are building the software ecosystem that makes these ideas deployable at scale.</div>
                 </div>
 
                 <div class="deep-section">
                   <div class="deep-heading">From Theory to Tooling: The TDA Ecosystem</div>
-                  <div class="deep-text">What makes TDA actionable today is not just the mathematics but the convergence of several software ecosystems. <a href="https://giotto-ai.github.io/gtda-docs/" target="_blank">Giotto-TDA</a> (Tauzin, Lupo, et al.) provides a scikit-learn-compatible pipeline for persistent homology that integrates directly with standard ML workflows. <a href="https://gudhi.inria.fr/" target="_blank">GUDHI</a> (Chazal's group at INRIA Saclay) offers state-of-the-art implementations of Rips and alpha complexes, persistence landscapes, and the statistical tools needed for inference. The <a href="https://github.com/pyt-team/TopoX" target="_blank">TopoX</a> ecosystem (Hajij, Zamzmi, Papamarkou, et al.) targets deep learning on combinatorial complexes — simplicial, cell, and hypergraph neural networks — extending message passing beyond graphs to higher-order structures. And <a href="https://ripser.scikit-tda.org/" target="_blank">Ripser</a> (Bauer 2021) remains the fastest engine for Vietoris-Rips persistence computation. Together, these tools form a stack that can take raw tabular or graph-structured data from an audit pipeline, compute topological summaries, and feed them into downstream ML models — which is precisely the workflow I am building in the Kunskap research program.</div>
+                  <div class="deep-text">What makes TDA actionable today is not just the mathematics but the convergence of several software ecosystems. <a href="https://giotto-ai.github.io/gtda-docs/" target="_blank">Giotto-TDA</a> provides a scikit-learn-compatible pipeline for persistent homology that integrates directly with standard ML workflows. <a href="https://gudhi.inria.fr/" target="_blank">GUDHI</a> (INRIA Saclay) offers state-of-the-art implementations of Rips and alpha complexes, persistence landscapes, and the statistical tools needed for inference. The <a href="https://github.com/pyt-team/TopoX" target="_blank">TopoX</a> ecosystem targets deep learning on combinatorial complexes — simplicial, cell, and hypergraph neural networks — extending message passing beyond graphs to higher-order structures. And <a href="https://ripser.scikit-tda.org/" target="_blank">Ripser</a> remains the fastest engine for Vietoris-Rips persistence computation. Together, these tools form a stack that can take raw tabular or graph-structured data from an audit pipeline, compute topological summaries, and feed them into downstream ML models.</div>
                 </div>
 
                 <div class="deep-section">
                   <div class="deep-heading">Brain-Inspired Architectures Meet Geometric Learning</div>
-                  <div class="deep-text">The convergence I'm most excited about is between <em>neuromorphic computing</em> and <em>geometric deep learning</em>. SNNs naturally encode temporal structure through spike timing – but they lack the topological awareness that persistent homology provides. Conversely, TDA extracts shape from static point clouds but doesn't exploit the event-driven sparsity that makes biological computation efficient. Combining them – topologically-guided spiking architectures that attend only to geometrically significant features – could yield models that are both representationally powerful and energetically viable. <a href="https://arxiv.org/abs/0906.0612" target="_blank">Carlsson's foundational work on TDA</a> provides the mathematical scaffolding; <a href="https://arxiv.org/abs/1901.09948" target="_blank">surrogate gradient methods</a> for training SNNs provide the algorithmic bridge.</div>
+                  <div class="deep-text">The convergence I'm most excited about is between <em>neuromorphic computing</em> and <em>geometric deep learning</em>. SNNs naturally encode temporal structure through spike timing – but they lack the topological awareness that persistent homology provides. Conversely, TDA extracts shape from static point clouds but doesn't exploit the event-driven sparsity that makes biological computation efficient. Combining them – topologically-guided spiking architectures that attend only to geometrically significant features – could yield models that are both representationally powerful and energetically viable. The <a href="https://arxiv.org/abs/0906.0612" target="_blank">foundational work on TDA</a> provides the mathematical scaffolding; <a href="https://arxiv.org/abs/1901.09948" target="_blank">surrogate gradient methods</a> for training SNNs provide the algorithmic bridge.</div>
                 </div>
 
                 <div class="deep-section">
                   <div class="deep-heading">Geometric Data Science – Applied</div>
-                  <div class="deep-text">Concretely, I apply persistent homology to FDA adverse event data for topological safety signal detection — persistent 1-cycles in the Vietoris-Rips complex of the drug-reaction co-occurrence graph identify clusters invisible to frequency-based methods like PRR or EBGM. The key advantage follows directly from <a href="https://arxiv.org/abs/1207.3674" target="_blank">Chazal et al.'s statistical persistence framework</a>: topological features that persist across a wide range of filtration parameters are provably robust to the sampling noise inherent in spontaneous reporting data, while short-lived features can be discarded with controlled false discovery rates. I use <a href="https://arxiv.org/abs/0810.3015" target="_blank">Ollivier-Ricci curvature</a> on control networks to find structurally fragile audit pathways — negatively curved edges are bottlenecks where information flow concentrates, precisely the points where control failure cascades originate. This connects to <a href="https://arxiv.org/abs/1712.04721" target="_blank">Ni et al.'s work on community detection via Ricci flow</a>, which showed that curvature-based methods outperform spectral approaches on networks with heterogeneous degree distributions — exactly the topology of enterprise control architectures. I frame data integration across clinical systems as a <a href="https://arxiv.org/abs/1303.3255" target="_blank">sheaf-theoretic consistency</a> problem where local-to-global obstructions reveal systemic data quality failures no row-level validation can catch. And the broader vision is <a href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">information geometry</a> (Fisher-Rao manifolds of probability distributions) as the natural language for measuring control drift, model divergence, and data quality degradation over time — where <a href="https://arxiv.org/abs/1808.08271" target="_blank">persistence landscapes</a> (Bubenik 2015) provide the Banach-space-valued summary statistics needed for rigorous hypothesis testing on topological features.</div>
+                  <div class="deep-text">Concretely, I apply persistent homology to FDA adverse event data for topological safety signal detection — persistent 1-cycles in the Vietoris-Rips complex of the drug-reaction co-occurrence graph identify clusters invisible to frequency-based methods like PRR or EBGM. The key advantage follows directly from the <a href="https://arxiv.org/abs/1207.3674" target="_blank">statistical persistence framework</a>: topological features that persist across a wide range of filtration parameters are provably robust to the sampling noise inherent in spontaneous reporting data, while short-lived features can be discarded with controlled false discovery rates. I use <a href="https://arxiv.org/abs/0810.3015" target="_blank">discrete Ricci curvature</a> on control networks to find structurally fragile audit pathways — negatively curved edges are bottlenecks where information flow concentrates, precisely the points where control failure cascades originate. This connects to <a href="https://arxiv.org/abs/1712.04721" target="_blank">community detection via Ricci flow</a>, which showed that curvature-based methods outperform spectral approaches on networks with heterogeneous degree distributions — exactly the topology of enterprise control architectures. I frame data integration across clinical systems as a <a href="https://arxiv.org/abs/1303.3255" target="_blank">sheaf-theoretic consistency</a> problem where local-to-global obstructions reveal systemic data quality failures no row-level validation can catch. And the broader vision is <a href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">information geometry</a> (Fisher-Rao manifolds of probability distributions) as the natural language for measuring control drift, model divergence, and data quality degradation over time — where <a href="https://arxiv.org/abs/1808.08271" target="_blank">persistence landscapes</a> provide the Banach-space-valued summary statistics needed for rigorous hypothesis testing on topological features.</div>
                 </div>
 
                 <div style="background:rgba(26,58,74,0.02);border:0.5px solid var(--rule);border-radius:4px;padding:1rem 1.25rem;margin:0 0 1.5rem;overflow-x:auto;">
@@ -1262,7 +1262,6 @@
                   <div class="ref-tier">
                     <div class="ref-tier-label">🏗️ My Work</div>
                     <div class="ref-tags">
-                      <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 Kunskap – Geometric Audit Analytics (Paper A)</a>
                       <a class="ref-tag ref-tag--highlight" href="https://kunskap.substack.com" target="_blank">Audit 2.0 – Substack series on TDA for assurance</a>
                       <a class="ref-tag ref-tag--highlight" href="https://www.pnas.org/doi/10.1073/pnas.2528654122" target="_blank">PNAS – Neuromorphic vs GPU Energy (2025)</a>
                     </div>
@@ -1270,39 +1269,39 @@
                   <div class="ref-tier">
                     <div class="ref-tier-label">🔬 TDA Core</div>
                     <div class="ref-tags">
-                      <a class="ref-tag" href="https://arxiv.org/abs/1207.3674" target="_blank">Chazal, de Silva, Glisse, Oudot – Persistence Stability (2012)</a>
-                      <a class="ref-tag" href="https://doi.org/10.1090/bull/1794" target="_blank">Cohen-Steiner, Edelsbrunner, Harer – Stability Theorem (2007)</a>
-                      <a class="ref-tag" href="https://arxiv.org/abs/0906.0612" target="_blank">Carlsson – Topology and Data (2009)</a>
-                      <a class="ref-tag" href="https://arxiv.org/abs/1808.08271" target="_blank">Bubenik – Persistence Landscapes (2015)</a>
-                      <a class="ref-tag" href="https://arxiv.org/abs/1905.12200" target="_blank">Moor, Horn, Rieck, Borgwardt – Topological Autoencoders (2020)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1207.3674" target="_blank">Persistence Stability – Statistical Framework (2012)</a>
+                      <a class="ref-tag" href="https://doi.org/10.1090/bull/1794" target="_blank">Stability Theorem for Persistence Diagrams (2007)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/0906.0612" target="_blank">Topology and Data – Foundational Survey (2009)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1808.08271" target="_blank">Persistence Landscapes (2015)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1905.12200" target="_blank">Topological Autoencoders (2020)</a>
                     </div>
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🔬 Methods</div>
                     <div class="ref-tags">
-                      <a class="ref-tag" href="https://arxiv.org/abs/0810.3015" target="_blank">Ollivier – Ricci Curvature on Metric Spaces</a>
-                      <a class="ref-tag" href="https://arxiv.org/abs/1712.04721" target="_blank">Ni, Lin, Luo, Gao – Ricci Flow for Community Detection</a>
-                      <a class="ref-tag" href="https://arxiv.org/abs/1303.3255" target="_blank">Curry – Sheaves, Cosheaves, Applications</a>
-                      <a class="ref-tag" href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">Amari – Information Geometry (Springer)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/0810.3015" target="_blank">Ricci Curvature on Metric Spaces</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1712.04721" target="_blank">Ricci Flow for Community Detection</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1303.3255" target="_blank">Sheaves, Cosheaves, and Applications</a>
+                      <a class="ref-tag" href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">Information Geometry (Springer)</a>
                     </div>
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🛠️ Tooling</div>
                     <div class="ref-tags">
-                      <a class="ref-tag" href="https://github.com/pyt-team/TopoX" target="_blank">TopoX – Topological DL (pyt-team)</a>
-                      <a class="ref-tag" href="https://gudhi.inria.fr/" target="_blank">GUDHI – TDA Library (INRIA Saclay)</a>
+                      <a class="ref-tag" href="https://github.com/pyt-team/TopoX" target="_blank">TopoX – Topological DL</a>
+                      <a class="ref-tag" href="https://gudhi.inria.fr/" target="_blank">GUDHI – TDA Library (INRIA)</a>
                       <a class="ref-tag" href="https://giotto-ai.github.io/gtda-docs/" target="_blank">Giotto-TDA – scikit-learn-compatible</a>
-                      <a class="ref-tag" href="https://ripser.scikit-tda.org/" target="_blank">Ripser – Fast Vietoris-Rips (Bauer 2021)</a>
-                      <a class="ref-tag" href="https://arxiv.org/abs/2312.07368" target="_blank">Hajij, Papillon, et al. – TDL Framework</a>
+                      <a class="ref-tag" href="https://ripser.scikit-tda.org/" target="_blank">Ripser – Fast Vietoris-Rips</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/2312.07368" target="_blank">Topological Deep Learning Framework</a>
                     </div>
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🧭 Frontier</div>
                     <div class="ref-tags">
-                      <a class="ref-tag" href="https://bastian.rieck.me/" target="_blank">Rieck – AIDOS Lab, Basel</a>
-                      <a class="ref-tag" href="https://arxiv.org/abs/1901.09948" target="_blank">Neftci – Surrogate Gradients for SNNs</a>
-                      <a class="ref-tag" href="https://doi.org/10.1038/s41467-020-17236-y" target="_blank">Bellec – e-prop Learning (Nature Comms)</a>
-                      <a class="ref-tag" href="https://www.hessbellwald-lab.ch/" target="_blank">Hess Bellwald – TDA Lab, EPFL</a>
+                      <a class="ref-tag" href="https://bastian.rieck.me/" target="_blank">AIDOS Lab – TDA for ML (Fribourg)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1901.09948" target="_blank">Surrogate Gradients for SNNs</a>
+                      <a class="ref-tag" href="https://doi.org/10.1038/s41467-020-17236-y" target="_blank">e-prop Learning (Nature Comms)</a>
+                      <a class="ref-tag" href="https://www.hessbellwald-lab.ch/" target="_blank">TDA Lab – EPFL</a>
                     </div>
                   </div>
                 </div>
