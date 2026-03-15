@@ -367,6 +367,57 @@
   .deep-text a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid rgba(139,37,0,0.3); transition: border-color 0.25s; }
   .deep-text a:hover { border-color: var(--accent); }
 
+  /* Formula boxes */
+  .formula-box {
+    background: var(--paper-warm);
+    border: 0.5px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.25rem 0;
+    overflow-x: auto;
+  }
+  .formula-box .formula-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink-ghost);
+    margin-bottom: 0.6rem;
+  }
+  .formula-box .formula {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .formula-box .formula sub { font-size: 14px; }
+  .formula-box .formula sup { font-size: 14px; }
+  .formula-box .formula-note {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+
+  /* Project figures */
+  .project-figure {
+    width: 100%;
+    border-radius: 4px;
+    margin: 1.25rem 0;
+    border: 0.5px solid var(--rule);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  }
+  .project-figure-caption {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    text-align: center;
+    margin: -0.5rem 0 1.25rem;
+    letter-spacing: 0.3px;
+  }
+
   /* Results grid */
   .results-grid {
     display: grid;
@@ -584,6 +635,20 @@
               <div class="deep-text">I developed a benchmarking framework that builds persistence diagrams from both predicted and ground-truth RNA structures, then compares them using bottleneck and Wasserstein distances across homological dimensions. The framework introduces three novel metrics: a <strong>Topological Quality Score (TQS)</strong> that aggregates topological fidelity into a single number, a <strong>Topological Complexity Index (TCI)</strong> that quantifies the inherent structural richness of each molecule, and the <strong>persistent Laplacian spectral gap</strong> (λ₁) — a continuous measure of topological connectivity more sensitive than discrete Betti numbers alone. The full pipeline is implemented in Python with reproducible notebooks and public data.</div>
             </div>
 
+            <div class="formula-box">
+              <div class="formula-label">Key Equations</div>
+              <div class="formula">TQS<sub>k</sub> = W<sub>1</sub>( PD<sub>k</sub>(X<sub>nat</sub>), PD<sub>k</sub>(X<sub>pred</sub>) )</div>
+              <div class="formula-note">1-Wasserstein distance between dimension-k persistence diagrams. TQS₁ (loops) is the most informative for RNA.</div>
+              <div class="formula" style="margin-top:0.8rem;">TCI(X) = ∫<sub>0</sub><sup>r<sub>max</sub></sup> β<sub>1</sub>( VR(X, r) ) dr</div>
+              <div class="formula-note">Topological Complexity Index — integral of the first Betti number across the Vietoris–Rips filtration.</div>
+            </div>
+
+            <img class="project-figure" src="https://raw.githubusercontent.com/FranzuBaren/ML-Projects/main/RNA%20Topology%20Benchmark/paper/figures/fig_topological_persistence.png" alt="Topological persistence: native vs predicted RNA structures" />
+            <div class="project-figure-caption">Fig. 7 — Betti number profiles (β₀ components, β₁ cycles) across the filtration for four RNA targets. Bottom row: prediction methods vs. native structure.</div>
+
+            <img class="project-figure" src="https://raw.githubusercontent.com/FranzuBaren/ML-Projects/main/RNA%20Topology%20Benchmark/paper/figures/fig_radar.png" alt="Best-decoy lDDT across all targets" />
+            <div class="project-figure-caption">Fig. 10 — Radar plot of best-decoy lDDT across seven RNA targets, comparing AlphaFold 3, NVIDIA Clara RNAPro, RhoFold+, and FARFAR2.</div>
+
             <div class="deep-section">
               <div class="deep-heading">Why It Matters</div>
               <div class="deep-text">These metrics are invariant to rigid-body transformations, robust to small perturbations, and capture structural features that are invisible to geometric metrics. They provide the mathematical tools needed to evaluate whether an RNA structure prediction model is getting the <em>biology</em> right, not just the geometry. This work sits at the intersection of topological data analysis and computational biology — a space I believe is underexplored and full of potential for pharma applications.</div>
@@ -655,6 +720,18 @@
               <div class="deep-text">This repository provides an independent review, implementation, and analysis of the BDH-GPU architecture. I explore its key design choices in depth: shared-weight layers that act as "learned programs" (the causal circuit G<sub>x</sub> and output circuit G<sub>y</sub>), non-negative ReLU activations for biological plausibility, and the constrained Q=K attention mechanism with causal masking. The implementation includes interpretability tools for visualizing the emergent hub structure and signal propagation dynamics. My review critically examines BDH's claims through the lens of both computational neuroscience (my PhD background) and practical AI engineering.</div>
             </div>
 
+            <div class="formula-box">
+              <div class="formula-label">Hebbian Synaptic Update</div>
+              <div class="formula">q = k = ReLU(W<sub>qk</sub> · x<sup>(t)</sup>)</div>
+              <div class="formula" style="margin-top:0.5rem;">σ<sup>(t+1)</sup> = (1 − λ) σ<sup>(t)</sup> + q ⊗ k<sup>⊤</sup></div>
+              <div class="formula-note">Q=K sharing makes σ PSD rank-1 — a Hebbian rule. The synaptic state achieves cosine similarity 0.901 with the empirical co-activation matrix (17× stronger than Linear Attention).</div>
+              <div class="formula" style="margin-top:0.8rem;">y<sup>(t)</sup> = Σ<sub>τ&lt;t</sub> (1−λ)<sup>t−τ</sup> q<sub>τ</sub> (q<sub>τ</sub><sup>⊤</sup> k<sub>t</sub>)</div>
+              <div class="formula-note">Unrolled kernel form — attention weights emerge from exponentially decayed Hebbian traces, not explicit softmax computation.</div>
+            </div>
+
+            <img class="project-figure" src="https://raw.githubusercontent.com/pathwaycom/bdh/main/figs/architecture.png" alt="BDH Architecture — Pathway" />
+            <div class="project-figure-caption">BDH architecture diagram (Kosowski et al., 2025). Scale-free neuron-level graph with locally interacting particles.</div>
+
             <div class="deep-section">
               <div class="deep-heading">Why It Matters</div>
               <div class="deep-text">BDH demonstrates that biologically plausible architectures can follow transformer-like scaling laws while maintaining full causal interpretability. This has direct implications for AI governance: if we can <em>trace</em> how a model reaches a decision through its neuron-level graph dynamics, we can build genuinely auditable AI systems. Understanding these bridges between neuroscience and deep learning is central to my work in AI assurance for regulated industries — a model you can explain is a model you can govern.</div>
@@ -725,6 +802,17 @@
               <div class="deep-heading">My Contribution</div>
               <div class="deep-text">I developed a complete mathematical framework that models each control as a Beta-Binomial process: the prior encodes historical performance, and each new observation (finding, exception, test result) updates the posterior distribution. <strong>Shannon entropy</strong> of the posterior serves as the monitoring signal — rising entropy means increasing uncertainty about control effectiveness, which is itself a leading indicator of governance breakdown. Simulations demonstrate a <strong>114-day early detection advantage</strong> over traditional threshold-based methods. The framework extends to Monte Carlo stress-testing with strategic adversary modeling (what happens if an intelligent adversary targets the weakest controls?) and Jensen's inequality-based antifragility metrics (which controls actually improve under stress?). All simulation code is public, and the theoretical foundations were published as a six-part series on the <a href="https://kunskap.substack.com" target="_blank">Audit 2.0 Substack</a>.</div>
             </div>
+
+            <div class="formula-box">
+              <div class="formula-label">Beta-Binomial Conjugate Update</div>
+              <div class="formula">π(θ | data) = Beta(α + failures, β + (n − failures))</div>
+              <div class="formula-note">Prior belief Beta(α, β) updates to posterior after observing n controls with k failures. No MCMC required — closed-form conjugate update.</div>
+              <div class="formula" style="margin-top:0.8rem;">H(θ) = −∫ p(θ) log p(θ) dθ</div>
+              <div class="formula-note">Shannon entropy of the posterior — rising entropy signals increasing uncertainty about control effectiveness. Crosses warning threshold ~114 days before traditional quarterly audit detects the same deterioration.</div>
+            </div>
+
+            <img class="project-figure" src="https://raw.githubusercontent.com/FranzuBaren/Audit-Risk/main/Bayesian%20Governance/images/bayesian_vs_checklist.png" alt="Continuous Bayesian monitoring vs traditional quarterly audits" />
+            <div class="project-figure-caption">Bayesian real-time risk tracking (top) vs. traditional quarterly audit snapshots (bottom). The Bayesian system alerts at Day 219; the quarterly audit doesn't flag until Day 270+.</div>
 
             <div class="deep-section">
               <div class="deep-heading">Why It Matters</div>
@@ -805,6 +893,20 @@
               <div class="deep-heading">My Contribution</div>
               <div class="deep-text">I built an end-to-end pipeline that ingests SAS binary transport files (no SAS license required), validates through Pydantic schemas, loads into DuckDB for analytics, and trains 8 models in a rigorous ablation study: from regularized logistic regression through random forests, gradient boosting, MLP, LSTM, GRU, GRU+Attention, and a Conditional VAE. Feature attribution uses <strong>Integrated Gradients</strong>; uncertainty quantification uses <strong>MC Dropout</strong>. Nine publication-quality figures are generated automatically, including a DSMB-ready safety dashboard. The pipeline runs on real FDA-grade CDISC data from the PHUSE pilot study (254 Alzheimer's patients). A <strong>data leakage bug was caught and fixed</strong> mid-development and documented transparently in the report. The CVAE overfitting anomaly was explicitly flagged rather than hidden.</div>
             </div>
+
+            <div class="formula-box">
+              <div class="formula-label">Fisher's Exact Test (Safety Signal Detection)</div>
+              <div class="formula">p<sub>j</sub> = Σ<sub>k≥a<sub>j</sub></sub> C(a<sub>j</sub>+b<sub>j</sub>, k) · C(c<sub>j</sub>+d<sub>j</sub>, n₁−k) / C(N, n₁)</div>
+              <div class="formula-note">Exact p-value for the 2×2 contingency table (Drug × AE). Used to generate the volcano plot flagging disproportionate adverse events.</div>
+              <div class="formula" style="margin-top:0.8rem;">Ŝ(t) = ∏<sub>t<sub>k</sub>≤t</sub> (1 − d<sub>k</sub> / n<sub>k</sub>)</div>
+              <div class="formula-note">Kaplan-Meier survival estimator — time-to-first-SAE analysis stratified by treatment arm.</div>
+            </div>
+
+            <img class="project-figure" src="https://raw.githubusercontent.com/FranzuBaren/ML-Projects/main/ClinOps_AI/figures/fig06_safety_dashboard.png" alt="Clinical Safety Dashboard — CDISCPILOT01" />
+            <div class="project-figure-caption">DSMB-ready safety dashboard: AE incidence with 95% CI, severity profile by arm, SAE rates, and exposure-response correlation (r = 0.93).</div>
+
+            <img class="project-figure" src="https://raw.githubusercontent.com/FranzuBaren/ML-Projects/main/ClinOps_AI/figures/fig09_integrated_gradients.png" alt="Neural Feature Attribution — Integrated Gradients" />
+            <div class="project-figure-caption">Integrated Gradients feature attribution: global importance (left) and per-subject SHAP-style beeswarm (right). n_unique_ae dominates.</div>
 
             <div class="deep-section">
               <div class="deep-heading">Why It Matters</div>
