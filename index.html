@@ -330,6 +330,7 @@
     animation: fadeSlideUp 0.8s ease 0.85s forwards;
   }
 
+
   .scorecard {
     border: 0.5px solid var(--rule);
     border-bottom: none;
@@ -447,6 +448,8 @@
     transform: rotate(90deg);
     opacity: 0;
   }
+    background: var(--accent);
+  }
 
   .scorecard-header:hover .scorecard-toggle::before,
   .scorecard-header:hover .scorecard-toggle::after {
@@ -462,7 +465,7 @@
   }
 
   .scorecard.is-open .scorecard-body {
-    max-height: 5000px;
+    max-height: 15000px;
     opacity: 1;
   }
 
@@ -769,7 +772,7 @@
         <a href="https://kunskap.substack.com" target="_blank" title="Substack" data-tooltip="substack">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 6.98H2V4.82h20zM2 10.52h20v-2.2H2zM2 13.04v8.96l10-5.55 10 5.55v-8.96H2z"/></svg>
         </a>
-        <a href="/cdn-cgi/l/email-protection#9afce8fbf4f9ffe9f9f5b4f5e8e9f3a2aedafdf7fbf3f6b4f9f5f7" title="Email" data-tooltip="email">
+        <a href="mailto:contact@francescoorsi.com" title="Email" data-tooltip="email">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         </a>
       </div>
@@ -876,69 +879,118 @@
                 </div>
 
                 <!-- Inline SVG: Audit-as-Set-Cover conceptual diagram -->
-                <svg viewBox="0 0 620 220" style="width:100%;max-width:900px;margin:1.25rem auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+                <div style="width:100%;margin:1.5rem auto;border:0.5px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--paper);box-shadow:0 2px 16px rgba(0,0,0,0.04);">
+                <svg viewBox="0 0 760 480" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <marker id="arr1" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0 0, 6 2, 0 4" fill="#c4522a" opacity="0.5"/></marker>
+                    <marker id="arr1" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto"><polygon points="0 0, 8 2.5, 0 5" fill="#c4522a" opacity="0.6"/></marker>
+                    <marker id="arr1b" markerWidth="7" markerHeight="4" refX="7" refY="2" orient="auto"><polygon points="0 0, 7 2, 0 4" fill="#8b2500" opacity="0.4"/></marker>
+                    <filter id="sc1-shadow"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/></filter>
                   </defs>
 
-                  <text x="310" y="16" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#8b2500" letter-spacing="1.5">AUDIT AS SET COVER – THE FRAMEWORK</text>
+                  <!-- Title bar -->
+                  <text x="380" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#8b2500" letter-spacing="2.5" font-weight="500">AUDIT AS SET COVER — THE FRAMEWORK</text>
+                  <line x1="120" y1="40" x2="640" y2="40" stroke="#d4cfc6" stroke-width="0.5"/>
 
-                  <!-- Risk universe (background) -->
-                  <rect x="30" y="30" width="260" height="170" rx="4" fill="#faf5ef" stroke="#d4cfc6" stroke-width="0.5"/>
-                  <text x="160" y="48" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#888" letter-spacing="1">RISK UNIVERSE 𝒰</text>
+                  <!-- ===== LEFT PANEL: Risk Universe ===== -->
+                  <rect x="30" y="58" width="340" height="310" rx="5" fill="#faf5ef" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                  <text x="200" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888" letter-spacing="2">RISK UNIVERSE  𝒰</text>
 
-                  <!-- Risk items -->
-                  <g font-family="'IBM Plex Mono',monospace" font-size="6" fill="#888">
-                    <rect x="50" y="60" width="48" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="74" y="74" text-anchor="middle">R₁ data</text>
-                    <rect x="110" y="60" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="138" y="74" text-anchor="middle">R₂ model</text>
-                    <rect x="178" y="60" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="206" y="74" text-anchor="middle">R₃ deploy</text>
-                    <rect x="50" y="92" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="78" y="106" text-anchor="middle">R₄ access</text>
-                    <rect x="118" y="92" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="146" y="106" text-anchor="middle">R₅ drift</text>
-                    <rect x="186" y="92" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="214" y="106" text-anchor="middle">R₆ audit</text>
-                    <rect x="80" y="124" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="108" y="138" text-anchor="middle">R₇ bias</text>
-                    <rect x="148" y="124" width="56" height="22" rx="2" fill="#fff" stroke="#d4cfc6" stroke-width="0.5"/><text x="176" y="138" text-anchor="middle">R₈ PV</text>
+                  <!-- Risk items — 3×3 grid, generous spacing -->
+                  <g font-family="'IBM Plex Mono',monospace" font-size="9" fill="#555">
+                    <rect x="55" y="100" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="95" y="121" text-anchor="middle" font-weight="500">R₁ data</text>
+
+                    <rect x="155" y="100" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="195" y="121" text-anchor="middle" font-weight="500">R₂ model</text>
+
+                    <rect x="255" y="100" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="295" y="121" text-anchor="middle" font-weight="500">R₃ deploy</text>
+
+                    <rect x="55" y="152" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="95" y="173" text-anchor="middle" font-weight="500">R₄ access</text>
+
+                    <rect x="155" y="152" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="195" y="173" text-anchor="middle" font-weight="500">R₅ drift</text>
+
+                    <rect x="255" y="152" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="295" y="173" text-anchor="middle" font-weight="500">R₆ audit</text>
+
+                    <rect x="105" y="204" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="145" y="225" text-anchor="middle" font-weight="500">R₇ bias</text>
+
+                    <rect x="205" y="204" width="80" height="34" rx="3" fill="#fff" stroke="#d4cfc6" stroke-width="0.5" filter="url(#sc1-shadow)"/>
+                    <text x="245" y="225" text-anchor="middle" font-weight="500">R₈ PV</text>
                   </g>
 
                   <!-- Control coverage ellipses -->
-                  <ellipse cx="105" cy="90" rx="68" ry="48" fill="none" stroke="#8b2500" stroke-width="1" stroke-dasharray="4,3" opacity="0.35"/>
-                  <text x="52" y="170" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#8b2500" opacity="0.7">C₁ validation</text>
+                  <ellipse cx="150" cy="160" rx="120" ry="80" fill="rgba(139,37,0,0.03)" stroke="#8b2500" stroke-width="1.2" stroke-dasharray="6,4" opacity="0.5"/>
+                  <text x="58" y="266" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#8b2500" opacity="0.8" font-weight="500">C₁ validation</text>
 
-                  <ellipse cx="195" cy="95" rx="60" ry="45" fill="none" stroke="#c4522a" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
-                  <text x="215" y="170" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#c4522a" opacity="0.6">C₂ monitoring</text>
+                  <ellipse cx="255" cy="165" rx="105" ry="72" fill="rgba(196,82,42,0.02)" stroke="#c4522a" stroke-width="1.2" stroke-dasharray="6,4" opacity="0.4"/>
+                  <text x="285" y="266" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#c4522a" opacity="0.7" font-weight="500">C₂ monitoring</text>
 
-                  <ellipse cx="150" cy="130" rx="50" ry="28" fill="none" stroke="#d48a6a" stroke-width="1" stroke-dasharray="4,3" opacity="0.25"/>
-                  <text x="130" y="187" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#d48a6a" opacity="0.6">C₃ fairness</text>
+                  <ellipse cx="200" cy="215" rx="85" ry="40" fill="rgba(212,138,106,0.02)" stroke="#d48a6a" stroke-width="1.1" stroke-dasharray="5,4" opacity="0.35"/>
+                  <text x="160" y="290" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#d48a6a" opacity="0.7" font-weight="500">C₃ fairness</text>
 
-                  <!-- Arrow to optimization -->
-                  <line x1="300" y1="110" x2="335" y2="110" stroke="#c4522a" stroke-width="0.8" opacity="0.4" marker-end="url(#arr1)"/>
+                  <!-- Uncovered gap indicator -->
+                  <rect x="264" y="210" width="64" height="24" rx="3" fill="none" stroke="#c4522a" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.5"/>
+                  <text x="296" y="224" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#c4522a" opacity="0.7">gap?</text>
 
-                  <!-- Right panel: Optimization problem -->
-                  <rect x="345" y="30" width="250" height="170" rx="4" fill="rgba(139,37,0,0.02)" stroke="#c4522a" stroke-width="0.4"/>
-                  <text x="470" y="48" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#8b2500" letter-spacing="1">OPTIMIZATION</text>
+                  <!-- Cascade arrows inside risk universe -->
+                  <path d="M 135,135 L 190,150" stroke="#8b2500" stroke-width="0.6" opacity="0.2" marker-end="url(#arr1b)" fill="none"/>
+                  <path d="M 235,135 L 290,150" stroke="#8b2500" stroke-width="0.6" opacity="0.2" marker-end="url(#arr1b)" fill="none"/>
+                  <path d="M 195,187 L 195,203" stroke="#8b2500" stroke-width="0.6" opacity="0.15" marker-end="url(#arr1b)" fill="none"/>
 
-                  <g font-family="'Newsreader',serif" font-size="10" fill="#4a3a2e">
-                    <text x="370" y="78" font-style="italic">Objective:</text>
+                  <!-- Legend row -->
+                  <g transform="translate(55, 330)">
+                    <circle cx="0" cy="0" r="4" fill="#8b2500" opacity="0.5"/>
+                    <text x="10" y="3.5" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">covered</text>
+                    <circle cx="80" cy="0" r="4" fill="none" stroke="#c4522a" stroke-width="1.2" stroke-dasharray="2,1.5" opacity="0.6"/>
+                    <text x="90" y="3.5" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">at risk</text>
+                    <line x1="155" y1="-3" x2="172" y2="3" stroke="#8b2500" stroke-width="0.7" opacity="0.3" marker-end="url(#arr1b)"/>
+                    <text x="180" y="3.5" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">cascade</text>
                   </g>
-                  <foreignObject x="365" y="82" width="225" height="30">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:14px;color:#8b2500;">$$\min |\mathcal{S}| \;\;\text{s.t.}\;\; \bigcup \mathcal{S} \supseteq \mathcal{U}$$</div>
-                  </foreignObject>
-                  <g font-family="'Newsreader',serif" font-size="10" fill="#4a3a2e">
-                    <text x="370" y="128" font-style="italic">Dynamic extension:</text>
-                  </g>
-                  <foreignObject x="365" y="132" width="225" height="30">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:14px;color:#8b2500;">$$\eta(t) = \eta_0 \cdot e^{-\lambda t}$$</div>
-                  </foreignObject>
-                  <text x="370" y="170" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#888">control effectiveness decays</text>
-                  <g font-family="'Newsreader',serif" font-size="10" fill="#4a3a2e">
-                    <text x="370" y="185" font-style="italic">Probabilistic coverage:</text>
-                  </g>
-                  <foreignObject x="365" y="188" width="225" height="30">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:14px;color:#8b2500;">$$\mathbb{P}\!\left(\bigcup \mathcal{S}(t) \supseteq \mathcal{U}\right) \geq 1 - \delta$$</div>
+
+                  <!-- ===== ARROW BETWEEN PANELS ===== -->
+                  <line x1="380" y1="210" x2="408" y2="210" stroke="#c4522a" stroke-width="1.2" opacity="0.5" marker-end="url(#arr1)"/>
+                  <text x="395" y="228" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#c4522a" opacity="0.5">optimize</text>
+
+                  <!-- ===== RIGHT PANEL: Optimization ===== -->
+                  <rect x="418" y="58" width="312" height="310" rx="5" fill="rgba(139,37,0,0.015)" stroke="#c4522a" stroke-width="0.4" filter="url(#sc1-shadow)"/>
+                  <text x="574" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8b2500" letter-spacing="2" font-weight="500">OPTIMIZATION PROBLEM</text>
+
+                  <!-- Objective -->
+                  <text x="445" y="112" font-family="'Newsreader',serif" font-size="13" fill="#4a3a2e" font-style="italic">Objective</text>
+                  <line x1="445" y1="117" x2="700" y2="117" stroke="#d4cfc6" stroke-width="0.4"/>
+                  <foreignObject x="440" y="124" width="280" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;color:#8b2500;line-height:1.6;">$$\min_{S \subseteq \mathcal{C}} |S| \;\;\text{s.t.}\;\; \bigcup_{c \in S} R(c) \supseteq \mathcal{U}$$</div>
                   </foreignObject>
 
-                  <!-- Bottom caption -->
-                  <text x="310" y="215" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">Each control covers a risk subset – the optimal audit plan is the minimum cover that holds over time</text>
+                  <!-- Dynamic extension -->
+                  <text x="445" y="186" font-family="'Newsreader',serif" font-size="13" fill="#4a3a2e" font-style="italic">Temporal decay</text>
+                  <line x1="445" y1="191" x2="700" y2="191" stroke="#d4cfc6" stroke-width="0.4"/>
+                  <foreignObject x="440" y="198" width="280" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;color:#8b2500;line-height:1.6;">$$\eta_c(t) = \eta_{c,0} \cdot e^{-\lambda_c\, t} \geq \theta$$</div>
+                  </foreignObject>
+                  <text x="445" y="248" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">control effectiveness decays — reaudit when η &lt; θ</text>
+
+                  <!-- Probabilistic coverage -->
+                  <text x="445" y="278" font-family="'Newsreader',serif" font-size="13" fill="#4a3a2e" font-style="italic">Probabilistic coverage guarantee</text>
+                  <line x1="445" y1="283" x2="700" y2="283" stroke="#d4cfc6" stroke-width="0.4"/>
+                  <foreignObject x="440" y="290" width="280" height="42">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:16px;color:#8b2500;line-height:1.6;">$$\mathbb{P}\!\left(\bigcup_{c \in S} R_c(t) \supseteq \mathcal{U}\right) \geq 1 - \delta$$</div>
+                  </foreignObject>
+                  <text x="445" y="344" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">Bayesian credible coverage via Beta-Binomial posteriors</text>
+
+                  <!-- ===== BOTTOM CAPTION ===== -->
+                  <text x="380" y="410" text-anchor="middle" font-family="'Newsreader',serif" font-size="12" fill="#888" font-style="italic">Each control covers a risk subset — the optimal audit plan is the minimum cover that holds over time.</text>
+                  <text x="380" y="432" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#bbb" letter-spacing="1">CASCADE BLOCKING  ·  SET-COVER NP-HARDNESS  ·  GREEDY APPROXIMATION ln(n)+1</text>
+
+                  <!-- Decorative bottom rule -->
+                  <line x1="180" y1="455" x2="580" y2="455" stroke="#d4cfc6" stroke-width="0.5"/>
+                  <text x="380" y="470" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="10" fill="#bbb" font-style="italic">auditcover — open-source Python package</text>
                 </svg>
+                </div>
 
                 <div class="deep-section">
                   <div class="deep-heading">From Checklists to Topology</div>
@@ -1027,168 +1079,184 @@
                 </div>
 
                 <!-- Inline SVG: The Paradigm Gap – current AI vs brain-inspired architecture -->
-                <svg viewBox="0 0 620 380" style="width:100%;max-width:900px;margin:1.25rem auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+                <div style="width:100%;margin:1.5rem auto;border:0.5px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--paper);box-shadow:0 2px 16px rgba(0,0,0,0.04);">
+                <svg viewBox="0 0 760 560" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <radialGradient id="mg2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2d6a7e" stop-opacity="0.08"/><stop offset="100%" stop-color="#2d6a7e" stop-opacity="0"/></radialGradient>
-                    <radialGradient id="mg3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c4522a" stop-opacity="0.06"/><stop offset="100%" stop-color="#c4522a" stop-opacity="0"/></radialGradient>
-                    <radialGradient id="mg4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4a7a3a" stop-opacity="0.06"/><stop offset="100%" stop-color="#4a7a3a" stop-opacity="0"/></radialGradient>
-                    <marker id="arr2" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0 0, 6 2, 0 4" fill="#c4522a" opacity="0.4"/></marker>
-                    <filter id="glow1"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                    <filter id="glow2"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    <radialGradient id="mg2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2d6a7e" stop-opacity="0.06"/><stop offset="100%" stop-color="#2d6a7e" stop-opacity="0"/></radialGradient>
+                    <radialGradient id="mg3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c4522a" stop-opacity="0.05"/><stop offset="100%" stop-color="#c4522a" stop-opacity="0"/></radialGradient>
+                    <radialGradient id="mg4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4a7a3a" stop-opacity="0.05"/><stop offset="100%" stop-color="#4a7a3a" stop-opacity="0"/></radialGradient>
+                    <marker id="arr2" markerWidth="7" markerHeight="4" refX="7" refY="2" orient="auto"><polygon points="0 0, 7 2, 0 4" fill="#1a3a4a" opacity="0.4"/></marker>
+                    <marker id="arr2b" markerWidth="7" markerHeight="4" refX="7" refY="2" orient="auto"><polygon points="0 0, 7 2, 0 4" fill="#c4522a" opacity="0.35"/></marker>
+                    <filter id="sc2-glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    <filter id="sc2-shadow"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/></filter>
                   </defs>
 
-                  <!-- ====== LEFT: Current AI – dense, wasteful ====== -->
-                  <rect x="15" y="8" width="185" height="195" rx="4" fill="rgba(196,82,42,0.015)" stroke="#c4522a" stroke-width="0.3" opacity="0.6"/>
-                  <text x="107" y="24" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#8b2500" letter-spacing="1.5" font-weight="500">CURRENT PARADIGM</text>
-                  <text x="107" y="36" text-anchor="middle" font-family="'Newsreader',serif" font-size="8.5" fill="#888" font-style="italic">dense · synchronous · O(n²)</text>
+                  <!-- Title bar -->
+                  <text x="380" y="28" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#1a3a4a" letter-spacing="2.5" font-weight="500">THREE PARADIGMS — ONE CONVERGENCE</text>
+                  <line x1="120" y1="38" x2="640" y2="38" stroke="#d4cfc6" stroke-width="0.5"/>
 
-                  <!-- Dense attention matrix -->
-                  <circle cx="107" cy="105" r="58" fill="url(#mg3)"/>
-                  <g transform="translate(65,63)">
-                    <!-- 8x8 grid representing dense attention weights -->
+                  <!-- ====== COLUMN 1: Current Paradigm (Dense Transformers) ====== -->
+                  <rect x="24" y="54" width="225" height="270" rx="5" fill="rgba(196,82,42,0.012)" stroke="#c4522a" stroke-width="0.4" filter="url(#sc2-shadow)"/>
+                  <text x="136" y="76" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8b2500" letter-spacing="2" font-weight="500">DENSE TRANSFORMERS</text>
+                  <text x="136" y="92" text-anchor="middle" font-family="'Newsreader',serif" font-size="10.5" fill="#888" font-style="italic">synchronous · O(n²) · brute-force</text>
+
+                  <!-- Dense attention matrix — 7x7 grid -->
+                  <circle cx="136" cy="170" r="72" fill="url(#mg3)"/>
+                  <g transform="translate(89,123)">
                     <g fill="#c4522a">
-                      <rect x="0" y="0" width="9" height="9" rx="0.5" opacity="0.7"/><rect x="11" y="0" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="22" y="0" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="33" y="0" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="44" y="0" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="55" y="0" width="9" height="9" rx="0.5" opacity="0.25"/><rect x="66" y="0" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="77" y="0" width="9" height="9" rx="0.5" opacity="0.4"/>
-                      <rect x="0" y="11" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="11" y="11" width="9" height="9" rx="0.5" opacity="0.75"/><rect x="22" y="11" width="9" height="9" rx="0.5" opacity="0.3"/><rect x="33" y="11" width="9" height="9" rx="0.5" opacity="0.65"/><rect x="44" y="11" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="55" y="11" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="66" y="11" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="77" y="11" width="9" height="9" rx="0.5" opacity="0.6"/>
-                      <rect x="0" y="22" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="11" y="22" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="22" y="22" width="9" height="9" rx="0.5" opacity="0.8"/><rect x="33" y="22" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="44" y="22" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="55" y="22" width="9" height="9" rx="0.5" opacity="0.3"/><rect x="66" y="22" width="9" height="9" rx="0.5" opacity="0.65"/><rect x="77" y="22" width="9" height="9" rx="0.5" opacity="0.5"/>
-                      <rect x="0" y="33" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="11" y="33" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="22" y="33" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="33" y="33" width="9" height="9" rx="0.5" opacity="0.7"/><rect x="44" y="33" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="55" y="33" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="66" y="33" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="77" y="33" width="9" height="9" rx="0.5" opacity="0.45"/>
-                      <rect x="0" y="44" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="11" y="44" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="22" y="44" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="33" y="44" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="44" y="44" width="9" height="9" rx="0.5" opacity="0.75"/><rect x="55" y="44" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="66" y="44" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="77" y="44" width="9" height="9" rx="0.5" opacity="0.65"/>
-                      <rect x="0" y="55" width="9" height="9" rx="0.5" opacity="0.3"/><rect x="11" y="55" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="22" y="55" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="33" y="55" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="44" y="55" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="55" y="55" width="9" height="9" rx="0.5" opacity="0.7"/><rect x="66" y="55" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="77" y="55" width="9" height="9" rx="0.5" opacity="0.5"/>
-                      <rect x="0" y="66" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="11" y="66" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="22" y="66" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="33" y="66" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="44" y="66" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="55" y="66" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="66" y="66" width="9" height="9" rx="0.5" opacity="0.7"/><rect x="77" y="66" width="9" height="9" rx="0.5" opacity="0.55"/>
-                      <rect x="0" y="77" width="9" height="9" rx="0.5" opacity="0.45"/><rect x="11" y="77" width="9" height="9" rx="0.5" opacity="0.55"/><rect x="22" y="77" width="9" height="9" rx="0.5" opacity="0.35"/><rect x="33" y="77" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="44" y="77" width="9" height="9" rx="0.5" opacity="0.4"/><rect x="55" y="77" width="9" height="9" rx="0.5" opacity="0.6"/><rect x="66" y="77" width="9" height="9" rx="0.5" opacity="0.5"/><rect x="77" y="77" width="9" height="9" rx="0.5" opacity="0.65"/>
+                      <rect x="0" y="0" width="12" height="12" rx="1" opacity="0.7"/><rect x="14" y="0" width="12" height="12" rx="1" opacity="0.4"/><rect x="28" y="0" width="12" height="12" rx="1" opacity="0.6"/><rect x="42" y="0" width="12" height="12" rx="1" opacity="0.3"/><rect x="56" y="0" width="12" height="12" rx="1" opacity="0.5"/><rect x="70" y="0" width="12" height="12" rx="1" opacity="0.25"/><rect x="84" y="0" width="12" height="12" rx="1" opacity="0.55"/>
+                      <rect x="0" y="14" width="12" height="12" rx="1" opacity="0.45"/><rect x="14" y="14" width="12" height="12" rx="1" opacity="0.75"/><rect x="28" y="14" width="12" height="12" rx="1" opacity="0.3"/><rect x="42" y="14" width="12" height="12" rx="1" opacity="0.6"/><rect x="56" y="14" width="12" height="12" rx="1" opacity="0.4"/><rect x="70" y="14" width="12" height="12" rx="1" opacity="0.55"/><rect x="84" y="14" width="12" height="12" rx="1" opacity="0.35"/>
+                      <rect x="0" y="28" width="12" height="12" rx="1" opacity="0.6"/><rect x="14" y="28" width="12" height="12" rx="1" opacity="0.35"/><rect x="28" y="28" width="12" height="12" rx="1" opacity="0.8"/><rect x="42" y="28" width="12" height="12" rx="1" opacity="0.4"/><rect x="56" y="28" width="12" height="12" rx="1" opacity="0.55"/><rect x="70" y="28" width="12" height="12" rx="1" opacity="0.3"/><rect x="84" y="28" width="12" height="12" rx="1" opacity="0.65"/>
+                      <rect x="0" y="42" width="12" height="12" rx="1" opacity="0.4"/><rect x="14" y="42" width="12" height="12" rx="1" opacity="0.6"/><rect x="28" y="42" width="12" height="12" rx="1" opacity="0.45"/><rect x="42" y="42" width="12" height="12" rx="1" opacity="0.7"/><rect x="56" y="42" width="12" height="12" rx="1" opacity="0.35"/><rect x="70" y="42" width="12" height="12" rx="1" opacity="0.6"/><rect x="84" y="42" width="12" height="12" rx="1" opacity="0.5"/>
+                      <rect x="0" y="56" width="12" height="12" rx="1" opacity="0.55"/><rect x="14" y="56" width="12" height="12" rx="1" opacity="0.4"/><rect x="28" y="56" width="12" height="12" rx="1" opacity="0.6"/><rect x="42" y="56" width="12" height="12" rx="1" opacity="0.3"/><rect x="56" y="56" width="12" height="12" rx="1" opacity="0.75"/><rect x="70" y="56" width="12" height="12" rx="1" opacity="0.5"/><rect x="84" y="56" width="12" height="12" rx="1" opacity="0.4"/>
+                      <rect x="0" y="70" width="12" height="12" rx="1" opacity="0.3"/><rect x="14" y="70" width="12" height="12" rx="1" opacity="0.5"/><rect x="28" y="70" width="12" height="12" rx="1" opacity="0.4"/><rect x="42" y="70" width="12" height="12" rx="1" opacity="0.6"/><rect x="56" y="70" width="12" height="12" rx="1" opacity="0.45"/><rect x="70" y="70" width="12" height="12" rx="1" opacity="0.7"/><rect x="84" y="70" width="12" height="12" rx="1" opacity="0.35"/>
+                      <rect x="0" y="84" width="12" height="12" rx="1" opacity="0.45"/><rect x="14" y="84" width="12" height="12" rx="1" opacity="0.55"/><rect x="28" y="84" width="12" height="12" rx="1" opacity="0.35"/><rect x="42" y="84" width="12" height="12" rx="1" opacity="0.5"/><rect x="56" y="84" width="12" height="12" rx="1" opacity="0.4"/><rect x="70" y="84" width="12" height="12" rx="1" opacity="0.6"/><rect x="84" y="84" width="12" height="12" rx="1" opacity="0.65"/>
                     </g>
                   </g>
-                  <text x="107" y="160" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#8b2500" opacity="0.6">every token attends to every token</text>
-                  <text x="107" y="175" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#c4522a" font-weight="600">300–700 W</text>
-                  <text x="107" y="188" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#888">GPU inference (H100)</text>
-                  <text x="107" y="198" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6" fill="#888">62.9 mJ / inference</text>
+                  <text x="136" y="232" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8b2500" opacity="0.6">every token attends to every token</text>
+                  <text x="136" y="254" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#c4522a" font-weight="600">300–700 W</text>
+                  <text x="136" y="270" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">GPU inference (H100)</text>
+                  <text x="136" y="286" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">62.9 mJ / inference</text>
 
-                  <!-- ====== CENTER: The arrow / paradigm shift ====== -->
-                  <line x1="208" y1="100" x2="224" y2="100" stroke="#c4522a" stroke-width="1" opacity="0.3" marker-end="url(#arr2)"/>
-                  <text x="216" y="115" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="5" fill="#c4522a" opacity="0.4">10⁶×</text>
+                  <!-- ====== Arrows between columns ====== -->
+                  <line x1="254" y1="180" x2="272" y2="180" stroke="#c4522a" stroke-width="1" opacity="0.3" marker-end="url(#arr2b)"/>
+                  <text x="263" y="198" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#c4522a" opacity="0.4">10⁶×</text>
 
-                  <!-- ====== CENTER-RIGHT: Brain-inspired – sparse, event-driven ====== -->
-                  <rect x="230" y="8" width="185" height="195" rx="4" fill="rgba(74,122,58,0.015)" stroke="#4a7a3a" stroke-width="0.3" opacity="0.6"/>
-                  <text x="322" y="24" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#2c4a2e" letter-spacing="1.5" font-weight="500">BRAIN-INSPIRED</text>
-                  <text x="322" y="36" text-anchor="middle" font-family="'Newsreader',serif" font-size="8.5" fill="#888" font-style="italic">sparse · event-driven · spiking</text>
+                  <!-- ====== COLUMN 2: Brain-Inspired (Sparse SNNs) ====== -->
+                  <rect x="278" y="54" width="205" height="270" rx="5" fill="rgba(74,122,58,0.012)" stroke="#4a7a3a" stroke-width="0.4" filter="url(#sc2-shadow)"/>
+                  <text x="380" y="76" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#2c4a2e" letter-spacing="2" font-weight="500">SPIKING NETWORKS</text>
+                  <text x="380" y="92" text-anchor="middle" font-family="'Newsreader',serif" font-size="10.5" fill="#888" font-style="italic">sparse · event-driven · temporal</text>
 
                   <!-- Spiking neural network visualization -->
-                  <circle cx="322" cy="105" r="58" fill="url(#mg4)"/>
-                  <g transform="translate(272,58)">
-                    <!-- Neurons (circles) with sparse spike connections -->
-                    <circle cx="15" cy="15" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.6"/>
-                    <circle cx="50" cy="8" r="4" fill="#4a7a3a" opacity="0.7" filter="url(#glow2)"/>
-                    <circle cx="85" cy="18" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.4"/>
-                    <circle cx="30" cy="40" r="4" fill="#4a7a3a" opacity="0.6" filter="url(#glow2)"/>
-                    <circle cx="65" cy="35" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.5"/>
-                    <circle cx="95" cy="42" r="4" fill="#4a7a3a" opacity="0.5" filter="url(#glow2)"/>
-                    <circle cx="10" cy="65" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.3"/>
-                    <circle cx="45" cy="60" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.6"/>
-                    <circle cx="75" cy="68" r="4" fill="#4a7a3a" opacity="0.65" filter="url(#glow2)"/>
-                    <circle cx="20" cy="88" r="4" fill="#4a7a3a" opacity="0.4" filter="url(#glow2)"/>
-                    <circle cx="55" cy="85" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.5"/>
-                    <circle cx="88" cy="90" r="4" fill="none" stroke="#4a7a3a" stroke-width="0.8" opacity="0.3"/>
-                    <!-- Sparse spikes (only active connections) -->
-                    <line x1="50" y1="12" x2="30" y2="36" stroke="#4a7a3a" stroke-width="0.8" opacity="0.5"/>
-                    <line x1="50" y1="12" x2="65" y2="31" stroke="#4a7a3a" stroke-width="0.6" opacity="0.3"/>
-                    <line x1="30" y1="44" x2="45" y2="56" stroke="#4a7a3a" stroke-width="0.7" opacity="0.4"/>
-                    <line x1="95" y1="46" x2="75" y2="64" stroke="#4a7a3a" stroke-width="0.8" opacity="0.5"/>
-                    <line x1="75" y1="72" x2="55" y2="81" stroke="#4a7a3a" stroke-width="0.6" opacity="0.3"/>
-                    <line x1="75" y1="72" x2="88" y2="86" stroke="#4a7a3a" stroke-width="0.5" opacity="0.25"/>
-                    <line x1="20" y1="92" x2="10" y2="69" stroke="#4a7a3a" stroke-width="0.6" opacity="0.35"/>
+                  <circle cx="380" cy="170" r="72" fill="url(#mg4)"/>
+                  <g transform="translate(320,118)">
+                    <!-- Neurons -->
+                    <circle cx="20" cy="15" r="5.5" fill="none" stroke="#4a7a3a" stroke-width="1" opacity="0.5"/>
+                    <circle cx="65" cy="8" r="5.5" fill="#4a7a3a" opacity="0.65" filter="url(#sc2-glow)"/>
+                    <circle cx="105" cy="18" r="5.5" fill="none" stroke="#4a7a3a" stroke-width="1" opacity="0.4"/>
+                    <circle cx="35" cy="48" r="5.5" fill="#4a7a3a" opacity="0.55" filter="url(#sc2-glow)"/>
+                    <circle cx="80" cy="42" r="5.5" fill="none" stroke="#4a7a3a" stroke-width="1" opacity="0.45"/>
+                    <circle cx="115" cy="52" r="5.5" fill="#4a7a3a" opacity="0.5" filter="url(#sc2-glow)"/>
+                    <circle cx="12" cy="78" r="5.5" fill="none" stroke="#4a7a3a" stroke-width="1" opacity="0.3"/>
+                    <circle cx="55" cy="72" r="5.5" fill="none" stroke="#4a7a3a" stroke-width="1" opacity="0.55"/>
+                    <circle cx="95" cy="82" r="5.5" fill="#4a7a3a" opacity="0.6" filter="url(#sc2-glow)"/>
+                    <circle cx="25" cy="105" r="5.5" fill="#4a7a3a" opacity="0.4" filter="url(#sc2-glow)"/>
+                    <circle cx="70" cy="100" r="5.5" fill="none" stroke="#4a7a3a" stroke-width="1" opacity="0.5"/>
+                    <!-- Sparse spike connections -->
+                    <line x1="65" y1="14" x2="35" y2="43" stroke="#4a7a3a" stroke-width="1" opacity="0.45"/>
+                    <line x1="65" y1="14" x2="80" y2="37" stroke="#4a7a3a" stroke-width="0.8" opacity="0.3"/>
+                    <line x1="35" y1="54" x2="55" y2="67" stroke="#4a7a3a" stroke-width="0.9" opacity="0.35"/>
+                    <line x1="115" y1="58" x2="95" y2="76" stroke="#4a7a3a" stroke-width="1" opacity="0.45"/>
+                    <line x1="95" y1="88" x2="70" y2="95" stroke="#4a7a3a" stroke-width="0.8" opacity="0.3"/>
+                    <line x1="25" y1="111" x2="12" y2="84" stroke="#4a7a3a" stroke-width="0.7" opacity="0.3"/>
                     <!-- Spike timing marks -->
-                    <rect x="48" y="5" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.8"/>
-                    <rect x="28" y="37" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.7"/>
-                    <rect x="93" y="39" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.6"/>
-                    <rect x="73" y="65" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.7"/>
-                    <rect x="18" y="85" width="4" height="1.5" rx="0.5" fill="#4a7a3a" opacity="0.5"/>
+                    <rect x="62" y="3" width="6" height="2" rx="0.75" fill="#4a7a3a" opacity="0.8"/>
+                    <rect x="32" y="43" width="6" height="2" rx="0.75" fill="#4a7a3a" opacity="0.7"/>
+                    <rect x="112" y="47" width="6" height="2" rx="0.75" fill="#4a7a3a" opacity="0.6"/>
+                    <rect x="92" y="77" width="6" height="2" rx="0.75" fill="#4a7a3a" opacity="0.7"/>
+                    <rect x="22" y="100" width="6" height="2" rx="0.75" fill="#4a7a3a" opacity="0.5"/>
                   </g>
-                  <text x="322" y="160" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#2c4a2e" opacity="0.6">fire only when needed · ~5% active</text>
-                  <text x="322" y="175" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a7a3a" font-weight="600">0.25–1.2 W</text>
-                  <text x="322" y="188" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#888">Loihi 2 / SNN inference</text>
-                  <text x="322" y="198" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6" fill="#888">1.2 mJ / inference</text>
+                  <text x="380" y="232" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#2c4a2e" opacity="0.6">fire only when needed · ~5% active</text>
+                  <text x="380" y="254" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#4a7a3a" font-weight="600">0.25–1.2 W</text>
+                  <text x="380" y="270" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">Loihi 2 / SNN inference</text>
+                  <text x="380" y="286" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">1.2 mJ / inference</text>
 
-                  <!-- ====== RIGHT: Geometric deep learning – the bridge ====== -->
-                  <rect x="422" y="8" width="185" height="195" rx="4" fill="rgba(45,106,126,0.015)" stroke="#2d6a7e" stroke-width="0.3" opacity="0.6"/>
-                  <text x="514" y="24" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#1a3a4a" letter-spacing="1.5" font-weight="500">GEOMETRIC DL</text>
-                  <text x="514" y="36" text-anchor="middle" font-family="'Newsreader',serif" font-size="8.5" fill="#888" font-style="italic">shape-aware · topological · efficient</text>
+                  <!-- ====== Arrow to column 3 ====== -->
+                  <line x1="488" y1="180" x2="506" y2="180" stroke="#2d6a7e" stroke-width="1" opacity="0.3" marker-end="url(#arr2)"/>
+
+                  <!-- ====== COLUMN 3: Geometric Deep Learning (TDA) ====== -->
+                  <rect x="512" y="54" width="225" height="270" rx="5" fill="rgba(45,106,126,0.012)" stroke="#2d6a7e" stroke-width="0.4" filter="url(#sc2-shadow)"/>
+                  <text x="624" y="76" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#1a3a4a" letter-spacing="2" font-weight="500">GEOMETRIC TDA</text>
+                  <text x="624" y="92" text-anchor="middle" font-family="'Newsreader',serif" font-size="10.5" fill="#888" font-style="italic">shape-aware · topological · efficient</text>
 
                   <!-- TDA / manifold visualization -->
-                  <circle cx="514" cy="105" r="58" fill="url(#mg2)"/>
-                  <g transform="translate(514,105)">
+                  <circle cx="624" cy="170" r="72" fill="url(#mg2)"/>
+                  <g transform="translate(624,170)">
                     <!-- Outer manifold loop -->
-                    <path d="M -38,-5 C -35,-25 -18,-35 0,-38 S 30,-30 38,-10 S 35,22 18,35 S -15,38 -32,25 S -42,10 -38,-5 Z" fill="none" stroke="#2d6a7e" stroke-width="1" opacity="0.4"/>
+                    <path d="M -48,-6 C -44,-32 -22,-45 0,-48 S 38,-38 48,-12 S 44,28 22,44 S -18,48 -40,32 S -53,12 -48,-6 Z" fill="none" stroke="#2d6a7e" stroke-width="1.2" opacity="0.4"/>
                     <!-- Points on manifold -->
-                    <circle cx="-35" cy="-8" r="2.2" fill="#2d6a7e" opacity="0.7"/>
-                    <circle cx="-22" cy="-28" r="2.2" fill="#2d6a7e" opacity="0.7"/>
-                    <circle cx="0" cy="-36" r="2.2" fill="#2d6a7e" opacity="0.7"/>
-                    <circle cx="25" cy="-25" r="2.2" fill="#2d6a7e" opacity="0.7"/>
-                    <circle cx="36" cy="-5" r="2.2" fill="#2d6a7e" opacity="0.7"/>
-                    <circle cx="30" cy="18" r="2.2" fill="#2d6a7e" opacity="0.7"/>
-                    <circle cx="12" cy="33" r="2.2" fill="#2d6a7e" opacity="0.7"/>
-                    <circle cx="-12" cy="35" r="2.2" fill="#2d6a7e" opacity="0.7"/>
-                    <circle cx="-30" cy="20" r="2.2" fill="#2d6a7e" opacity="0.7"/>
-                    <!-- Persistent hole – the key feature -->
-                    <circle cx="0" cy="0" r="14" fill="none" stroke="#c4522a" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.6"/>
-                    <text x="0" y="3" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#c4522a" font-weight="500" opacity="0.7">H₁</text>
+                    <circle cx="-44" cy="-10" r="3" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="-28" cy="-36" r="3" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="0" cy="-46" r="3" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="32" cy="-32" r="3" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="46" cy="-6" r="3" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="38" cy="22" r="3" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="15" cy="42" r="3" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="-15" cy="44" r="3" fill="#2d6a7e" opacity="0.7"/>
+                    <circle cx="-38" cy="25" r="3" fill="#2d6a7e" opacity="0.7"/>
+                    <!-- Persistent hole — the key feature -->
+                    <circle cx="0" cy="0" r="18" fill="none" stroke="#c4522a" stroke-width="1.5" stroke-dasharray="4,2.5" opacity="0.55"/>
+                    <text x="0" y="4" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#c4522a" font-weight="500" opacity="0.7">H₁</text>
                     <!-- Simplicial edges -->
-                    <line x1="-35" y1="-8" x2="-22" y2="-28" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
-                    <line x1="-22" y1="-28" x2="0" y2="-36" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
-                    <line x1="0" y1="-36" x2="25" y2="-25" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
-                    <line x1="25" y1="-25" x2="36" y2="-5" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
-                    <line x1="36" y1="-5" x2="30" y2="18" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
-                    <line x1="30" y1="18" x2="12" y2="33" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
-                    <line x1="12" y1="33" x2="-12" y2="35" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
-                    <line x1="-12" y1="35" x2="-30" y2="20" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
-                    <line x1="-30" y1="20" x2="-35" y2="-8" stroke="#2d6a7e" stroke-width="0.5" opacity="0.25"/>
-                    <!-- Filled triangle (2-simplex) -->
-                    <polygon points="0,-36 25,-25 36,-5" fill="#2d6a7e" fill-opacity="0.04" stroke="#2d6a7e" stroke-width="0.3" opacity="0.4"/>
-                    <polygon points="12,33 -12,35 -30,20" fill="#2d6a7e" fill-opacity="0.04" stroke="#2d6a7e" stroke-width="0.3" opacity="0.4"/>
+                    <line x1="-44" y1="-10" x2="-28" y2="-36" stroke="#2d6a7e" stroke-width="0.6" opacity="0.25"/>
+                    <line x1="-28" y1="-36" x2="0" y2="-46" stroke="#2d6a7e" stroke-width="0.6" opacity="0.25"/>
+                    <line x1="0" y1="-46" x2="32" y2="-32" stroke="#2d6a7e" stroke-width="0.6" opacity="0.25"/>
+                    <line x1="32" y1="-32" x2="46" y2="-6" stroke="#2d6a7e" stroke-width="0.6" opacity="0.25"/>
+                    <line x1="46" y1="-6" x2="38" y2="22" stroke="#2d6a7e" stroke-width="0.6" opacity="0.25"/>
+                    <line x1="38" y1="22" x2="15" y2="42" stroke="#2d6a7e" stroke-width="0.6" opacity="0.25"/>
+                    <line x1="15" y1="42" x2="-15" y2="44" stroke="#2d6a7e" stroke-width="0.6" opacity="0.25"/>
+                    <line x1="-15" y1="44" x2="-38" y2="25" stroke="#2d6a7e" stroke-width="0.6" opacity="0.25"/>
+                    <line x1="-38" y1="25" x2="-44" y2="-10" stroke="#2d6a7e" stroke-width="0.6" opacity="0.25"/>
+                    <!-- Filled triangles (2-simplices) -->
+                    <polygon points="0,-46 32,-32 46,-6" fill="#2d6a7e" fill-opacity="0.04" stroke="#2d6a7e" stroke-width="0.4" opacity="0.35"/>
+                    <polygon points="15,42 -15,44 -38,25" fill="#2d6a7e" fill-opacity="0.04" stroke="#2d6a7e" stroke-width="0.4" opacity="0.35"/>
                   </g>
-                  <text x="514" y="160" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#1a3a4a" opacity="0.6">detect shape · ignore noise</text>
-                  <text x="514" y="175" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#2d6a7e" font-weight="600">~20 W</text>
-                  <text x="514" y="188" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#888">the human brain target</text>
-                  <text x="514" y="198" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6" fill="#888">10⁻² mJ / synaptic event</text>
+                  <text x="624" y="232" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#1a3a4a" opacity="0.6">detect shape · ignore noise</text>
+                  <text x="624" y="254" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#2d6a7e" font-weight="600">~20 W</text>
+                  <text x="624" y="270" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">the human brain target</text>
+                  <text x="624" y="286" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#888">10⁻² mJ / synaptic event</text>
 
                   <!-- ====== BOTTOM: The convergence pipeline ====== -->
-                  <line x1="15" y1="218" x2="605" y2="218" stroke="#d4cfc6" stroke-width="0.4"/>
+                  <line x1="24" y1="342" x2="736" y2="342" stroke="#d4cfc6" stroke-width="0.5"/>
 
-                  <rect x="15" y="228" width="590" height="145" rx="4" fill="rgba(26,58,74,0.012)" stroke="#2d6a7e" stroke-width="0.2"/>
-                  <text x="310" y="245" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#1a3a4a" letter-spacing="1.5" font-weight="500">THE CONVERGENCE – WHERE THESE IDEAS MEET</text>
+                  <rect x="24" y="356" width="712" height="170" rx="5" fill="rgba(26,58,74,0.012)" stroke="#2d6a7e" stroke-width="0.3" filter="url(#sc2-shadow)"/>
+                  <text x="380" y="378" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#1a3a4a" letter-spacing="2" font-weight="500">THE CONVERGENCE — WHERE THESE IDEAS MEET</text>
 
                   <!-- Pipeline: data → topology → sparsity → efficiency -->
-                  <g font-family="'IBM Plex Mono',monospace" font-size="8" fill="#1a3a4a">
+                  <g font-family="'IBM Plex Mono',monospace">
                     <!-- Step 1 -->
-                    <rect x="40" y="262" width="90" height="36" rx="3" fill="#faf8f4" stroke="#c4522a" stroke-width="0.5"/>
-                    <text x="85" y="278" text-anchor="middle" font-size="7.5" fill="#8b2500" font-weight="500">RAW DATA</text>
-                    <text x="85" y="290" text-anchor="middle" font-size="6" fill="#888">patient cohorts</text>
+                    <rect x="52" y="396" width="115" height="44" rx="4" fill="#faf8f4" stroke="#c4522a" stroke-width="0.6" filter="url(#sc2-shadow)"/>
+                    <text x="109" y="416" text-anchor="middle" font-size="9" fill="#8b2500" font-weight="500">RAW DATA</text>
+                    <text x="109" y="431" text-anchor="middle" font-size="7.5" fill="#888">patient cohorts</text>
                     <!-- Arrow -->
-                    <text x="145" y="283" text-anchor="middle" font-size="10" fill="#c4522a" opacity="0.3">→</text>
+                    <line x1="172" y1="418" x2="196" y2="418" stroke="#1a3a4a" stroke-width="0.8" opacity="0.3" marker-end="url(#arr2)"/>
                     <!-- Step 2 -->
-                    <rect x="160" y="262" width="100" height="36" rx="3" fill="#faf8f4" stroke="#2d6a7e" stroke-width="0.5"/>
-                    <text x="210" y="278" text-anchor="middle" font-size="7.5" fill="#1a3a4a" font-weight="500">TDA FILTER</text>
-                    <text x="210" y="290" text-anchor="middle" font-size="6" fill="#888">VR(X,ε) → Dgm(X)</text>
+                    <rect x="202" y="396" width="130" height="44" rx="4" fill="#faf8f4" stroke="#2d6a7e" stroke-width="0.6" filter="url(#sc2-shadow)"/>
+                    <text x="267" y="416" text-anchor="middle" font-size="9" fill="#1a3a4a" font-weight="500">TDA FILTER</text>
+                    <text x="267" y="431" text-anchor="middle" font-size="7.5" fill="#888">VR(X,ε) → Dgm(X)</text>
                     <!-- Arrow -->
-                    <text x="275" y="283" text-anchor="middle" font-size="10" fill="#c4522a" opacity="0.3">→</text>
+                    <line x1="337" y1="418" x2="361" y2="418" stroke="#1a3a4a" stroke-width="0.8" opacity="0.3" marker-end="url(#arr2)"/>
                     <!-- Step 3 -->
-                    <rect x="290" y="262" width="110" height="36" rx="3" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.5"/>
-                    <text x="345" y="278" text-anchor="middle" font-size="7.5" fill="#2c4a2e" font-weight="500">SPARSE SPIKES</text>
-                    <text x="345" y="290" text-anchor="middle" font-size="6" fill="#888">attend to H₁ features</text>
+                    <rect x="367" y="396" width="140" height="44" rx="4" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.6" filter="url(#sc2-shadow)"/>
+                    <text x="437" y="416" text-anchor="middle" font-size="9" fill="#2c4a2e" font-weight="500">SPARSE SPIKES</text>
+                    <text x="437" y="431" text-anchor="middle" font-size="7.5" fill="#888">attend to H₁ features</text>
                     <!-- Arrow -->
-                    <text x="415" y="283" text-anchor="middle" font-size="10" fill="#c4522a" opacity="0.3">→</text>
+                    <line x1="512" y1="418" x2="536" y2="418" stroke="#1a3a4a" stroke-width="0.8" opacity="0.3" marker-end="url(#arr2)"/>
                     <!-- Step 4 -->
-                    <rect x="430" y="262" width="150" height="36" rx="3" fill="#faf8f4" stroke="#8b2500" stroke-width="0.7"/>
-                    <text x="505" y="278" text-anchor="middle" font-size="7.5" fill="#8b2500" font-weight="500">EFFICIENT + AWARE</text>
-                    <text x="505" y="290" text-anchor="middle" font-size="6" fill="#888">signals, not noise</text>
+                    <rect x="542" y="396" width="175" height="44" rx="4" fill="#faf8f4" stroke="#8b2500" stroke-width="0.8" filter="url(#sc2-shadow)"/>
+                    <text x="629" y="416" text-anchor="middle" font-size="9" fill="#8b2500" font-weight="500">EFFICIENT + AWARE</text>
+                    <text x="629" y="431" text-anchor="middle" font-size="7.5" fill="#888">signals, not noise</text>
                   </g>
 
                   <!-- Bottom formulas -->
-                  <foreignObject x="60" y="305" width="500" height="35">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:13px;color:#1a3a4a;text-align:center;">$$X \to \mathrm{VR}(X,\varepsilon) \to \{H_k(\varepsilon)\}_{k=0,1,\ldots} \to \mathrm{Dgm}_k(X) \to \text{sparse SNN input}$$</div>
+                  <foreignObject x="80" y="448" width="600" height="36">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:14px;color:#1a3a4a;text-align:center;">$$X \to \mathrm{VR}(X,\varepsilon) \to \{H_k(\varepsilon)\}_{k=0,1,\ldots} \to \mathrm{Dgm}_k(X) \to \text{sparse SNN input}$$</div>
                   </foreignObject>
-                  <text x="310" y="340" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">Topologically-guided spiking architectures: attend only to geometrically significant features</text>
-                  <text x="310" y="358" text-anchor="middle" font-family="'Newsreader',serif" font-size="8.5" fill="#888" font-style="italic">Stability Theorem (Cohen-Steiner, Edelsbrunner, Harer 2007) guarantees robustness under noise</text>
-                  <text x="310" y="373" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#2d6a7e" opacity="0.5">Applications: FAERS safety signals · patient subpopulation detection · control drift measurement</text>
+                  <text x="380" y="496" text-anchor="middle" font-family="'Newsreader',serif" font-size="11" fill="#888" font-style="italic">Topologically-guided spiking architectures: attend only to geometrically significant features</text>
+                  <text x="380" y="514" text-anchor="middle" font-family="'Newsreader',serif" font-size="10" fill="#888" font-style="italic">Stability Theorem (Cohen-Steiner, Edelsbrunner, Harer 2007) guarantees robustness under noise</text>
+                  <text x="380" y="535" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#2d6a7e" opacity="0.5">Applications: FAERS safety signals · patient subpopulation detection · control drift measurement</text>
                 </svg>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">Topological Data Analysis: The Mathematical Core</div>
+                  <div class="deep-text">The central insight of TDA is that <em>shape is computable</em>. Given a finite point cloud sampled from an unknown space, persistent homology recovers the topological features — connected components, loops, voids — that persist across a range of scales, separating genuine structure from noise. The theoretical foundation rests on the <a href="https://doi.org/10.1090/bull/1794" target="_blank">Stability Theorem</a> (Cohen-Steiner, Edelsbrunner, Harer 2007): the bottleneck distance between persistence diagrams is bounded by the sup-norm distance between the generating functions. <a href="https://geometrica.saclay.inria.fr/team/Fred.Chazal/" target="_blank">Frédéric Chazal</a> and collaborators extended this to a full statistical framework — <a href="https://arxiv.org/abs/1207.3674" target="_blank">convergence rates for persistent homology estimators</a>, bootstrap confidence sets for persistence diagrams, and minimax-optimal rates under Hausdorff noise — establishing TDA as a rigorous inference tool rather than a purely descriptive one. Their <a href="https://arxiv.org/abs/1710.04019" target="_blank">survey on the structure and stability of persistence modules</a> remains the standard theoretical reference. In the applied direction, <a href="https://bastian.rieck.me/" target="_blank">Bastian Rieck</a> (based here in Basel) has been a driving force in making TDA practical for machine learning. His work on <a href="https://arxiv.org/abs/1905.12200" target="_blank">topological autoencoders</a> showed that persistence-based regularization forces latent spaces to preserve topological features of the input data — a structural guarantee that no standard loss function provides. More recently, his group's contributions to <a href="https://github.com/aidos-lab" target="_blank">topological machine learning benchmarks</a> and the <a href="https://arxiv.org/abs/2312.07368" target="_blank">Topological Deep Learning</a> framework (with Hajij, Papillon, and the pyt-team) are building the software ecosystem that makes these ideas deployable at scale.</div>
+                </div>
+
+                <div class="deep-section">
+                  <div class="deep-heading">From Theory to Tooling: The TDA Ecosystem</div>
+                  <div class="deep-text">What makes TDA actionable today is not just the mathematics but the convergence of several software ecosystems. <a href="https://giotto-ai.github.io/gtda-docs/" target="_blank">Giotto-TDA</a> (Tauzin, Lupo, et al.) provides a scikit-learn-compatible pipeline for persistent homology that integrates directly with standard ML workflows. <a href="https://gudhi.inria.fr/" target="_blank">GUDHI</a> (Chazal's group at INRIA Saclay) offers state-of-the-art implementations of Rips and alpha complexes, persistence landscapes, and the statistical tools needed for inference. The <a href="https://github.com/pyt-team/TopoX" target="_blank">TopoX</a> ecosystem (Hajij, Zamzmi, Papamarkou, et al.) targets deep learning on combinatorial complexes — simplicial, cell, and hypergraph neural networks — extending message passing beyond graphs to higher-order structures. And <a href="https://ripser.scikit-tda.org/" target="_blank">Ripser</a> (Bauer 2021) remains the fastest engine for Vietoris-Rips persistence computation. Together, these tools form a stack that can take raw tabular or graph-structured data from an audit pipeline, compute topological summaries, and feed them into downstream ML models — which is precisely the workflow I am building in the Kunskap research program.</div>
+                </div>
 
                 <div class="deep-section">
                   <div class="deep-heading">Brain-Inspired Architectures Meet Geometric Learning</div>
@@ -1197,15 +1265,17 @@
 
                 <div class="deep-section">
                   <div class="deep-heading">Geometric Data Science – Applied</div>
-                  <div class="deep-text">Concretely, I apply persistent homology to FDA adverse event data for topological safety signal detection – persistent 1-cycles in the co-occurrence graph of adverse events identify drug-reaction clusters invisible to frequency-based methods. I use <a href="https://arxiv.org/abs/0810.3015" target="_blank">Ollivier-Ricci curvature</a> on control networks to find structurally fragile audit pathways (negative curvature = bottleneck). And I frame data integration across clinical systems as a <a href="https://arxiv.org/abs/1303.3255" target="_blank">sheaf-theoretic consistency</a> problem where local-to-global obstructions reveal systemic data quality failures that no row-level validation can catch. The broader vision: <a href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">information geometry</a> (Fisher-Rao manifolds of probability distributions) as a natural language for measuring control drift, model divergence, and data quality degradation over time.</div>
+                  <div class="deep-text">Concretely, I apply persistent homology to FDA adverse event data for topological safety signal detection — persistent 1-cycles in the Vietoris-Rips complex of the drug-reaction co-occurrence graph identify clusters invisible to frequency-based methods like PRR or EBGM. The key advantage follows directly from <a href="https://arxiv.org/abs/1207.3674" target="_blank">Chazal et al.'s statistical persistence framework</a>: topological features that persist across a wide range of filtration parameters are provably robust to the sampling noise inherent in spontaneous reporting data, while short-lived features can be discarded with controlled false discovery rates. I use <a href="https://arxiv.org/abs/0810.3015" target="_blank">Ollivier-Ricci curvature</a> on control networks to find structurally fragile audit pathways — negatively curved edges are bottlenecks where information flow concentrates, precisely the points where control failure cascades originate. This connects to <a href="https://arxiv.org/abs/1712.04721" target="_blank">Ni et al.'s work on community detection via Ricci flow</a>, which showed that curvature-based methods outperform spectral approaches on networks with heterogeneous degree distributions — exactly the topology of enterprise control architectures. I frame data integration across clinical systems as a <a href="https://arxiv.org/abs/1303.3255" target="_blank">sheaf-theoretic consistency</a> problem where local-to-global obstructions reveal systemic data quality failures no row-level validation can catch. And the broader vision is <a href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">information geometry</a> (Fisher-Rao manifolds of probability distributions) as the natural language for measuring control drift, model divergence, and data quality degradation over time — where <a href="https://arxiv.org/abs/1808.08271" target="_blank">persistence landscapes</a> (Bubenik 2015) provide the Banach-space-valued summary statistics needed for rigorous hypothesis testing on topological features.</div>
                 </div>
 
                 <div style="background:rgba(26,58,74,0.02);border:0.5px solid var(--rule);border-radius:4px;padding:1.2rem 1.5rem;margin:0 0 1.5rem;overflow-x:auto;">
                   <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-ghost);margin-bottom:0.6rem;">Key Mathematical Tools</div>
                   <div style="font-size:15px;color:var(--ink);line-height:2;">$$\beta_k(\varepsilon) = \mathrm{rank}\, H_k\!\left(\mathrm{VR}(X,\varepsilon);\, \mathbb{F}\right), \quad d_B\!\left(\mathrm{Dgm}(f), \mathrm{Dgm}(g)\right) \leq \|f - g\|_\infty$$</div>
-                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Betti numbers count k-dimensional holes at scale ε. The Stability Theorem guarantees that small perturbations in the input produce small perturbations in persistence diagrams.</div>
+                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Betti numbers count k-dimensional holes at scale ε. The Stability Theorem (Cohen-Steiner, Edelsbrunner, Harer 2007) guarantees that small perturbations in the input produce small perturbations in persistence diagrams.</div>
+                  <div style="font-size:15px;color:var(--ink);line-height:2;margin-top:0.6rem;">$$\lambda_k(t) = \sup\!\bigl\{(d_i - b_i)/2 : (b_i, d_i) \in \mathrm{Dgm}_k,\; b_i \leq t \leq d_i\bigr\}, \quad d_H\!\left(\hat{X}_n, X\right) = O\!\left(\left(\frac{\log n}{n}\right)^{1/d}\right)$$</div>
+                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Persistence landscapes (Bubenik 2015): Banach-space-valued summary statistics enabling CLTs and hypothesis tests on topological features. Hausdorff convergence rate (Chazal et al. 2014) for estimating persistent homology from finite samples — minimax-optimal in dimension d.</div>
                   <div style="font-size:15px;color:var(--ink);line-height:2;margin-top:0.6rem;">$$\kappa(x,y) = 1 - \frac{W_1(m_x, m_y)}{d(x,y)}, \quad \quad ds^2_{\mathrm{FR}} = g_{ij}\, d\theta^i\, d\theta^j = E_\theta\!\left[\partial_i \log p \;\partial_j \log p\right] d\theta^i d\theta^j$$</div>
-                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Ollivier-Ricci curvature κ detects structural bottlenecks (κ < 0) in control networks. The Fisher-Rao metric on probability distributions measures natural distance between statistical models — the right geometry for tracking model drift.</div>
+                  <div style="font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:0.4rem;">Ollivier-Ricci curvature κ detects structural bottlenecks (κ &lt; 0) in control networks. The Fisher-Rao metric on probability distributions measures natural distance between statistical models — the right geometry for tracking model drift.</div>
                 </div>
 
                 <div class="deep-section">
@@ -1217,25 +1287,47 @@
                   <div class="ref-tier">
                     <div class="ref-tier-label">🏗️ My Work</div>
                     <div class="ref-tags">
-                      <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 Your project – coming soon</a>
-                      <a class="ref-tag ref-tag--highlight" href="https://arxiv.org/abs/0906.0612" target="_blank">Carlsson – Topology and Data (2009)</a>
+                      <a class="ref-tag ref-tag--highlight" href="#" target="_blank">📌 Kunskap – Geometric Audit Analytics (Paper A)</a>
+                      <a class="ref-tag ref-tag--highlight" href="https://kunskap.substack.com" target="_blank">Audit 2.0 – Substack series on TDA for assurance</a>
                       <a class="ref-tag ref-tag--highlight" href="https://www.pnas.org/doi/10.1073/pnas.2528654122" target="_blank">PNAS – Neuromorphic vs GPU Energy (2025)</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🔬 TDA Core</div>
+                    <div class="ref-tags">
+                      <a class="ref-tag" href="https://arxiv.org/abs/1207.3674" target="_blank">Chazal, de Silva, Glisse, Oudot – Persistence Stability (2012)</a>
+                      <a class="ref-tag" href="https://doi.org/10.1090/bull/1794" target="_blank">Cohen-Steiner, Edelsbrunner, Harer – Stability Theorem (2007)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/0906.0612" target="_blank">Carlsson – Topology and Data (2009)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1808.08271" target="_blank">Bubenik – Persistence Landscapes (2015)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1905.12200" target="_blank">Moor, Horn, Rieck, Borgwardt – Topological Autoencoders (2020)</a>
                     </div>
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🔬 Methods</div>
                     <div class="ref-tags">
                       <a class="ref-tag" href="https://arxiv.org/abs/0810.3015" target="_blank">Ollivier – Ricci Curvature on Metric Spaces</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/1712.04721" target="_blank">Ni, Lin, Luo, Gao – Ricci Flow for Community Detection</a>
                       <a class="ref-tag" href="https://arxiv.org/abs/1303.3255" target="_blank">Curry – Sheaves, Cosheaves, Applications</a>
                       <a class="ref-tag" href="https://doi.org/10.1007/978-4-431-55978-8" target="_blank">Amari – Information Geometry (Springer)</a>
-                      <a class="ref-tag" href="https://arxiv.org/abs/1710.04019" target="_blank">Moor et al. – Topological Autoencoders</a>
+                    </div>
+                  </div>
+                  <div class="ref-tier">
+                    <div class="ref-tier-label">🛠️ Tooling</div>
+                    <div class="ref-tags">
+                      <a class="ref-tag" href="https://github.com/pyt-team/TopoX" target="_blank">TopoX – Topological DL (pyt-team)</a>
+                      <a class="ref-tag" href="https://gudhi.inria.fr/" target="_blank">GUDHI – TDA Library (INRIA Saclay)</a>
+                      <a class="ref-tag" href="https://giotto-ai.github.io/gtda-docs/" target="_blank">Giotto-TDA – scikit-learn-compatible</a>
+                      <a class="ref-tag" href="https://ripser.scikit-tda.org/" target="_blank">Ripser – Fast Vietoris-Rips (Bauer 2021)</a>
+                      <a class="ref-tag" href="https://arxiv.org/abs/2312.07368" target="_blank">Hajij, Papillon, et al. – TDL Framework</a>
                     </div>
                   </div>
                   <div class="ref-tier">
                     <div class="ref-tier-label">🧭 Frontier</div>
                     <div class="ref-tags">
+                      <a class="ref-tag" href="https://bastian.rieck.me/" target="_blank">Rieck – AIDOS Lab, Basel</a>
                       <a class="ref-tag" href="https://arxiv.org/abs/1901.09948" target="_blank">Neftci – Surrogate Gradients for SNNs</a>
                       <a class="ref-tag" href="https://doi.org/10.1038/s41467-020-17236-y" target="_blank">Bellec – e-prop Learning (Nature Comms)</a>
+                      <a class="ref-tag" href="https://www.hessbellwald-lab.ch/" target="_blank">Hess Bellwald – TDA Lab, EPFL</a>
                     </div>
                   </div>
                 </div>
@@ -1273,6 +1365,123 @@
                 <div class="challenge-box">
                   <div class="challenge-label">The Challenge</div>
                   <div class="challenge-text">Bringing a new drug to market takes 10–15 years and costs over $2 billion on average. Clinical trials fail at a 90% rate, often due to poor patient stratification, late-detected safety signals, or flawed endpoint selection. Meanwhile, pharma sits on vast, underexploited datasets – electronic health records, adverse event reports, genomic profiles, imaging archives – that could transform every stage of the pipeline, from target identification to post-market surveillance. The bottleneck isn't data availability; it's the analytical capability to extract actionable insight at scale under strict regulatory constraints.</div>
+                </div>
+
+                <!-- Inline SVG: Drug Repurposing Pipeline -->
+                <div style="width:100%;margin:1.5rem auto;border:0.5px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--paper);box-shadow:0 2px 16px rgba(0,0,0,0.04);">
+                <svg viewBox="0 0 760 420" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <marker id="arr3" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto"><polygon points="0 0, 8 2.5, 0 5" fill="#4a7a3a" opacity="0.5"/></marker>
+                    <marker id="arr3b" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto"><polygon points="0 0, 8 2.5, 0 5" fill="#2c4a2e" opacity="0.4"/></marker>
+                    <filter id="sc3-shadow"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/></filter>
+                    <linearGradient id="sc3-flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4a7a3a" stop-opacity="0.08"/><stop offset="100%" stop-color="#4a7a3a" stop-opacity="0.02"/></linearGradient>
+                  </defs>
+
+                  <!-- Title bar -->
+                  <text x="380" y="28" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#2c4a2e" letter-spacing="2.5" font-weight="500">COMPUTATIONAL DRUG REPURPOSING PIPELINE</text>
+                  <line x1="140" y1="38" x2="620" y2="38" stroke="#d4cfc6" stroke-width="0.5"/>
+
+                  <!-- Pipeline flow background -->
+                  <rect x="24" y="52" width="712" height="120" rx="5" fill="url(#sc3-flow)" stroke="#4a7a3a" stroke-width="0.3" filter="url(#sc3-shadow)"/>
+
+                  <!-- ===== STEP 1: SNP Variant ===== -->
+                  <rect x="42" y="72" width="108" height="72" rx="5" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.7" filter="url(#sc3-shadow)"/>
+                  <text x="96" y="92" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="#2c4a2e" font-weight="600">SNPᵢ</text>
+                  <text x="96" y="107" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">patient variant</text>
+                  <text x="96" y="122" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#bbb">rs12345678</text>
+                  <!-- Helix icon -->
+                  <g transform="translate(82, 128)" opacity="0.25">
+                    <path d="M 4,0 C 8,3 20,3 24,0 M 4,5 C 8,8 20,8 24,5" stroke="#4a7a3a" stroke-width="1" fill="none"/>
+                  </g>
+
+                  <!-- Arrow 1→2 -->
+                  <line x1="155" y1="108" x2="183" y2="108" stroke="#4a7a3a" stroke-width="1" opacity="0.4" marker-end="url(#arr3)"/>
+                  <text x="170" y="100" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#4a7a3a" opacity="0.5">Boltz-2</text>
+
+                  <!-- ===== STEP 2: Structure Prediction ===== -->
+                  <rect x="190" y="72" width="118" height="72" rx="5" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.7" filter="url(#sc3-shadow)"/>
+                  <text x="249" y="92" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#2c4a2e" font-weight="600">𝒮ₘᵤₜ</text>
+                  <text x="249" y="107" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">mutant structure</text>
+                  <text x="249" y="122" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#bbb">3D fold prediction</text>
+                  <!-- Protein icon -->
+                  <g transform="translate(232, 128)" opacity="0.2">
+                    <circle cx="8" cy="3" r="4" stroke="#4a7a3a" stroke-width="0.8" fill="none"/>
+                    <circle cx="20" cy="5" r="5" stroke="#4a7a3a" stroke-width="0.8" fill="none"/>
+                    <line x1="12" y1="3" x2="15" y2="5" stroke="#4a7a3a" stroke-width="0.6"/>
+                  </g>
+
+                  <!-- Arrow 2→3 -->
+                  <line x1="313" y1="108" x2="341" y2="108" stroke="#4a7a3a" stroke-width="1" opacity="0.4" marker-end="url(#arr3)"/>
+                  <text x="328" y="100" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#4a7a3a" opacity="0.5">ΔΔG</text>
+
+                  <!-- ===== STEP 3: Binding Affinity Screen ===== -->
+                  <rect x="348" y="72" width="118" height="72" rx="5" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.7" filter="url(#sc3-shadow)"/>
+                  <text x="407" y="92" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#2c4a2e" font-weight="600">rank(FDA)</text>
+                  <text x="407" y="107" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">binding screen</text>
+                  <text x="407" y="122" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#bbb">approved library</text>
+
+                  <!-- Arrow 3→4 -->
+                  <line x1="471" y1="108" x2="499" y2="108" stroke="#4a7a3a" stroke-width="1" opacity="0.4" marker-end="url(#arr3)"/>
+                  <text x="486" y="100" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#4a7a3a" opacity="0.5">TDA</text>
+
+                  <!-- ===== STEP 4: TDA Safety Filter ===== -->
+                  <rect x="506" y="72" width="108" height="72" rx="5" fill="#faf8f4" stroke="#2d6a7e" stroke-width="0.8" filter="url(#sc3-shadow)"/>
+                  <text x="560" y="92" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#1a3a4a" font-weight="600">TDA filter</text>
+                  <text x="560" y="107" text-anchor="middle" font-family="'Newsreader',serif" font-size="9" fill="#888" font-style="italic">safety topology</text>
+                  <text x="560" y="122" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#bbb">FAERS clusters</text>
+
+                  <!-- Arrow 4→5 -->
+                  <line x1="619" y1="108" x2="647" y2="108" stroke="#2c4a2e" stroke-width="1.2" opacity="0.5" marker-end="url(#arr3b)"/>
+
+                  <!-- ===== STEP 5: Candidates ===== -->
+                  <rect x="654" y="72" width="72" height="72" rx="5" fill="rgba(44,74,46,0.06)" stroke="#2c4a2e" stroke-width="1" filter="url(#sc3-shadow)"/>
+                  <text x="690" y="98" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="16" fill="#2c4a2e" font-weight="600">✓</text>
+                  <text x="690" y="116" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#2c4a2e" font-weight="500">candidates</text>
+                  <text x="690" y="130" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#888">repurposing</text>
+
+                  <!-- ===== BOTTOM: Clinical Operations Flow ===== -->
+                  <line x1="24" y1="194" x2="736" y2="194" stroke="#d4cfc6" stroke-width="0.5"/>
+                  <text x="380" y="216" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#2c4a2e" letter-spacing="2" font-weight="500">CLINICAL OPERATIONS INTELLIGENCE</text>
+
+                  <rect x="24" y="228" width="712" height="100" rx="5" fill="rgba(44,74,46,0.01)" stroke="#4a7a3a" stroke-width="0.25"/>
+
+                  <!-- 4 operational pillars -->
+                  <g font-family="'IBM Plex Mono',monospace">
+                    <rect x="42" y="242" width="155" height="72" rx="4" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.5" filter="url(#sc3-shadow)"/>
+                    <text x="119" y="262" text-anchor="middle" font-size="8.5" fill="#2c4a2e" font-weight="600">DRUG DISCOVERY</text>
+                    <text x="119" y="278" text-anchor="middle" font-size="7.5" fill="#888">Boltz-2 · AlphaFold 3</text>
+                    <text x="119" y="293" text-anchor="middle" font-size="7" fill="#bbb">virtual screening</text>
+
+                    <rect x="213" y="242" width="155" height="72" rx="4" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.5" filter="url(#sc3-shadow)"/>
+                    <text x="290" y="262" text-anchor="middle" font-size="8.5" fill="#2c4a2e" font-weight="600">SAFETY SIGNALS</text>
+                    <text x="290" y="278" text-anchor="middle" font-size="7.5" fill="#888">FAERS NLP · TDA</text>
+                    <text x="290" y="293" text-anchor="middle" font-size="7" fill="#bbb">disproportionality</text>
+
+                    <rect x="384" y="242" width="155" height="72" rx="4" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.5" filter="url(#sc3-shadow)"/>
+                    <text x="461" y="262" text-anchor="middle" font-size="8.5" fill="#2c4a2e" font-weight="600">DIAGNOSTICS</text>
+                    <text x="461" y="278" text-anchor="middle" font-size="7.5" fill="#888">MedGemma · CXR</text>
+                    <text x="461" y="293" text-anchor="middle" font-size="7" fill="#bbb">radiologist-level AI</text>
+
+                    <rect x="555" y="242" width="162" height="72" rx="4" fill="#faf8f4" stroke="#4a7a3a" stroke-width="0.5" filter="url(#sc3-shadow)"/>
+                    <text x="636" y="262" text-anchor="middle" font-size="8.5" fill="#2c4a2e" font-weight="600">FEDERATED AI</text>
+                    <text x="636" y="278" text-anchor="middle" font-size="7.5" fill="#888">NVIDIA Clara</text>
+                    <text x="636" y="293" text-anchor="middle" font-size="7" fill="#bbb">privacy-preserving</text>
+                  </g>
+
+                  <!-- ===== FORMULA ZONE ===== -->
+                  <line x1="24" y1="345" x2="736" y2="345" stroke="#d4cfc6" stroke-width="0.4"/>
+
+                  <foreignObject x="60" y="352" width="300" height="32">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:13px;color:#2c4a2e;">$$\text{SNP}_i \;\xrightarrow{\text{Boltz-2}}\; \mathcal{S}_{\text{mut}} \;\xrightarrow{\Delta\Delta G}\; \text{rank}$$</div>
+                  </foreignObject>
+                  <foreignObject x="380" y="352" width="340" height="32">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:13px;color:#2c4a2e;">$$\hat{S}(t) = \prod_{t_k \leq t}\!\left(1 - \frac{d_k}{n_k}\right), \;\; \text{RR}_j = \frac{a_j/(a_j+c_j)}{b_j/(b_j+d_j)}$$</div>
+                  </foreignObject>
+
+                  <!-- Bottom caption -->
+                  <text x="380" y="400" text-anchor="middle" font-family="'Newsreader',serif" font-size="11" fill="#888" font-style="italic">From genetic variant to treatment candidate — with topological safety validation at every stage</text>
+                  <text x="380" y="416" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#bbb" letter-spacing="1">KAPLAN-MEIER SURVIVAL  ·  RISK RATIO DISPROPORTIONALITY  ·  PERSISTENT HOMOLOGY</text>
+                </svg>
                 </div>
 
                 <div class="deep-section">
@@ -1461,14 +1670,14 @@
     </div>
   </footer>
 
-    <script>
+  <script>
     function toggleCard(header) {
       var card = header.closest('.scorecard');
       if (!card) return;
       var wasOpen = card.classList.contains('is-open');
-      var all = document.querySelectorAll('.scorecard.is-open');
-      for (var i = 0; i < all.length; i++) {
-        all[i].classList.remove('is-open');
+      var openCards = document.querySelectorAll('.scorecard.is-open');
+      for (var i = 0; i < openCards.length; i++) {
+        openCards[i].classList.remove('is-open');
       }
       if (!wasOpen) {
         card.classList.add('is-open');
