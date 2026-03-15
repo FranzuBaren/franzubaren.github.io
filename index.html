@@ -330,6 +330,13 @@
     animation: fadeSlideUp 0.8s ease 0.85s forwards;
   }
 
+  /* Hidden radio inputs for pure-CSS accordion */
+  .scorecard-radio { display: none; }
+  .scorecard-radio:checked + .scorecard { box-shadow: 0 6px 30px rgba(0,0,0,0.05); z-index: 2; }
+  .scorecard-radio:checked + .scorecard::before { opacity: 1; }
+  .scorecard-radio:checked + .scorecard .scorecard-toggle::after { transform: rotate(90deg); opacity: 0; }
+  .scorecard-radio:checked + .scorecard .scorecard-body { max-height: 12000px; opacity: 1; }
+
   .scorecard {
     border: 0.5px solid var(--rule);
     border-bottom: none;
@@ -446,6 +453,10 @@
   .scorecard.is-open .scorecard-toggle::after {
     transform: rotate(90deg);
     opacity: 0;
+  }
+  .scorecard-radio:checked + .scorecard .scorecard-toggle::before,
+  .scorecard-radio:checked + .scorecard .scorecard-toggle::after {
+    background: var(--accent);
   }
 
   .scorecard-header:hover .scorecard-toggle::before,
@@ -796,15 +807,16 @@
     <div class="scorecards-label">About</div>
 
     <div class="scorecards">
+      <input type="radio" class="scorecard-radio" name="sc-group-1" id="sc-1"/>
       <div class="scorecard scorecard--assurance">
-        <div class="scorecard-header" onclick="toggleCard(this)">
+        <label class="scorecard-header" for="sc-1">
           <div class="scorecard-number">↬</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">Who I Am</div>
             <div class="scorecard-subtitle">Physicist → Neuroscientist → Data Science Leader</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </div>
+        </label>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -848,15 +860,16 @@
     <div class="scorecards">
 
       <!-- SCORECARD 1: AI Assurance -->
+      <input type="radio" class="scorecard-radio" name="sc-group-2" id="sc-2"/>
       <div class="scorecard scorecard--assurance">
-        <div class="scorecard-header" onclick="toggleCard(this)">
+        <label class="scorecard-header" for="sc-2">
           <div class="scorecard-number">01</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">AI Assurance, Risk &amp; Governance</div>
             <div class="scorecard-subtitle">Regulation · Compliance · Audit Frameworks</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </div>
+        </label>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -1043,15 +1056,16 @@
       </div>
 
       <!-- SCORECARD 2: Mathematical Foundations -->
+      <input type="radio" class="scorecard-radio" name="sc-group-2" id="sc-3"/>
       <div class="scorecard scorecard--math">
-        <div class="scorecard-header" onclick="toggleCard(this)">
+        <label class="scorecard-header" for="sc-3">
           <div class="scorecard-number">02</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">Mathematical Foundations of AI/ML</div>
             <div class="scorecard-subtitle">Geometry · Topology · Information Theory</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </div>
+        </label>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -1337,15 +1351,16 @@
       </div>
 
       <!-- SCORECARD 3: Healthcare × Tech Bridge -->
+      <input type="radio" class="scorecard-radio" name="sc-group-2" id="sc-4"/>
       <div class="scorecard scorecard--bridge">
-        <div class="scorecard-header" onclick="toggleCard(this)">
+        <label class="scorecard-header" for="sc-4">
           <div class="scorecard-number">03</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">AI for Pharma &amp; Diagnostics</div>
             <div class="scorecard-subtitle">Drug Discovery · Clinical Operations · Patient Outcomes</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </div>
+        </label>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -1556,15 +1571,16 @@
 
     <div class="scorecards">
       <!-- SCORECARD: Vision – Bridging Health & Tech -->
+      <input type="radio" class="scorecard-radio" name="sc-group-3" id="sc-5"/>
       <div class="scorecard scorecard--assurance" id="vision-section">
-        <div class="scorecard-header" onclick="toggleCard(this)">
+        <label class="scorecard-header" for="sc-5">
           <div class="scorecard-number">✦</div>
           <div class="scorecard-header-text">
             <div class="scorecard-title">Bridging Healthcare &amp; Technology</div>
             <div class="scorecard-subtitle">Switzerland · Europe · Innovation Ecosystem</div>
           </div>
           <div class="scorecard-toggle"></div>
-        </div>
+        </label>
         <div class="scorecard-body">
           <div class="scorecard-body-inner">
             <div class="scorecard-content">
@@ -1668,15 +1684,20 @@
   </footer>
 
   <script>
-    function toggleCard(header) {
-      const card = header.closest('.scorecard');
-      const wasOpen = card.classList.contains('is-open');
-      document.querySelectorAll('.scorecard.is-open').forEach(function(c) { c.classList.remove('is-open'); });
-      if (!wasOpen) card.classList.add('is-open');
-    }
+    /* Fallback: also toggle via JS for environments where CSS :checked works but
+       users expect clicking an open card to close it (radio can't uncheck natively) */
     document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.scorecard-header').forEach(function(header) {
-        header.addEventListener('click', function() { toggleCard(this); });
+      var radios = document.querySelectorAll('.scorecard-radio');
+      radios.forEach(function(radio) {
+        var label = radio.nextElementSibling.querySelector('.scorecard-header');
+        if (label) {
+          label.addEventListener('click', function(e) {
+            if (radio.checked) {
+              e.preventDefault();
+              radio.checked = false;
+            }
+          });
+        }
       });
     });
   </script>
